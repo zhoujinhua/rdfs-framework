@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.rdfs.framework.quartz.entity.QzJobLog" table="qz_job_log" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="isSuccess" type="java.lang.String">
+            <column name="is_success"/>
+        </property>
+        <property name="message" type="java.lang.String">
+            <column name="message"/>
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="create_Time"></column>
+        </property>
+        <many-to-one name="jobInfo" class="com.rdfs.framework.quartz.entity.QzJobInfo">
+        	<column name="job_id"></column>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">  
+
+	<bean id="cacheParamsServiceImpl" class="com.rdfs.framework.cache.service.impl.CacheParamsServiceImpl"></bean>
+	<bean id="cacheCxtUtil" class="com.rdfs.framework.taglib.utils.CacheCxtUtil">
+		<property name="cacheDataService" ref="cacheParamsServiceImpl"></property>
+	</bean>
+</beans>

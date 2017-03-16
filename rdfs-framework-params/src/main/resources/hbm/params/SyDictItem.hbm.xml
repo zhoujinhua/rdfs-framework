@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.rdfs.framework.params.entity.SyDictItem" table="sy_dict_item" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="dict_name"/>
+        </property>
+        <property name="key" type="java.lang.String">
+            <column name="dict_key"/>
+        </property>
+        <property name="code" type="java.lang.String">
+            <column name="dict_code"></column>
+        </property>
+        <property name="desc" type="java.lang.String">
+            <column name="dict_desc"></column>
+        </property>
+        <property name="status" type="java.lang.String">
+            <column name="dict_status"/>
+        </property>
+        <property name="group" type="java.lang.String">
+            <column name="dict_group" />
+        </property>
+        <property name="sortNo" type="java.lang.Integer">
+            <column name="sort_No"/>
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="remark"/>
+        </property>
+    </class>
+</hibernate-mapping>
