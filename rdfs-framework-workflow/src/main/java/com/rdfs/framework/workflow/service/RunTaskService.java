@@ -7,4 +7,6 @@ public interface RunTaskService extends HibernateService{
 
 	CwRunTask getRunTask(String businessKey, String flowName);
 
+	CwRunTask getRunTask(String businessKey, Integer flowId);
+
 }

@@ -8,6 +8,7 @@ import com.rdfs.framework.hibernate.service.impl.HibernateServiceSupport;
 import com.rdfs.framework.workflow.entity.CwRunExecution;
 import com.rdfs.framework.workflow.service.RunExecutionService;
 
+
 @Service
 public class RunExecutionServiceImpl extends HibernateServiceSupport implements RunExecutionService {
 
@@ -15,6 +16,17 @@ public class RunExecutionServiceImpl extends HibernateServiceSupport implements 
 	public CwRunExecution getRunExecution(String businessKey, String flowName, String userIdentify) {
 		String hql = "from CwRunExecution where businessKey = '" + businessKey + "' and processInfo.code = '"
 				+ flowName + "' and nodeEvent.currNode.code = '" + userIdentify + "' order by createTime desc";
+		List<CwRunExecution> runExecutions = getList(hql);
+		if(runExecutions!=null && !runExecutions.isEmpty()){
+			return runExecutions.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public CwRunExecution getRunExecution(String businessKey, Integer flowId, String userIdentify) {
+		String hql = "from CwRunExecution where businessKey = '" + businessKey + "' and processInfo.id = '"
+				+ flowId + "' and nodeEvent.currNode.code = '" + userIdentify + "' order by createTime desc";
 		List<CwRunExecution> runExecutions = getList(hql);
 		if(runExecutions!=null && !runExecutions.isEmpty()){
 			return runExecutions.get(0);

@@ -11,6 +11,7 @@ import com.rdfs.framework.workflow.entity.CwNodeEvent;
 import com.rdfs.framework.workflow.entity.CwTaskNode;
 import com.rdfs.framework.workflow.service.NodeEventService;
 
+
 @Service
 public class NodeEventServiceImpl extends HibernateServiceSupport implements NodeEventService {
 

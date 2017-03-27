@@ -18,5 +18,6 @@
     <module>rdfs-framework-quartz</module>
     <module>rdfs-framework-workflow</module>
     <module>rdfs-framework-auth</module>
+    <module>rdfs-framework-mail</module>
   </modules>
 </project>

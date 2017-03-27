@@ -14,6 +14,8 @@ public class CwRunTask implements Serializable{
 	private CwProcessInfo processInfo; //流程
 	private CwTaskNode taskNode; //当前节点
 	private String status;  //是否活跃
+	private String group; //待分配组
+	private String user; //待分配用户
 	private String assigenee; //分配人
 	private Date createTime;
 	
@@ -46,6 +48,18 @@ public class CwRunTask implements Serializable{
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getGroup() {
+		return group;
+	}
+	public void setGroup(String group) {
+		this.group = group;
+	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
 	}
 	public String getAssigenee() {
 		return assigenee;

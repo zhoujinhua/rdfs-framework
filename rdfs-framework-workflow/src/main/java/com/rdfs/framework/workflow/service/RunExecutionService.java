@@ -14,4 +14,13 @@ public interface RunExecutionService extends HibernateService {
 	 */
 	CwRunExecution getRunExecution(String businessKey, String flowName, String userIdentify);
 
+	/**
+	 * 根据业务主键+流程ID+节点代码查找最近一次的提交记录
+	 * @param businessKey 业务主键
+	 * @param flowId 流程ID
+	 * @param userIdentify 节点代码
+	 * @return
+	 */
+	CwRunExecution getRunExecution(String businessKey, Integer flowId, String userIdentify);
+
 }

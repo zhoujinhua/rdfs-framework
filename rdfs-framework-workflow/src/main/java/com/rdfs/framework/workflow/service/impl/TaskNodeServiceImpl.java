@@ -9,6 +9,7 @@ import com.rdfs.framework.workflow.entity.CwProcessInfo;
 import com.rdfs.framework.workflow.entity.CwTaskNode;
 import com.rdfs.framework.workflow.service.TaskNodeService;
 
+
 @Service
 public class TaskNodeServiceImpl extends HibernateServiceSupport implements TaskNodeService {
 

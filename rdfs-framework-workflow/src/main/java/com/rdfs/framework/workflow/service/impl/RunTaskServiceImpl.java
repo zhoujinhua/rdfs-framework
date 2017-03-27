@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.rdfs.framework.core.contants.Constants;
 import com.rdfs.framework.hibernate.service.impl.HibernateServiceSupport;
 import com.rdfs.framework.workflow.entity.CwRunTask;
 import com.rdfs.framework.workflow.service.RunTaskService;
+
 
 @Service
 public class RunTaskServiceImpl extends HibernateServiceSupport implements RunTaskService {
@@ -15,7 +15,19 @@ public class RunTaskServiceImpl extends HibernateServiceSupport implements RunTa
 	@Override
 	public CwRunTask getRunTask(String businessKey, String flowName) {
 		List<CwRunTask> runTasks = getList("from CwRunTask where businessKey = '" + businessKey + "' and processInfo.code = '" + flowName + "'"
-				+ " and status = '" + Constants.IS.YES + "'");
+				//+ " and status = '" + Constants.IS.YES + "'"
+		);
+		if(runTasks!=null && !runTasks.isEmpty()){
+			return runTasks.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public CwRunTask getRunTask(String businessKey, Integer flowId) {
+		List<CwRunTask> runTasks = getList("from CwRunTask where businessKey = '" + businessKey + "' and processInfo.id = '" + flowId + "'"
+				//+ " and status = '" + Constants.IS.YES + "'"
+		);
 		if(runTasks!=null && !runTasks.isEmpty()){
 			return runTasks.get(0);
 		}
