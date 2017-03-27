@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 /**
  * request --HTTP/HTTPS 
  * method --GET/POST
- * @date 2015�?12�?2�? 下午6:42:43
+ * @date 2015�?12�?2�? 下午6:42:43
  */
 public class HttpUtils {
 
@@ -44,16 +44,24 @@ public class HttpUtils {
 	public static final String SSL_V3 = "SSLv3";
 
 	/**
-	 * 发�?? get 请求
+	 * 发�?? get 请求
 	 * @param params 参数
 	 * @param url 地址
 	 * @return String
 	 */
-	public static String invokeGet(Map<String, Object> params, String url) {
+	public static String invokeGet(Map<String, Object> params, String url, int connectTimeout) {
+		return invokeGet(params,url,SO_TIMEOUT,connectTimeout);
+	}
+	/* 发�?? get 请求
+			* @param params 参数
+			* @param url 地址
+			* @return String
+					*/
+					public static String invokeGet(Map<String, Object> params, String url) {
 		return invokeGet(params,url,SO_TIMEOUT,CONNECT_TIMEOUT);
 	}
 	/**
-	 * 发�?? get 请求
+	 * 发�?? get 请求
 	 * @param params 参数
 	 * @param url 地址
 	 * @param socketTimeout socketTimeout
@@ -81,7 +89,7 @@ public class HttpUtils {
 				}
 				url += "?" + urlParams;
 			}
-			logger.info("# GET 请求URL�?:" + url);
+			logger.info("# GET 请求URL�?:" + url);
 
 			HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
 			if(url.toLowerCase().startsWith("https"))
@@ -89,7 +97,7 @@ public class HttpUtils {
 			closeableHttpClient = httpClientBuilder.build();
 			
 			RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).
-					setConnectTimeout(connectTimeout).build();//设置请求和传输超时时�?
+					setConnectTimeout(connectTimeout).build();//设置请求和传输超时时�?
 			HttpGet get = new HttpGet(url);
 			get.setConfig(requestConfig);
 			HttpResponse resp = closeableHttpClient.execute(get);
@@ -108,7 +116,7 @@ public class HttpUtils {
 		return result;
 	}
 	/**
-	 * 发�?? Post 请求
+	 * 发�?? Post 请求
 	 * @param jsonStrData 参数
 	 * @param url 地址
 	 * @return String
@@ -126,7 +134,7 @@ public class HttpUtils {
 		return invokePostExceptionHandler(jsonStrData, url, SO_TIMEOUT, CONNECT_TIMEOUT, SSL);
 	}
 	/**
-	 * 发�?? Post 请求
+	 * 发�?? Post 请求
 	 * @param jsonStrData 参数
 	 * @param url 地址
 	 * @param socketTimeout socketTimeout
@@ -146,7 +154,7 @@ public class HttpUtils {
 			HttpEntity entity = new StringEntity(jsonStrData, "UTF-8");
 			closeableHttpClient = httpClientBuilder.build();
 			RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).
-						setConnectTimeout(connectTimeout).build();//设置请求和传输超时时�?
+						setConnectTimeout(connectTimeout).build();//设置请求和传输超时时�?
 			HttpPost post = new HttpPost(url);
 			post.setConfig(requestConfig);
 			post.setEntity(entity);
@@ -169,7 +177,7 @@ public class HttpUtils {
 	}
 	
 	/**
-	 * 发�?? Post 请求
+	 * 发�?? Post 请求
 	 * @param jsonStrData 参数
 	 * @param url 地址
 	 * @param socketTimeout socketTimeout
@@ -191,7 +199,7 @@ public class HttpUtils {
 			HttpEntity entity = new StringEntity(jsonStrData, "UTF-8");
 			closeableHttpClient = httpClientBuilder.build();
 			RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(socketTimeout).
-						setConnectTimeout(connectTimeout).build();//设置请求和传输超时时�?
+						setConnectTimeout(connectTimeout).build();//设置请求和传输超时时�?
 			HttpPost post = new HttpPost(url);
 			post.setConfig(requestConfig);
 			post.setEntity(entity);
@@ -212,7 +220,7 @@ public class HttpUtils {
 	}
 
 //	/**
-//	 * 发�?? Post 请求
+//	 * 发�?? Post 请求
 //	 * @param jsonStrData 参数
 //	 * @param url 地址
 //	 * @param socketTimeout socketTimeout
@@ -222,7 +230,7 @@ public class HttpUtils {
 //	public static String invokePostFile(String url, Map<String,Object> params, File file){
 //		logger.info("# POST JSON 请求URL为：" + url); 
 //		StringBuilder urlParams = new StringBuilder();
-//		logger.info("# GET 请求URL�?:" + url);
+//		logger.info("# GET 请求URL�?:" + url);
 //		String result = "";
 //		CloseableHttpClient closeableHttpClient = null;
 //		try {
@@ -250,7 +258,7 @@ public class HttpUtils {
 //	        builder.addBinaryBody("file", file, ContentType.TEXT_PLAIN, "card");
 //	        HttpEntity entity = builder.build();
 //			RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(3000).
-//						setConnectTimeout(3000).build();//设置请求和传输超时时�? 
+//						setConnectTimeout(3000).build();//设置请求和传输超时时�? 
 //			HttpPost post = new HttpPost(url);
 //			post.setConfig(requestConfig);
 //			post.setEntity(entity);

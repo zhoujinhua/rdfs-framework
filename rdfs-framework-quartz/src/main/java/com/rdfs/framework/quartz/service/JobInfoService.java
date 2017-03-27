@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.quartz.SchedulerException;
 
+import com.rdfs.framework.core.bean.TreeDto;
 import com.rdfs.framework.hibernate.service.HibernateService;
 import com.rdfs.framework.quartz.entity.QzJobInfo;
 
@@ -14,5 +15,7 @@ public interface JobInfoService extends HibernateService{
 	List<QzJobInfo> getJobInfos(String status);
 
 	void runJob(QzJobInfo job);
+
+	List<TreeDto> jobTree(QzJobInfo job) throws Exception;
 
 }

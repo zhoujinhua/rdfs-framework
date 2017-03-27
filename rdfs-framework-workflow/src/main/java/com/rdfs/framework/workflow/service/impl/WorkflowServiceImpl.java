@@ -1,6 +1,7 @@
 package com.rdfs.framework.workflow.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -113,5 +114,14 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 			nodeEvent = nodeEventService.getNodeEvent(runTask.getTaskNode(), action);
 		}
 		return nodeEvent.getRoute();
+	}
+	
+	public List<CwProcessInfo> getCwProcessInfos(){
+		return processInfoService.getProcessInfos();
+	}
+	
+	@Override
+	public CwProcessInfo getProcessInfo(Integer id){
+		return getEntityById(CwProcessInfo.class, id, false);
 	}
 }

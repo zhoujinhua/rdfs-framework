@@ -14,6 +14,39 @@ request.setAttribute("basePath", basePath);
     <jsp:include page="/view/common/head.jsp"></jsp:include>
 </head>
 <script type="text/javascript">
+	function setJob(zTree, nodes, obj){
+		$("#qz_tbody").children().remove();
+		var ids = "";
+		if(nodes!=null&&nodes.length!=0){
+			for(var i=0;i<nodes.length;i++){
+				if(!nodes[i].isParent){
+					ids += nodes[i].id+",";
+					$("#qz_tbody").prepend("<tr id=''><td class='seq'></td><td><input type='hidden' class='qzid' value='"
+							+nodes[i].id+"'><input type='hidden' class='qzname' value='"
+							+nodes[i].name+"'>"+nodes[i].name+"</td><td><input class='form-control qseq' maxlength='2'></td></tr>");
+				}
+			}
+		} 
+		if(ids == ""){
+			$("#qz_table").addClass("hide").hide();
+		} else {
+			$("#qz_table").removeClass("hide").show();
+			sort();
+		}
+		$('.modal').map(function() {
+		    $(this).modal('hide');
+		});
+	}
+	function sort(){
+		var i = 1;
+		$(".seq").each(function(){
+			$(this).html(i);
+			$(this).parent().find(".qzid").attr("name","relations["+(i-1)+"].jobInfo.id");
+			$(this).parent().find(".qzname").attr("name","relations["+(i-1)+"].jobInfo.name");
+			$(this).parent().find(".qseq").attr("name","relations["+(i-1)+"].seq");
+			i++;
+		});
+	}
 	$(function(){
 		$("#_quartz_type").change(function(){
 			if($(this).val() == '01'){
@@ -36,6 +69,14 @@ request.setAttribute("basePath", basePath);
 				$(".ssh, .native, .http").removeClass("required");
 			}
 		});
+		$(document).delegate('.qseq', 'keyup', function() {
+			if($(this).hasClass("error"))
+				$(this).fieldErrorClear();
+			if ( !/^[1-9]\d?$/g.test($(this).val())){
+				$(this).val("");
+				$(this).fieldError("只能输入1-99之间的数字")
+			}
+		});
 	  	$("#fn-btn-save").click(function() {
 	  		validate();
 	  		if($(".error").length!=0){
@@ -43,6 +84,14 @@ request.setAttribute("basePath", basePath);
 	  		}
             $("#fn-save-form").submit();
          });
+	  	$("#cron_btn").click(function(){
+		  	ztree_modal("checkbox",contextPath+"/job/jobTree?id=${info.id}",$("#cron_after"),"setJob");
+	  	});
+	  	var relationName = "${info.relationName}";
+	  	if(relationName){
+	  		$("#qz_table").removeClass("hide").show();
+	  	}
+	  	$("#_quartz_type").change();
 	});
 </script>
 <body>
@@ -92,9 +141,9 @@ request.setAttribute("basePath", basePath);
 		                        </div>
 		                    </div>
 		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">执行计划<i class="glyphicon glyphicon-star red"></i></label>
+		                        <label class="control-label col-sm-4">执行计划</label>
 		                         <div class="col-sm-8">
-	                       	 		<input type="text" class="form-control required" name="cron" maxlength="100" value="${info.cron }">
+	                       	 		<input type="text" class="form-control" name="cron" maxlength="100" value="${info.cron }">
 		                        </div>
 		                    </div>
 		                     <div class="form-group col-sm-12 col-sm-8">
@@ -113,6 +162,17 @@ request.setAttribute("basePath", basePath);
 		                        <label class="control-label col-sm-4">是否允许并发<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
 		                         	<cs:select class="form-control required chosen" dicField="_is" name="batch" allowBlank="true" value="${info.batch }"/>
+		                        </div>
+		                    </div>
+		                     <div class="form-group col-sm-12 col-sm-8">
+		                        <label class="control-label col-sm-4">执行完成后</label>
+		                         <div class="col-sm-8">
+		                         	<div class="input-group">
+			                         	<input class="form-control" id="cron_after" readonly value="${info.relationName }">
+		                         		<a class="btn btn-primary input-group-addon" id="cron_btn" href="javascript:;">
+		                         			<i class="glyphicon glyphicon-user red"></i>
+		                         		</a>
+		                         	</div>
 		                        </div>
 		                    </div>
 		                     <div class="form-group col-sm-12 col-sm-8">
@@ -167,6 +227,33 @@ request.setAttribute("basePath", basePath);
 		                        <label class="control-label col-sm-4">任务备注</label>
 		                         <div class="col-sm-8">
 		                         	<textarea rows="" cols="" class="form-control autogrow" maxlength="1000" name="remark">${info.remark }</textarea>
+		                        </div>
+		                    </div>
+		                     <div class="form-group col-sm-12 col-sm-8">
+		                        <label class="control-label col-sm-4"></label>
+		                         <div class="col-sm-8">
+		                         	<table class="table table-striped table-bordered responsive no-footer hide" id="qz_table">
+		                         		<thead>
+		                         			<tr role="row">
+		                         				<th>任务序号</th>
+		                         				<th>任务名称</th>
+		                         				<th>优先级</th>
+		                         			</tr>
+		                         		</thead>
+		                         		<tbody id="qz_tbody">
+		                         			<c:forEach items="${info.relations }" var="item" varStatus="status">
+		                         				<tr role="row">
+		                         					<td>${status.index+1 }</td>
+		                         					<td>
+		                         						<input type="hidden" class="qzid" name="relations[${status.index }].jobInfo.id" value="${item.jobInfo.id }">
+		                         						<input type="hidden" class="qzname" name="relations[${status.index }].jobInfo.name" value="${item.jobInfo.name }">
+		                         						${item.jobInfo.name }
+		                         					</td>
+		                         					<td><input maxlength="2" class="form-control qseq" value="${item.seq }" name="relations[${status.index }].seq"></td>
+		                         				</tr>
+		                         			</c:forEach>
+		                         		</tbody>
+	                         		</table>
 		                        </div>
 		                    </div>
 		                     <div class="form-group">

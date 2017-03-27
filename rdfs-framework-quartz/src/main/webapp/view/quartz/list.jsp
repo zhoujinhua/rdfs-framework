@@ -17,8 +17,8 @@ request.setAttribute("basePath", basePath);
 	<script type="text/javascript">
 		function operator(data, type, full, meta){
 			var html = '';
-    		html += ' <a class="link" href= "'+contextPath+'/dict/detail?id='+data+'">查看</a>';
-    		html += ' <a class="link" href= "'+contextPath+'/dict/edit?id='+data+'">修改</a>';
+    		html += ' <a class="link" href= "'+contextPath+'/job/detail?id='+data+'">查看</a>';
+    		html += ' <a class="link" href= "'+contextPath+'/job/edit?id='+data+'">修改</a>';
     		html += ' <a class="link runOnce" data-id="'+data+'" href= "javascript:;">跑一次</a>';
 	    	return	data=html;
 		}
@@ -35,7 +35,6 @@ request.setAttribute("basePath", basePath);
 	    			location.href = contextPath + '/job/run?id='+id;
 	    		}
 	    	});
-		    window.location.href = contextPath + '/view/quartz/add.jsp?juid='+juid;
 	    });
 	</script>
 	<div class="ch-container">

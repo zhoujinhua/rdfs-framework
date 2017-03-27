@@ -111,7 +111,6 @@ public class Constants {
 		
 		public static final String USER_KEY = GLOBAL + "user_";
 		//菜单项
-		public static final String RESOURCE_KEY = GLOBAL + "resource_";
 		
 		public static final String APP_SEQ = GLOBAL + "app_seq_";
 		

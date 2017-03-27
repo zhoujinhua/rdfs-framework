@@ -2,6 +2,9 @@ package com.rdfs.framework.quartz.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class QzJobInfo implements Serializable{
 
@@ -14,6 +17,7 @@ public class QzJobInfo implements Serializable{
 	private String group;
 	private String cron;
 	private String status;
+	private String runStatus; //运行状态
 	private String type;
 	private String batch;
 	private String ip;
@@ -28,6 +32,11 @@ public class QzJobInfo implements Serializable{
 	private String password;
 	private Integer port;
 	private String cmd;
+	
+	@JsonIgnore
+	private List<QzJobRelation> relations;
+	@JsonIgnore
+	private String relationName;
 	
 	public Integer getId() {
 		return id;
@@ -58,6 +67,12 @@ public class QzJobInfo implements Serializable{
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getRunStatus() {
+		return runStatus;
+	}
+	public void setRunStatus(String runStatus) {
+		this.runStatus = runStatus;
 	}
 	public String getType() {
 		return type;
@@ -131,4 +146,25 @@ public class QzJobInfo implements Serializable{
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	public List<QzJobRelation> getRelations() {
+		return relations;
+	}
+	public void setRelations(List<QzJobRelation> relations) {
+		this.relations = relations;
+	}
+	public String getRelationName() {
+		if(this.relations != null && !this.relations.isEmpty()){
+			String name = "";
+			for(QzJobRelation jobRelation : this.relations){
+				name += jobRelation.getJobInfo().getName() + ",";
+			}
+			return name.substring(0, name.length()-1);
+		}
+		return relationName;
+	}
+	public void setRelationName(String relationName) {
+		this.relationName = relationName;
+	}
+	
+	
 }

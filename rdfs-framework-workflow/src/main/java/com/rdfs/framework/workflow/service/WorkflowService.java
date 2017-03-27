@@ -1,6 +1,7 @@
 package com.rdfs.framework.workflow.service;
 
 import com.rdfs.framework.hibernate.service.HibernateService;
+import com.rdfs.framework.workflow.entity.CwProcessInfo;
 
 public interface WorkflowService extends HibernateService{
 
@@ -29,5 +30,12 @@ public interface WorkflowService extends HibernateService{
 	 * @throws Exception
 	 */
 	String getNextRoute(String businessKey, String flowName, String action);
+
+	/**
+	 * 根据流程ID获取流程实例
+	 * @param id
+	 * @return
+	 */
+	CwProcessInfo getProcessInfo(Integer id);
 
 }

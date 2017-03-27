@@ -55,5 +55,11 @@
         <property name="createTime" type="java.sql.Timestamp">
             <column name="create_time"/>
         </property>
+        <bag name="relations" lazy="true" cascade="all-delete-orphan" inverse="true">
+            <key>
+                <column name="job_id" not-null="true"/>
+            </key>
+            <one-to-many class="com.rdfs.framework.quartz.entity.QzJobRelation" />
+        </bag>
     </class>
 </hibernate-mapping>

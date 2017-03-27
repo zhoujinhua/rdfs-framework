@@ -23,4 +23,10 @@ public class ProcessInfoServiceImpl extends HibernateServiceSupport implements P
 		}
 		return null;
 	}
+
+	@Override
+	public List<CwProcessInfo> getProcessInfos() {
+		String hql = "from CwProcessInfo a where a.status = '" + Constants.IS.YES + "' and exists (select 1 from CwProcessInfo b where a.code = b.code group by b.code having max(b.version) = a.version)";
+		return getList(hql);
+	}
 }

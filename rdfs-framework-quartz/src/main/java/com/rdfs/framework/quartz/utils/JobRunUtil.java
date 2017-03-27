@@ -27,9 +27,10 @@ public class JobRunUtil {
 				QzJobLog jobLog = new QzJobLog(info, Constants.IS.NO, new Date());
 				try{
 					if(!StringUtils.isBlank(info.getType())){
+						//jobInfoService.updateEntity(info, "");
 						if(info.getType().equals(Constants.TYPE.HTTP)){
 							try{
-								String result = HttpUtils.invokeGet(null, info.getHttpUrl());
+								String result = HttpUtils.invokeGet(null, info.getHttpUrl(), 30000000);
 								jobLog.setIsSuccess(Constants.IS.YES);
 								jobLog.setMessage(result);
 							}catch(Exception e){

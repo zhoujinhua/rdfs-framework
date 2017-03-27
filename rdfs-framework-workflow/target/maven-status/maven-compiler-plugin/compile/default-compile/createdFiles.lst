@@ -2,7 +2,6 @@ com\rdfs\framework\workflow\entity\CwProcessInfo.class
 com\rdfs\framework\workflow\service\impl\TaskNodeServiceImpl.class
 com\rdfs\framework\workflow\entity\CwTaskNode.class
 com\rdfs\framework\workflow\service\RunTaskService.class
-com\rdfs\framework\workflow\service\TaskListener.class
 com\rdfs\framework\workflow\service\WorkflowService.class
 com\rdfs\framework\workflow\service\impl\RunTaskServiceImpl.class
 com\rdfs\framework\workflow\service\impl\NodeEventServiceImpl.class

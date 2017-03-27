@@ -58,6 +58,60 @@
 		        <attachClasses>true</attachClasses>
 		      </configuration>
 		  </plugin> -->
+		  <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-views</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<outputDirectory>${basedir}/target/classes/META-INF/resources/view</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/webapp/view</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-statics</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<outputDirectory>${basedir}/target/classes/META-INF/resources/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/webapp/static</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-tlds</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<outputDirectory>${basedir}/target/classes/META-INF/resources/WEB-INF/tld</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/webapp/WEB-INF/tld</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
   	</plugins>
   </build>
 </project>

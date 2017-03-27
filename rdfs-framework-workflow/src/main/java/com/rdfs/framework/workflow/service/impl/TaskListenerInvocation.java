@@ -1,7 +1,7 @@
 package com.rdfs.framework.workflow.service.impl;
 
 import com.rdfs.framework.workflow.entity.CwRunTask;
-import com.rdfs.framework.workflow.service.TaskListener;
+import com.rdfs.framework.workflow.listener.TaskListener;
 
 public class TaskListenerInvocation {
 

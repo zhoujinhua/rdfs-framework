@@ -1,9 +1,12 @@
 package com.rdfs.framework.quartz.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rdfs.framework.core.bean.TreeDto;
+import com.rdfs.framework.core.utils.JacksonUtil;
 import com.rdfs.framework.hibernate.bean.Page;
 import com.rdfs.framework.hibernate.enums.OperMode;
 import com.rdfs.framework.hibernate.enums.OrderMode;
@@ -76,4 +81,15 @@ public class JobInfoController {
 		return "quartz/list";
 	}
 	
+	@RequestMapping("jobTree")
+	public void jobTree(HttpServletRequest request, HttpServletResponse response, QzJobInfo job){
+		PrintWriter pw = null;
+		try{
+			pw = response.getWriter();
+			List<TreeDto> treeList = jobInfoService.jobTree(job);
+			pw.print(JacksonUtil.toJson(treeList));
+		}catch(Exception e){
+			logger.error("获取定时任务树失败,", e);
+		}
+	}
 }

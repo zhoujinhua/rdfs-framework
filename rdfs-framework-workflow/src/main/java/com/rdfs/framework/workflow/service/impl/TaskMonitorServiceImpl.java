@@ -8,7 +8,7 @@ import com.rdfs.framework.hibernate.service.impl.HibernateServiceSupport;
 import com.rdfs.framework.workflow.entity.CwNodeEvent;
 import com.rdfs.framework.workflow.entity.CwRunTask;
 import com.rdfs.framework.workflow.entity.CwTaskMonitor;
-import com.rdfs.framework.workflow.service.TaskListener;
+import com.rdfs.framework.workflow.listener.TaskListener;
 import com.rdfs.framework.workflow.service.TaskMonitorService;
 
 @Service
