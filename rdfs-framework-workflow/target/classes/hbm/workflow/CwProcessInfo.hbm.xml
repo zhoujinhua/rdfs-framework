@@ -16,7 +16,7 @@
         <property name="code" type="java.lang.String">
             <column name="code"></column>
         </property>
-        <property name="version" type="java.lang.String">
+        <property name="version" type="java.lang.Long">
             <column name="version"></column>
         </property>
         <property name="status" type="java.lang.String">

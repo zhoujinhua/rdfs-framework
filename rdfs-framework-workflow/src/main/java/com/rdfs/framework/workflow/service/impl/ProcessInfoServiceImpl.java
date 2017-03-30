@@ -1,18 +1,23 @@
 package com.rdfs.framework.workflow.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
+import com.rdfs.framework.core.bean.TreeDto;
 import com.rdfs.framework.core.contants.Constants;
 import com.rdfs.framework.hibernate.service.impl.HibernateServiceSupport;
+import com.rdfs.framework.workflow.entity.CwNodeEvent;
 import com.rdfs.framework.workflow.entity.CwProcessInfo;
+import com.rdfs.framework.workflow.entity.CwTaskNode;
 import com.rdfs.framework.workflow.service.ProcessInfoService;
 
 @Service
 public class ProcessInfoServiceImpl extends HibernateServiceSupport implements ProcessInfoService {
-
+	
 	@Override
 	public CwProcessInfo getLastProcess(String flowName){
 		List<CwProcessInfo> list = getList(" from CwProcessInfo where code = '" + flowName + "' and status = '" + Constants.IS.YES + "' order by convert(version using GBK) desc");
@@ -28,5 +33,52 @@ public class ProcessInfoServiceImpl extends HibernateServiceSupport implements P
 	public List<CwProcessInfo> getProcessInfos() {
 		String hql = "from CwProcessInfo a where a.status = '" + Constants.IS.YES + "' and exists (select 1 from CwProcessInfo b where a.code = b.code group by b.code having max(b.version) = a.version)";
 		return getList(hql);
+	}
+
+	@Override
+	public void saveProcessInfo(CwProcessInfo processInfo) {
+		if(processInfo.getId()!=null){
+			updateEntity(processInfo, "name", "code", "status");
+		} else {
+			processInfo.setVersion(new Date().getTime());
+			processInfo.setCreateTime(new Date());
+			saveEntity(processInfo);
+		}
+	}
+
+	@Override
+	public void updateProcessVersion(CwProcessInfo processInfo) {
+		processInfo = getEntityById(CwProcessInfo.class, processInfo.getId(), false);
+		processInfo.setVersion(new Date().getTime());
+	}
+	
+	@Override
+	public List<TreeDto> nodeTree(CwProcessInfo processInfo) throws Exception {
+		List<TreeDto> treeList = new ArrayList<>();
+		
+		processInfo = getEntityById(CwProcessInfo.class, processInfo.getId(), true);
+		TreeDto treeDto = new TreeDto(processInfo.getId()+"", "0", processInfo.getName(), true, true);
+		treeList.add(treeDto);
+		
+		List<CwTaskNode> nodeList = processInfo.getTaskNodes();
+		if(nodeList!=null && !nodeList.isEmpty()){
+			for(CwTaskNode taskNode : nodeList){
+				String nodeId = "node-"+taskNode.getId();
+				treeDto = new TreeDto(nodeId, processInfo.getId()+"", taskNode.getName(),true);
+				treeList.add(treeDto);
+				
+				Hibernate.initialize(taskNode.getNodeEvents());
+				List<CwNodeEvent> eventList = taskNode.getNodeEvents();
+				if(eventList!=null && !eventList.isEmpty()){
+					for(CwNodeEvent nodeEvent : eventList){
+						String eventId = "event-"+nodeEvent.getId();
+						treeDto = new TreeDto(eventId, nodeId, nodeEvent.getRemark(), false);
+						treeList.add(treeDto);
+					}
+				}
+			}
+		}
+		
+		return treeList;
 	}
 }

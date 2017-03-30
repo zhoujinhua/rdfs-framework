@@ -2,6 +2,7 @@ com\rdfs\framework\workflow\entity\CwProcessInfo.class
 com\rdfs\framework\workflow\service\impl\TaskNodeServiceImpl.class
 com\rdfs\framework\workflow\entity\CwTaskNode.class
 com\rdfs\framework\workflow\service\RunTaskService.class
+com\rdfs\framework\workflow\service\TaskListener.class
 com\rdfs\framework\workflow\service\WorkflowService.class
 com\rdfs\framework\workflow\service\impl\RunTaskServiceImpl.class
 com\rdfs\framework\workflow\service\impl\NodeEventServiceImpl.class
@@ -10,11 +11,14 @@ com\rdfs\framework\workflow\entity\CwRunExecution.class
 com\rdfs\framework\workflow\service\ProcessInfoService.class
 com\rdfs\framework\workflow\service\TaskNodeService.class
 com\rdfs\framework\workflow\service\impl\WorkflowServiceImpl.class
+com\rdfs\framework\workflow\controller\ProcessInfoController.class
 com\rdfs\framework\workflow\service\TaskMonitorService.class
 com\rdfs\framework\workflow\entity\CwNodeEvent.class
+com\rdfs\framework\workflow\listener\TaskListener.class
 com\rdfs\framework\workflow\entity\CwTaskMonitor.class
 com\rdfs\framework\workflow\entity\CwRunTask.class
 com\rdfs\framework\workflow\service\NodeEventService.class
+com\rdfs\framework\workflow\controller\WorkflowController.class
 com\rdfs\framework\workflow\service\impl\TaskListenerInvocation.class
 com\rdfs\framework\workflow\service\DelegateTask.class
 com\rdfs\framework\workflow\service\impl\TaskMonitorServiceImpl.class

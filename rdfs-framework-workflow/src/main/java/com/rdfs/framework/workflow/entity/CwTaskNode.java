@@ -1,6 +1,7 @@
 package com.rdfs.framework.workflow.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,6 +17,9 @@ public class CwTaskNode implements Serializable{
 	private String name;
 	private String code;
 	private String type; //类型：开始/用户任务/结束
+	
+	@JsonIgnore
+	private List<CwNodeEvent> nodeEvents;
 	
 	public Integer getId() {
 		return id;
@@ -46,6 +50,12 @@ public class CwTaskNode implements Serializable{
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public List<CwNodeEvent> getNodeEvents() {
+		return nodeEvents;
+	}
+	public void setNodeEvents(List<CwNodeEvent> nodeEvents) {
+		this.nodeEvents = nodeEvents;
 	}
 	
 }

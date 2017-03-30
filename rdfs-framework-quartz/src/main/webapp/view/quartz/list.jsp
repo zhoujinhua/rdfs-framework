@@ -114,8 +114,8 @@ request.setAttribute("basePath", basePath);
 		           <div class="box-content">
 		           		<cs:table id="data-table" class="table table-striped table-bordered responsive" onrender="${path }/job/list">
 		           			<cs:column dataField="name" name="任务名称"/>
-		           			<cs:column dataField="type" name="任务类型"/>
-		           			<cs:column dataField="status" name="任务状态"/>
+		           			<cs:column dataField="type" name="任务类型" type="dict" format="_quartz_type"/>
+		           			<cs:column dataField="status" name="任务状态" type="dict" format="_is"/>
 		           			<cs:column dataField="cron" name="任务计划"/>
 		           			<cs:column dataField="batch" name="是否允许并发" type="dict" format="_is"/>
 		           			<cs:column dataField="ip" name="任务执行主机"/>

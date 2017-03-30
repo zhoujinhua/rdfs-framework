@@ -48,13 +48,13 @@
 
 	<mvc:resources mapping="/**" location="/" />
 	<!-- /**的意思是所有文件夹及里面的子文件夹  /*是所有文件夹，不含子文件夹  /是web项目的根目录 -->
-	<mvc:interceptors>
+	<!-- <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*/*" />
-			<bean class="com.rdfs.framework.core.interceptor.DispatcherContextInterceptor"></bean>
+			<bean class="com.rdfs.core.interceptor.DispatcherContextInterceptor"></bean>
 		</mvc:interceptor>
 		
-	</mvc:interceptors>
+	</mvc:interceptors> -->
 
 	<mvc:view-controller path="/" view-name="forward:/login.jsp" />
 	<!--当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->

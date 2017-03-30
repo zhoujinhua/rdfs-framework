@@ -20,7 +20,7 @@ public class CwProcessInfo implements Serializable{
 	private Integer id;
 	private String name;
 	private String code;
-	private String version;
+	private Long version;
 	private String status; 
 	private Date createTime;
 	
@@ -45,10 +45,10 @@ public class CwProcessInfo implements Serializable{
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public String getVersion() {
+	public Long getVersion() {
 		return version;
 	}
-	public void setVersion(String version) {
+	public void setVersion(Long version) {
 		this.version = version;
 	}
 	public String getStatus() {

@@ -30,4 +30,27 @@ public class TaskMonitorServiceImpl extends HibernateServiceSupport implements T
 		}
 	}
 
+	@Override
+	public void saveTaskMonitor(CwNodeEvent nodeEvent) {
+		CwNodeEvent cwNodeEvent = getEntityById(CwNodeEvent.class, nodeEvent.getId(), true);
+		cwNodeEvent.getTaskMonitors().clear();
+		if(nodeEvent.getTaskMonitors()!=null && !nodeEvent.getTaskMonitors().isEmpty()){
+			for(CwTaskMonitor taskMonitor : nodeEvent.getTaskMonitors()){
+				try {
+					Class<?> clazz = Class.forName(taskMonitor.getClassName());
+					try {
+						if(!(clazz.newInstance() instanceof TaskListener)){
+							throw new RuntimeException("监听类必须实现TaskListener接口.");
+						}
+					} catch (Exception e) {
+						throw new RuntimeException("监听类实例化失败.");
+					}
+				} catch (ClassNotFoundException e) {
+					throw new RuntimeException("监听类不存在.");
+				}
+				cwNodeEvent.getTaskMonitors().add(taskMonitor);
+			}
+		}
+	}
+
 }

@@ -14,4 +14,8 @@ public interface NodeEventService extends HibernateService{
 	 */
 	CwNodeEvent getNodeEvent(CwTaskNode taskNode, String action);
 
+	void deleteNodeEvent(CwNodeEvent nodeEvent);
+
+	void saveNodeEvent(CwNodeEvent nodeEvent);
+
 }

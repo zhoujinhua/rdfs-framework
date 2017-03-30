@@ -8,4 +8,6 @@ public interface TaskMonitorService extends HibernateService {
 
 	void invoke(CwRunTask runTask, CwNodeEvent nodeEvent, String eventName) throws Exception;
 
+	void saveTaskMonitor(CwNodeEvent nodeEvent);
+
 }

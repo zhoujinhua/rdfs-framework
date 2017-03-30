@@ -31,4 +31,17 @@ public class NodeEventServiceImpl extends HibernateServiceSupport implements Nod
 		}
 		return null;
 	}
+
+	@Override
+	public void deleteNodeEvent(CwNodeEvent nodeEvent) {
+		nodeEvent = getEntityById(CwNodeEvent.class, nodeEvent.getId(), true);
+		nodeEvent.getTaskMonitors().clear();
+		deleteEntity(nodeEvent);
+	}
+
+	@Override
+	public void saveNodeEvent(CwNodeEvent nodeEvent) {
+		// TODO Auto-generated method stub
+		
+	}
 }
