@@ -33,6 +33,7 @@ public class MailSenderServiceImpl extends HibernateServiceSupport implements Ma
 		}
 	}
 
+	@Override
 	public SyMailSender getDefaultSender(){
 		String hql = "from SyMailSender where isDefault = '" + Constants.IS.YES +"' and status = '" + Constants.IS.YES +"'";
 		List<SyMailSender> mailSenders = getList(hql);

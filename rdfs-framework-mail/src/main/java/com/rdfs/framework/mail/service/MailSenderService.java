@@ -9,4 +9,6 @@ public interface MailSenderService extends HibernateService{
 
 	void saveMailSender(SyMailSender sender);
 
+	SyMailSender getDefaultSender();
+
 }
