@@ -36,7 +36,7 @@ request.setAttribute("basePath", basePath);
 		    reload("data-table");
 	    });
 	    $(document).delegate('#fn-btn-add', 'click', function() {
-		    window.location.href = contextPath + '/view/sender/add.jsp?juid='+juid;
+		    window.location.href = contextPath + '/view/mail/sender/add.jsp?juid='+juid;
 	    });
 	</script>
 	<div class="ch-container">

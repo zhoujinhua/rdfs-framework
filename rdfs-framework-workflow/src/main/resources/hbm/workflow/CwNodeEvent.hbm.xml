@@ -20,7 +20,7 @@
             <column name="route"></column>
         </property>
         <property name="group" type="java.lang.String">
-            <column name="group"></column>
+            <column name="group_no"></column>
         </property>
         <property name="user" type="java.lang.String">
             <column name="user"></column>

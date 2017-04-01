@@ -81,7 +81,8 @@ public class ProcessInfoController {
 	@RequestMapping("copy")
 	public String copy(HttpServletRequest request, CwProcessInfo processInfo){
 		try{
-			
+			processInfo = processInfoService.getEntityById(processInfo);
+			processInfoService.saveCopyProcess(processInfo);
 			request.setAttribute("msg", "复制流程成功!");
 		}catch(Exception e){
 			logger.error("复制流程失败,", e);
@@ -90,6 +91,11 @@ public class ProcessInfoController {
 		return "workflow/process/list";
 	}
 
+	@RequestMapping("view")
+	public String view(HttpServletRequest request, CwProcessInfo processInfo){
+		return "workflow/process/view";
+	}
+	
 	@RequestMapping("nodeTree")
 	public void nodeTree(HttpServletRequest request, HttpServletResponse response, CwProcessInfo processInfo){
 		PrintWriter pw = null;

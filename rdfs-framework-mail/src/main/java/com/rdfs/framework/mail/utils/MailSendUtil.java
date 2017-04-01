@@ -2,13 +2,23 @@ package com.rdfs.framework.mail.utils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.rdfs.framework.core.contants.Constants;
+import com.rdfs.framework.core.spring.SpringContextBeanFactory;
+import com.rdfs.framework.core.utils.JacksonUtil;
 import com.rdfs.framework.mail.config.MailSender;
 import com.rdfs.framework.mail.config.MailSenderConfig;
 import com.rdfs.framework.mail.entity.Attachment;
+import com.rdfs.framework.mail.entity.SyMailLog;
+import com.rdfs.framework.mail.entity.SyMailSender;
+import com.rdfs.framework.mail.service.MailSenderService;
 
 
 public class MailSendUtil {
@@ -21,6 +31,8 @@ public class MailSendUtil {
 	private List<Attachment> attachments;
 	private String userName;
 	private String password;
+	private MailSenderService mailSenderService = SpringContextBeanFactory.getBean("mailSenderServiceImpl");
+	private Logger logger = LoggerFactory.getLogger(MailSendUtil.class);
 
 	public MailSendUtil(String subject, String content, List<String> mailAddress, List<String> mailCCAddress,
 			List<Attachment> attachments, String userName, String password) {
@@ -43,14 +55,51 @@ public class MailSendUtil {
 		this.password = password;
 	}
 
+	public MailSendUtil(String subject, String content, List<String> mailAddress) {
+		super();
+		this.subject = subject;
+		this.content = content;
+		this.mailAddress = mailAddress;
+	}
+
 	public MailSendUtil() {
 		super();
 	}
 
-	public void send() throws Exception {
+	public void send() {
+		SyMailLog mailLog = null;
+		MailSenderConfig config = null;
+		try{
+			config = getConfig();
+			MailSender ms = new MailSender(config);
+			MimeMessage message = ms.getMessage();
+			ms.setMessage(message);
+			
+			ms.send();
+			mailLog = new SyMailLog(config.getFromMail(), JacksonUtil.toJson(mailAddress), 
+					JacksonUtil.toJson(attachments), content, Constants.IS.YES, null, new Date());
+		}catch(Exception e){
+			logger.error("发送邮件失败,", e);
+			mailLog = new SyMailLog(config.getFromMail(), JacksonUtil.toJson(mailAddress), 
+					JacksonUtil.toJson(attachments), content, Constants.IS.NO, e.getMessage(), new Date());
+		}finally{
+			mailSenderService.saveEntity(mailLog);
+		}
+	}
+	
+	public MailSenderConfig getConfig(){
 		MailSenderConfig c = new MailSenderConfig(SMTP_MAIL_HOST, subject, content, userName);
-		c.setUsername(userName);
-		c.setPassword(password);
+		if(userName == null && password == null){
+			SyMailSender mailSender = mailSenderService.getDefaultSender();
+			if(mailSender == null){
+				throw new RuntimeException("必须指定发件人.");
+			}
+			c.setUsername(mailSender.getEmail());
+			c.setPassword(mailSender.getPassword());
+		} else {
+			c.setUsername(userName);
+			c.setPassword(password);
+		}
 		if(mailAddress!=null && !mailAddress.isEmpty()){
 			for(String addr : mailAddress){
 				c.addToMail(addr);
@@ -66,12 +115,7 @@ public class MailSendUtil {
 				c.addAttachment(attachment);
 			}
 		}
-        MailSender ms = new MailSender(c);
-        MimeMessage message = ms.getMessage();
-        ms.setMessage(message);
-        
-        ms.send();
-        System.out.println("sent...");
+		return c;
 	}
 
 	public static void main(String[] args) throws Exception {

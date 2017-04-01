@@ -10,7 +10,7 @@ request.setAttribute("basePath", basePath);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>催收大平台-数据字典管理</title>
+    <title>定时调度管理</title>
     <jsp:include page="/view/common/head.jsp"></jsp:include>
 </head>
 <script type="text/javascript">
@@ -67,6 +67,14 @@ request.setAttribute("basePath", basePath);
 			} else {
 				$(".ssh, .native, .http").parent().parent().addClass("hide").hide();
 				$(".ssh, .native, .http").removeClass("required");
+			}
+		});
+		$(document).delegate('#send_mail', 'change', function() {
+			var value = $(this).val();
+			if(value == "01" || value == ""){
+				$("#email").parent().parent().addClass("hide").hide();
+			} else {
+				$("#email").parent().parent().removeClass("hide").show();
 			}
 		});
 		$(document).delegate('.qseq', 'keyup', function() {
@@ -165,7 +173,25 @@ request.setAttribute("basePath", basePath);
 		                        </div>
 		                    </div>
 		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">执行完成后</label>
+		                        <label class="control-label col-sm-4">执行调度主机名称</label>
+		                         <div class="col-sm-8">
+		                         	<cs:input class="form-control" name="ip" maxlength="30" value="${info.ip }"></cs:input>
+		                        </div>
+		                    </div>
+		                     <div class="form-group col-sm-12 col-sm-8">
+		                        <label class="control-label col-sm-4">邮件我<i class="glyphicon glyphicon-star red"></i></label>
+		                         <div class="col-sm-8">
+		                         	<cs:select class="form-control required chosen" dicField="_quartz_mail" name="" allowBlank="true" value="${info.sendMail }" id="send_mail"/>
+		                        </div>
+		                    </div>
+		                     <div class="form-group col-sm-12 col-sm-8 hide">
+		                        <label class="control-label col-sm-4">邮件地址<i class="glyphicon glyphicon-star red"></i></label>
+		                         <div class="col-sm-8">
+		                         	<textarea rows="" cols="" class="form-control required autogrow" maxlength="1000" name="email" id="email" style="min-height:57px;" placeholder="多个邮件地址使用英文分号;分割">${info.email }</textarea>
+		                        </div>
+		                    </div>
+		                     <div class="form-group col-sm-12 col-sm-8">
+		                        <label class="control-label col-sm-4">继续执行</label>
 		                         <div class="col-sm-8">
 		                         	<div class="input-group">
 			                         	<input class="form-control" id="cron_after" readonly value="${info.relationName }">
@@ -173,12 +199,6 @@ request.setAttribute("basePath", basePath);
 		                         			<i class="glyphicon glyphicon-user red"></i>
 		                         		</a>
 		                         	</div>
-		                        </div>
-		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">执行调度主机名称</label>
-		                         <div class="col-sm-8">
-		                         	<cs:input class="form-control" name="ip" maxlength="30" value="${info.ip }"></cs:input>
 		                        </div>
 		                    </div>
 		                     <div class="form-group col-sm-12 col-sm-8 hide">

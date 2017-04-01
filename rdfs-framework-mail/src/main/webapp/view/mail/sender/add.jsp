@@ -19,7 +19,7 @@ request.setAttribute("basePath", basePath);
 	            <a href="#">系统管理</a>
 	        </li>
 	        <li>
-	            <a href="${path }/view/sender/list.jsp">发件人管理</a>
+	            <a href="${path }/view/mail/sender/list.jsp">发件人管理</a>
 	        </li>
 	        <li>
 	            <a href="#">发件人维护</a>

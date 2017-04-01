@@ -21,15 +21,17 @@ request.setAttribute("basePath", basePath);
     		html += ' <a class="link copy" href= "javascript:;" data-id="'+data+'">复制</a>';
     		html += ' <a class="link" href= "'+contextPath+'/process/addVersion?id='+data+'">更新版本</a>';
     		html += ' <a class="link" href= "'+contextPath+'/view/workflow/process/tree/list.jsp?id='+data+'">节点管理</a>';
+    		html += ' <a target="_blank" class="link" href= "'+contextPath+'/process/view?id='+data+'">查看流程</a>';
 	    	return	data=html;
 		}
 		$(document).delegate('#fn-btn-search', 'click', function() {
 		    reload("data-table");
 	    });
 		$(document).delegate('.copy','click',function() {
+			var id = $(this).attr("data-id");
 			$.confirm("复制流程将同步复制流程下的节点和节点关联的事件，确定吗?", function(ok){
 				if(ok){
-					
+					location.href = "${path}/process/copy?id="+id+"&juid="+juid;
 				}
 			});
 	    });

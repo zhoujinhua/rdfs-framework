@@ -53,7 +53,7 @@ private Logger logger = LoggerFactory.getLogger(MailSenderController.class);
 			
 			return "sender/add";
 		}
-		return "sender/list";
+		return "mail/sender/list";
 	}
 	
 	@RequestMapping("edit")
@@ -61,7 +61,7 @@ private Logger logger = LoggerFactory.getLogger(MailSenderController.class);
 		sender = mailSenderService.getEntityById(SyMailSender.class, sender.getId(), true);
 		
 		request.setAttribute("sender", sender);
-		return "sender/add";
+		return "mail/sender/add";
 	}
 	
 	@RequestMapping("delete")
@@ -73,7 +73,7 @@ private Logger logger = LoggerFactory.getLogger(MailSenderController.class);
 			logger.error("删除发件人失败,",e);
 			request.setAttribute("msg", "删除发件人失败,"+e.getMessage());
 		}
-		return "sender/list";
+		return "mail/sender/list";
 	}
 	
 	@RequestMapping("setDefault")
@@ -85,6 +85,6 @@ private Logger logger = LoggerFactory.getLogger(MailSenderController.class);
 			logger.error("设置状态失败,",e);
 			request.setAttribute("msg", "设置默认失败,"+e.getMessage());
 		}
-		return "sender/list";
+		return "mail/sender/list";
 	}
 }

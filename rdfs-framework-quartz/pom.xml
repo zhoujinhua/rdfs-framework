@@ -23,12 +23,7 @@
   		</dependency>
   		<dependency>
   			<groupId>com.rdfs</groupId>
-  			<artifactId>rdfs-framework-ui</artifactId>
-  			<version>1.0.0</version>
-  		</dependency>
-  		<dependency>
-  			<groupId>com.rdfs</groupId>
-  			<artifactId>rdfs-framework-params</artifactId>
+  			<artifactId>rdfs-framework-mail</artifactId>
   			<version>1.0.0</version>
   		</dependency>
 		<dependency>  

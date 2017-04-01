@@ -25,6 +25,12 @@
         <property name="batch" type="java.lang.String">
             <column name="batch"/>
         </property>
+        <property name="sendMail" type="java.lang.String">
+            <column name="send_mail"/>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email"/>
+        </property>
         <property name="ip" type="java.lang.String">
             <column name="ip"/>
         </property>

@@ -20,6 +20,8 @@ public class QzJobInfo implements Serializable{
 	private String runStatus; //运行状态
 	private String type;
 	private String batch;
+	private String sendMail;
+	private String email;
 	private String ip;
 	private String remark;
 	private Date createTime;
@@ -121,6 +123,18 @@ public class QzJobInfo implements Serializable{
 	}
 	public void setBatch(String batch) {
 		this.batch = batch;
+	}
+	public String getSendMail() {
+		return sendMail;
+	}
+	public void setSendMail(String sendMail) {
+		this.sendMail = sendMail;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getHttpUrl() {
 		return httpUrl;

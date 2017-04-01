@@ -19,4 +19,8 @@ public interface ProcessInfoService extends HibernateService{
 
 	List<TreeDto> nodeTree(CwProcessInfo processInfo) throws Exception;
 
+	void saveCopyProcess(CwProcessInfo processInfo);
+
+	CwProcessInfo getEntityById(CwProcessInfo processInfo);
+
 }

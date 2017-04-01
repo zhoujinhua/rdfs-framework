@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author zhoufei
  *
  */
-public class CwProcessInfo implements Serializable{
+public class CwProcessInfo implements Serializable, Cloneable{
 
 	/**
 	 * 
@@ -68,6 +68,10 @@ public class CwProcessInfo implements Serializable{
 	}
 	public void setTaskNodes(List<CwTaskNode> taskNodes) {
 		this.taskNodes = taskNodes;
+	}
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 	
 }
