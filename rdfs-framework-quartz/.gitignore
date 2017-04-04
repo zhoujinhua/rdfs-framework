@@ -5,3 +5,6 @@
 /$/
 /src/test/
 /.idea
+build/
+src/META-INF
+
