@@ -14,7 +14,12 @@
   </properties>
 
   <dependencies>
-    <dependency>  
+    	<dependency>  
+            <groupId>com.rdfs</groupId>  
+            <artifactId>rdfs-framework-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    	<dependency>  
             <groupId>org.hibernate</groupId>  
             <artifactId>hibernate-core</artifactId>  
         </dependency>

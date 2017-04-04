@@ -10,7 +10,7 @@ import redis.clients.jedis.Jedis;
 
 /**
  */
-public class RdfsId {
+public class UUIDUtil {
 	
 	/**
 	 * 返回去除连接符-的UUID

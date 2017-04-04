@@ -2,7 +2,6 @@ package com.rdfs.framework.hibernate.service;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 import com.rdfs.framework.hibernate.bean.Page;
 import com.rdfs.framework.hibernate.enums.OperMode;

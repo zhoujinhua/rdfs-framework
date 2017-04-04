@@ -145,5 +145,4 @@ public class AuthUtil {
 		}
 		return ip;
 	}
-
 }

@@ -16,6 +16,7 @@ import com.rdfs.framework.hibernate.bean.Page;
 
 
 
+
 /**
  * @param <Q>
  */

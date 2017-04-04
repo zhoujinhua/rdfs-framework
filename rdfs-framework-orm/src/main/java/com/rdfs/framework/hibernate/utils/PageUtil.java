@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.ServletRequestUtils;
 
+import com.rdfs.framework.core.utils.AuthUtil;
 import com.rdfs.framework.hibernate.bean.Page;
-
 
 public class PageUtil {
 
@@ -19,7 +19,11 @@ public class PageUtil {
 			page.setStart(ServletRequestUtils.getIntParameter(request, "start", 0));
 			Integer length = ServletRequestUtils.getIntParameter(request, "length",0);
 			if(length == null || length.intValue() == 0){
-				length = 10;
+				String value = AuthUtil.getParam("_page_size");
+				if(value == null || "".equals(value)){
+					value = "10";
+				}
+				length = Integer.parseInt(value);
 			}
 			page.setLimit(length);
 		} catch (Exception e) {
@@ -28,4 +32,5 @@ public class PageUtil {
 		}
 		return page;
 	}
+	
 }
