@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.collect.Lists;
@@ -28,6 +29,7 @@ import com.rdfs.framework.taglib.utils.JacksonUtil;
 
 import redis.clients.jedis.Jedis;
 
+@Service
 public class CacheParamsServiceImpl extends HibernateServiceSupport implements CacheParamsService {
 
 private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class);

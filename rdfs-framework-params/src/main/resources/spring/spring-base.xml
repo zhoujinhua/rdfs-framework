@@ -62,5 +62,5 @@
     </bean>
     
     <import resource="classpath*:spring/spring-dao.xml"/>
-    <import resource="classpath*:spring/spring-params.xml"/>
+    <!-- <import resource="classpath*:spring/spring-params.xml"/> -->
 </beans>
