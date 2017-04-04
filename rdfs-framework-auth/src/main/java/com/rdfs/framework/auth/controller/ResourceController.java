@@ -57,8 +57,11 @@ public class ResourceController {
 		}
 	}
 	
+	@RequestMapping("edit")
 	public String edit(HttpServletRequest reuqest, SyResource resource){
 		resource = resourceService.getEntityById(SyResource.class, resource.getItemId(), true);
+		
+		reuqest.setAttribute("resource", resource);
 		return "resource/add";
 	}
 }

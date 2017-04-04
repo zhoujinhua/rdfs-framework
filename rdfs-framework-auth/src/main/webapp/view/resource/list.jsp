@@ -6,6 +6,8 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 request.setAttribute("path", path);
 request.setAttribute("basePath", basePath);
+String juid = request.getParameter("juid");
+request.setAttribute("juid", juid);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,23 +80,37 @@ request.setAttribute("basePath", basePath);
 		}
 		function addMenu() {
 			hideRMenu();
-			if (zTree.getSelectedNodes()[0]) {
-				var treeNode = zTree.getSelectedNodes()[0];
-				$("#menu-frame").attr("src", "${path}/view/menu/add.jsp?menuId="+treeNode.id+"&menuTitle="+treeNode.name+"&juid="+juid);
+			var treeNode = zTree.getSelectedNodes()[0];
+			if (treeNode) {
+				if(treeNode.isParent){
+					$("#menu-frame").attr("src", "${path}/view/menu/add.jsp?menuId="+treeNode.id+"&menuTitle="+treeNode.name+"&juid="+juid);
+				} else {
+					treeNode = treeNode.getParentNode();
+					$("#menu-frame").attr("src", "${path}/view/menu/add.jsp?menuId="+treeNode.id+"&menuTitle="+treeNode.name+"&juid="+juid);
+				}
 			}
 		}
 		function editMenu() {
 			hideRMenu();
-			if (zTree.getSelectedNodes()[0]) {
-				var treeNode = zTree.getSelectedNodes()[0];
-				$("#menu-frame").attr("src", "${path}/menu/edit?menuId="+treeNode.id+"&juid="+juid);
+			var treeNode = zTree.getSelectedNodes()[0];
+			if (treeNode) {
+				if(treeNode.isParent){
+					$("#menu-frame").attr("src", "${path}/menu/edit?menuId="+treeNode.id+"&juid="+juid);
+				} else {
+					$("#menu-frame").attr("src", "${path}/resource/edit?itemId="+treeNode.id+"&juid="+juid);
+				}
 			}
 		}
 		function addResource() {
 			hideRMenu();
-			if (zTree.getSelectedNodes()[0]) {
-				var treeNode = zTree.getSelectedNodes()[0];
-				$("#menu-frame").attr("src", "${path}/view/resource/add.jsp?menuId="+treeNode.id+"&menuTitle="+treeNode.name+"&juid="+juid);
+			var treeNode = zTree.getSelectedNodes()[0];
+			if (treeNode) {
+				if(treeNode.isParent){
+					$("#menu-frame").attr("src", "${path}/view/resource/add.jsp?menuId="+treeNode.id+"&menuTitle="+treeNode.name+"&juid="+juid);
+				}else {
+					treeNode = treeNode.getParentNode();
+					$("#menu-frame").attr("src", "${path}/view/resource/add.jsp?menuId="+treeNode.id+"&menuTitle="+treeNode.name+"&juid="+juid);
+				}
 			}
 		}
 		function onClick(e, treeId, treeNode) {

@@ -10,6 +10,8 @@ String id = request.getParameter("id");
 if(id!=null && !"".equals(id)){
 	request.setAttribute("id", id);
 }
+String juid = request.getParameter("juid");
+request.setAttribute("juid", juid);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,7 +110,7 @@ if(id!=null && !"".equals(id)){
 			           </div>
 			       </div>
 		           <div class="box-content">
-		           		<cs:table id="data-table" class="table table-striped table-bordered responsive" onrender="${path }/node/list?processInfo.id=${id }">
+		           		<cs:table id="data-table" class="table table-striped table-bordered responsive" onrender="${path }/node/list?processInfo.id=${id }&juid=${juid }">
 		           			<cs:column dataField="name" name="节点名称"/>
 		           			<cs:column dataField="code" name="节点代码"/>
 		           			<cs:column dataField="status" name="节点类型" type="dict" format="_node_type"/>

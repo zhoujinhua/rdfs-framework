@@ -69,7 +69,7 @@ if(menuTitle!=null && !"".equals(menuTitle)){
                         <label class="control-label col-sm-4">功能名称<i class="glyphicon glyphicon-star red"></i></label>
                         <div class="col-sm-8">
                         	<input type="hidden" name="id" value="${resource.itemId }"	>
-                      	 		<input type="text" class="form-control required" name="menuTitle" maxlength="20" value="${resource.itemName }">
+                      	 		<input type="text" class="form-control required" name="itemTitle" maxlength="20" value="${resource.itemTitle }">
                         </div>
                      </div>
                      <div class="form-group col-sm-12 col-sm-8">
@@ -81,26 +81,26 @@ if(menuTitle!=null && !"".equals(menuTitle)){
                      <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">所属菜单</label>
                          <div class="col-sm-8">
-                        	<input class="form-control" name="menu.menuTitle" value="${menuTitle != null ? menuTitle : menu.menuTitle }" readonly>
-                        	<input type="hidden" name="menu.menuId" value="${menuId != null ? menuId : menu.menuId }">
+                        	<input class="form-control" name="menu.menuTitle" value="${menuTitle != null ? menuTitle : resource.menu.menuTitle }" readonly>
+                        	<input type="hidden" name="menu.menuId" value="${menuId != null ? menuId : resource.menu.menuId }">
                         </div>
                     </div>
                      <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">请求地址</label>
                          <div class="col-sm-8">
-                        	<cs:input class="form-control" maxlength="20" name="itemLocation"/>
+                        	<cs:input class="form-control" maxlength="20" name="itemLocation" value="${resource.itemLocation }"/>
                         </div>
                     </div>
                      <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">排序号</label>
                          <div class="col-sm-8">
-                        	<cs:input type="int" class="form-control" maxlength="2" name="sortNo"/>
+                        	<cs:input type="int" class="form-control" maxlength="2" name="sortNo" value="${resource.sortNo }"/>
                         </div>
                     </div>
                      <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">图标</label>
                          <div class="col-sm-8">
-                        	<cs:input class="form-control" maxlength="30" name="menuIcon"/>
+                        	<cs:input class="form-control" maxlength="30" name="itemIcon" value="${resource.itemIcon }"/>
                         </div>
                     </div>
                      <div class="form-group">

@@ -8,6 +8,10 @@ request.setAttribute("path", path);
 request.setAttribute("basePath", basePath);
 String menuId = request.getParameter("menuId");
 request.setAttribute("menuId", menuId);
+String juid = request.getParameter("juid");
+if(juid!=null && !juid.equals("")){
+	request.setAttribute("juid", juid);
+}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +30,7 @@ request.setAttribute("menuId", menuId);
 		           </div>
 		       </div>
 	           <div class="box-content">
-					<cs:table id="menu-table" class="table table-striped table-bordered responsive" onrender="${path }/menu/list?menuId=${menuId }">
+					<cs:table id="menu-table" class="table table-striped table-bordered responsive" onrender="${path }/menu/list?menuId=${menuId }&juid=${juid }">
 						<cs:column dataField="menuTitle" name="模块名称"/>
 						<cs:column dataField="status" name="是否有效" type="dict" format="_is"/>
 						<cs:column dataField="parMenu.menuTitle" name="上级菜单"/>
@@ -47,7 +51,7 @@ request.setAttribute("menuId", menuId);
 		           </div>
 		       </div>
 	           <div class="box-content">
-					<cs:table id="resource-table" class="table table-striped table-bordered responsive" onrender="${path }/resource/list?menu.menuId=${menuId }">
+					<cs:table id="resource-table" class="table table-striped table-bordered responsive" onrender="${path }/resource/list?menu.menuId=${menuId }&juid=${juid }">
 						<cs:column dataField="itemTitle" name="模块名称"/>
 						<cs:column dataField="status" name="是否有效" type="dict" format="_is"/>
 						<cs:column dataField="itemLocation" name="请求地址"/>

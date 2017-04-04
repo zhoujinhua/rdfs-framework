@@ -10,6 +10,8 @@ String id = request.getParameter("id");
 if(id!=null && !"".equals(id)){
 	request.setAttribute("id", id);
 }
+String juid = request.getParameter("juid");
+request.setAttribute("juid", juid);
 %>
 <!DOCTYPE html>
 <html lang="en">

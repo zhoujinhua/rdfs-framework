@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rdfs.framework.auth.entity.SyMenu;
+import com.rdfs.framework.auth.entity.SyResource;
 import com.rdfs.framework.auth.service.MenuService;
 import com.rdfs.framework.core.bean.TreeDto;
 import com.rdfs.framework.core.service.TreeService;
@@ -25,6 +26,9 @@ public class MenuServiceImpl extends HibernateServiceSupport implements MenuServ
 		TreeDto treeDto = new TreeDto("0", "", "菜单树", true, false);
 		List<TreeDto> list = treeService.getList(menuList, true, "menuId", "menuTitle", "parMenu.menuId", null);
 		list.add(treeDto);
+		
+		List<SyResource> resourceList = getList("from SyResource");
+		list.addAll(treeService.getList(resourceList, false, "itemId", "itemTitle", "menu.menuId", null));
 		return list;
 	}
 

@@ -25,6 +25,7 @@ public class JobRunUtil {
 	private static Logger logger = LoggerFactory.getLogger(JobRunUtil.class);
 	
 	public static void run(QzJobInfo info){
+		info = jobInfoService.getEntityById(QzJobInfo.class, info.getId(), true);
 		if(!StringUtils.isBlankObj(info)){
 			logger.info("准备运行定时调度任务:" + info.toString());
 			if(StringUtils.isBlank(info.getIp()) || (!StringUtils.isBlank(info.getIp()) && 
@@ -43,8 +44,7 @@ public class JobRunUtil {
 					
 					if(jobLog.getIsSuccess().equals(Constants.IS.YES) && info.getRelations()!=null && !info.getRelations().isEmpty()){
 						for(QzJobRelation jobRelation : info.getRelations()){
-							info = jobInfoService.getEntityById(QzJobInfo.class, jobRelation.getJobInfo().getId(), true);
-							run(info);
+							run(jobRelation.getJobInfo());
 						}
 					}
 					
