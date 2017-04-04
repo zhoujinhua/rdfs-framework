@@ -6,6 +6,7 @@ import java.util.List;
 import com.rdfs.framework.hibernate.bean.Page;
 import com.rdfs.framework.hibernate.enums.OperMode;
 import com.rdfs.framework.hibernate.enums.OrderMode;
+import com.rdfs.framework.hibernate.enums.UpdateMode;
 
 
 public interface HibernateService {
@@ -111,6 +112,14 @@ public interface HibernateService {
 	 * @return
 	 */
 	<T extends Serializable> T updateEntity(T t);
+	
+	/**
+	 * 按字段更新对象
+	 * mode 排除/包含
+	 * @param t
+	 * @param params
+	 */
+	<T extends Serializable> T updateEntity(T t, UpdateMode mode, String...params);
 	
 	/**
 	 * 按字段更新对象
