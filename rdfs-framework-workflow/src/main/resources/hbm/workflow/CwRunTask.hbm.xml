@@ -17,7 +17,7 @@
             <column name="status"></column>
         </property>
         <property name="assigenee" type="java.lang.String">
-            <column name="assigenee"></column>
+            <column name="assignee"></column>
         </property>
         <property name="group" type="java.lang.String">
             <column name="group_no"></column>
@@ -26,7 +26,7 @@
             <column name="user"></column>
         </property>
         <property name="createTime" type="java.sql.Timestamp">
-            <column name="createTime"></column>
+            <column name="create_time"></column>
         </property>
         <many-to-one name="processInfo" class="com.rdfs.framework.workflow.entity.CwProcessInfo">
         	<column name="process_id"></column>
