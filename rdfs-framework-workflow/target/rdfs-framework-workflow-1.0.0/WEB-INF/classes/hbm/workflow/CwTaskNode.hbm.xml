@@ -6,7 +6,7 @@
 -->
 <hibernate-mapping>
     <class name="com.rdfs.framework.workflow.entity.CwTaskNode" table="cw_task_node" >
-        <id name="id" type="java.lang.String">
+        <id name="id" type="java.lang.Integer">
             <column name="id"/>
             <generator class="identity"></generator>
         </id>
@@ -22,5 +22,11 @@
         <many-to-one name="processInfo" class="com.rdfs.framework.workflow.entity.CwProcessInfo">
         	<column name="process_id"></column>
         </many-to-one>
+        <bag name="nodeEvents" lazy="true" cascade="all-delete-orphan" inverse="true">
+            <key>
+                <column name="curr_node" not-null="true"/>
+            </key>
+            <one-to-many class="com.rdfs.framework.workflow.entity.CwNodeEvent" />
+        </bag>
     </class>
 </hibernate-mapping>

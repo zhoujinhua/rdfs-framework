@@ -25,7 +25,7 @@ public class ParamsInitListener implements ServletContextListener{
 		cacheParamsService.cacheParamData();
 	}
 	
-	@SuppressWarnings("resource")
+	@SuppressWarnings({ "resource", "static-access" })
 	public void registry(ServletContextEvent arg0){
 		ApplicationContext ac = WebApplicationContextUtils.getRequiredWebApplicationContext(arg0.getServletContext());  
         ConfigurableApplicationContext context = (ConfigurableApplicationContext) ac;   

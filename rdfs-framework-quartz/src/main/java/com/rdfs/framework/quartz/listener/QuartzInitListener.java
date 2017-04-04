@@ -7,6 +7,12 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import org.quartz.SchedulerException;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.rdfs.framework.core.contants.Constants;
 import com.rdfs.framework.core.spring.SpringContextBeanFactory;
@@ -32,7 +38,7 @@ public class QuartzInitListener implements ServletContextListener{
 			}
 		}
 	}
-
+	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		
