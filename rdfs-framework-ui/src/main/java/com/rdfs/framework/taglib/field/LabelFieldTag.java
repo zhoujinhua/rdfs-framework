@@ -11,6 +11,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import com.rdfs.framework.taglib.bean.Region;
 import com.rdfs.framework.taglib.service.CacheDataService;
+import com.rdfs.framework.taglib.utils.CacheCxtUtil;
 import com.rdfs.framework.taglib.utils.StringUtils;
 
 /**
@@ -32,7 +33,6 @@ public class LabelFieldTag extends TagSupport implements DynamicAttributes{
 	private String type;
 	private String format;
 	
-	private CacheDataService cacheParamsService;
 	private Map<String, String> dynamicAttributes = new HashMap<String, String>(); 
 	
 	@Override
@@ -60,16 +60,16 @@ public class LabelFieldTag extends TagSupport implements DynamicAttributes{
 			if(!StringUtils.isBlank(this.getType())){
 				sb.append(" type='" +this.getType()+ "'");
 				if(this.getType().equalsIgnoreCase("dict")&& !StringUtils.isBlank(this.getFormat()) && !StringUtils.isBlank(this.getValue())){
-					if(!StringUtils.isBlankObj(cacheParamsService)){
-						String desc = cacheParamsService.getDicDesc(this.getFormat(), this.getValue());
+					if(!StringUtils.isBlankObj(CacheCxtUtil.cacheDataService)){
+						String desc = CacheCxtUtil.cacheDataService.getDicDesc(this.getFormat(), this.getValue());
 						if(!StringUtils.isBlank(desc)){
 							v = desc ;
 						}
 					}
 				}
 				if(this.getType().equalsIgnoreCase("region") && !StringUtils.isBlank(this.getValue())){
-					if(!StringUtils.isBlankObj(cacheParamsService)){
-						Region region = cacheParamsService.getRegion(this.getValue());
+					if(!StringUtils.isBlankObj(CacheCxtUtil.cacheDataService)){
+						Region region = CacheCxtUtil.cacheDataService.getRegion(this.getValue());
 						if(region != null){
 							v = region.getRegName();
 						}
@@ -160,13 +160,5 @@ public class LabelFieldTag extends TagSupport implements DynamicAttributes{
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	
-	public CacheDataService getCacheParamsService() {
-		return cacheParamsService;
-	}
-
-	public void setCacheParamsService(CacheDataService cacheParamsService) {
-		this.cacheParamsService = cacheParamsService;
 	}
 }

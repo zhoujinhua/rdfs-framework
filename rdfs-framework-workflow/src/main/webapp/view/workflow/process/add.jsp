@@ -57,7 +57,7 @@ request.setAttribute("basePath", basePath);
 			           </div>
 			       </div>
 		           <div class="box-content">
-		           		<form id="fn-save-form" class="form-horizontal" method="post" action="${path }/job/save">
+		           		<form id="fn-save-form" class="form-horizontal" method="post" action="${path }/process/save">
 		                    <div class="form-group col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">流程名称<i class="glyphicon glyphicon-star red"></i></label>
 		                        <div class="col-sm-8">

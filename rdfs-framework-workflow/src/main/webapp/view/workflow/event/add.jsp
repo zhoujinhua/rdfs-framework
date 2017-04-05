@@ -86,13 +86,13 @@ if(name!=null && !"".equals(name)){
                         <label class="control-label col-sm-4">当前节点<i class="glyphicon glyphicon-star red"></i></label>
                         <div class="col-sm-8">
                       	 		<input class="form-control required" readonly name="currNode.name" value="${name }" id="_curr_node_name">
-                      	 		<input type="hidden" name="currNode.id" value="${id }" id="_curr_node_id">
+                      	 		<input type="hidden" name="currNode.id" value="${event.currNode.id == null?id : event.currNode.id }" id="_curr_node_id">
                         </div>
                      </div>
                      <div class="form-group col-sm-12 col-sm-8">
-                        <label class="control-label col-sm-4">执行动作<i class="glyphicon glyphicon-star red"></i></label>
+                        <label class="control-label col-sm-4">执行动作</label>
                          <div class="col-sm-8">
-                      	 		<cs:select class="form-control required chosen" name="action" value="${event.action }" dicField="_node_action" allowBlank="true"/>
+                      	 		<cs:select class="form-control chosen" name="action" value="${event.action }" dicField="_node_action" allowBlank="true"/>
                         </div>
                     </div>
                      <div class="form-group col-sm-12 col-sm-8">

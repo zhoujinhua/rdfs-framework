@@ -41,7 +41,10 @@ public class NodeEventServiceImpl extends HibernateServiceSupport implements Nod
 
 	@Override
 	public void saveNodeEvent(CwNodeEvent nodeEvent) {
-		// TODO Auto-generated method stub
-		
+		if(nodeEvent.getId()!=null){
+			updateEntity(nodeEvent, "name","currNode","action","nextNode","route","group","user");
+		}else {
+			saveEntity(nodeEvent);
+		}
 	}
 }

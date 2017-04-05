@@ -91,16 +91,16 @@ request.setAttribute("juid", juid);
 					$("#process-frame").attr("src", "${path}/view/workflow/node/add.jsp?id="+treeNode.id+"&juid="+juid);
 				}
 				var nodeId = treeNode.id;
-				if(nodeId.indexOf("node")!=-1){
-					nodeId = nodeId.substring(5, 6);
-					$("#process-frame").attr("src", "${path}/view/workflow/event/add.jsp?id="+nodeId+"&juid="+juid);
-				}
 				var nodeName = treeNode.name;
+				if(nodeId.indexOf("node")!=-1){
+					nodeId = nodeId.substring(5, nodeId.length);
+					$("#process-frame").attr("src", "${path}/view/workflow/event/add.jsp?id="+nodeId+"&name="+nodeName+"&juid="+juid);
+				}
 				if(nodeId.indexOf("event")!=-1){
 					var parentNode = treeNode.getParentNode();
 					nodeId = parentNode.id;
 					if(nodeId.indexOf("node")!=-1){
-						nodeId = nodeId.substring(5, 6);
+						nodeId = nodeId.substring(5, nodeId.length);
 						$("#process-frame").attr("src", "${path}/view/workflow/event/add.jsp?id="+nodeId+"&name="+nodeName+"&juid="+juid);
 					}
 				}
@@ -115,11 +115,11 @@ request.setAttribute("juid", juid);
 				}
 				var nodeId = treeNode.id;
 				if(nodeId.indexOf("node")!=-1){
-					nodeId = nodeId.substring(5, 6);
+					nodeId = nodeId.substring(5, nodeId.length);
 					$("#process-frame").attr("src", "${path}/node/edit?id="+nodeId+"&juid="+juid);
 				}
 				if(nodeId.indexOf("event")!=-1){
-					nodeId = nodeId.substring(6, 7);
+					nodeId = nodeId.substring(6, nodeId.length);
 					$("#process-frame").attr("src", "${path}/event/edit?id="+nodeId+"&juid="+juid);
 				}
 			}
@@ -133,8 +133,9 @@ request.setAttribute("juid", juid);
 				}
 				var nodeId = treeNode.id;
 				if(nodeId.indexOf("node")!=-1){
-					nodeId = nodeId.substring(5, 6);
+					nodeId = nodeId.substring(5, nodeId.length);
 					var parId = treeNode.getParentNode().id;
+					parId = parId.substring(5, parId.length);
 					$.confirm("删除节点将同步删除节点下事件，确定吗?", function(ok){
 						if(ok){
 							$.ajax({
@@ -155,8 +156,9 @@ request.setAttribute("juid", juid);
 					});
 				}
 				if(nodeId.indexOf("event")!=-1){
-					nodeId = nodeId.substring(6, 7);
+					nodeId = nodeId.substring(6, nodeId.length);
 					var parId = treeNode.getParentNode().id;
+					parId = parId.substring(5, parId.length);
 					$.confirm("将删除该节点事件，确定吗?", function(ok){
 						if(ok){
 							$.ajax({
@@ -184,11 +186,11 @@ request.setAttribute("juid", juid);
 			}
 			var nodeId = treeNode.id;
 			if(nodeId.indexOf("node")!=-1){
-				nodeId = nodeId.substring(5, 6);
+				nodeId = nodeId.substring(5, nodeId.length);
 				$("#process-frame").attr("src", "${path}/view/workflow/event/list.jsp?id="+nodeId+"&juid="+juid);
 			}
 			if(nodeId.indexOf("event")!=-1){
-				nodeId = nodeId.substring(6, 7);
+				nodeId = nodeId.substring(6, nodeId.length);
 				$("#process-frame").attr("src", "${path}/event/detail?id="+nodeId+"&juid="+juid);
 			}
 		}
