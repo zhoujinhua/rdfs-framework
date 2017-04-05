@@ -68,7 +68,7 @@ if(menuTitle!=null && !"".equals(menuTitle)){
                     <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">功能名称<i class="glyphicon glyphicon-star red"></i></label>
                         <div class="col-sm-8">
-                        	<input type="hidden" name="id" value="${resource.itemId }"	>
+                        	<input type="hidden" name="itemId" value="${resource.itemId }"	>
                       	 		<input type="text" class="form-control required" name="itemTitle" maxlength="20" value="${resource.itemTitle }">
                         </div>
                      </div>

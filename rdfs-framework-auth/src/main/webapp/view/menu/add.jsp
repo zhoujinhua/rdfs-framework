@@ -66,7 +66,7 @@ if(menuTitle!=null && !"".equals(menuTitle)){
                     <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">菜单名称<i class="glyphicon glyphicon-star red"></i></label>
                         <div class="col-sm-8">
-                        	<input type="hidden" name="id" value="${menu.menuId }"	>
+                        	<input type="hidden" name="menuId" value="${menu.menuId }"	>
                       	 		<input type="text" class="form-control required" name="menuTitle" maxlength="20" value="${menu.menuTitle }">
                         </div>
                      </div>
