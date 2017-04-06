@@ -133,6 +133,32 @@ function validate(){
 			}
 		}
 	});
+	//数字最大值和最小值校验
+	$("input[xtype='int'],input[xtype='float']").each(function(){
+		var value = $(this).val().trim();
+		if(value){
+			var min = $(this).attr("min");
+			if(min){
+				try{
+					if(parseFloat(min) > parseFloat(value)){
+						$(this).fieldError("不可输入小于"+min+"的数字.");
+					}
+				}catch(err){
+					console.log("数字输入框的下限值或者输入框的值不是数字.");
+				}
+			}
+			var max = $(this).attr("max");
+			if(max){
+				try{
+					if(parseFloat(max) < parseFloat(value)){
+						$(this).fieldError("不可输入大于"+max+"的数字.");
+					}
+				}catch(err){
+					console.log("数字输入框的上限值或者输入框的值不是数字.");
+				}
+			}
+		}
+	});
 }
 function validateForm(id){
 	if($("#"+id).find(".error").length!=0){
@@ -195,6 +221,32 @@ function validateForm(id){
 			var tip = IdValid(value);
 			if(tip && tip != "success"){
 				$(this).fieldError(tip);
+			}
+		}
+	});
+	//数字最小值和最大值校验
+	$("#"+id).find("input[xtype='int'],input[xtype='float']").each(function(){
+		var value = $(this).val().trim();
+		if(value){
+			var min = $(this).attr("min");
+			if(min){
+				try{
+					if(parseFloat(min) > parseFloat(value)){
+						$(this).fieldError("不可输入小于"+min+"的数字.");
+					}
+				}catch(err){
+					console.log("数字输入框的下限值或者输入框的值不是数字.");
+				}
+			}
+			var max = $(this).attr("max");
+			if(max){
+				try{
+					if(parseFloat(max) < parseFloat(value)){
+						$(this).fieldError("不可输入大于"+max+"的数字.");
+					}
+				}catch(err){
+					console.log("数字输入框的上限值或者输入框的值不是数字.");
+				}
 			}
 		}
 	});

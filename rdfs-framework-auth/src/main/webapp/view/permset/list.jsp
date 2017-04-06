@@ -66,8 +66,6 @@ request.setAttribute("basePath", basePath);
 					</div>
 				</div>
 			</c:if>
-			<div id="menuTree" class="ztree" >
-			</div>
 			<div class="box col-md-12">
 			   	<div class="box-inner">
 		      	   <div class="box-header well" data-original-title="">
