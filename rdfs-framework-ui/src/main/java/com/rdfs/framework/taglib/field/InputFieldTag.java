@@ -94,14 +94,18 @@ public class InputFieldTag extends TagSupport implements DynamicAttributes{
 			boolean isFile = false;
 			if(!StringUtils.isBlank(this.getType())){
 				if(this.getType().equalsIgnoreCase("int")){
-					sb.append(" type='number' xtype='" +this.getType()+ "'");
+					//sb.append(" type='number' xtype='" +this.getType()+ "'");
+					sb.append(" xtype='" +this.getType()+ "'");
 					if(StringUtils.isBlank(this.getId())){
+						Thread.sleep(1);
 						sb.append(" id='number-" + new Date().getTime() + "'");
 					}
 				}
 				else if(this.getType().equalsIgnoreCase("float")){
-					sb.append(" type='number' xtype='" +this.getType()+ "'");
+					//sb.append(" type='number' xtype='" +this.getType()+ "'");
+					sb.append(" xtype='" +this.getType()+ "'");
 					if(StringUtils.isBlank(this.getId())){
+						Thread.sleep(1);
 						sb.append(" id='number-" + new Date().getTime() + "'");
 					}
 				} 

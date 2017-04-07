@@ -135,29 +135,7 @@ function validate(){
 	});
 	//数字最大值和最小值校验
 	$("input[xtype='int'],input[xtype='float']").each(function(){
-		var value = $(this).val().trim();
-		if(value){
-			var min = $(this).attr("min");
-			if(min){
-				try{
-					if(parseFloat(min) > parseFloat(value)){
-						$(this).fieldError("不可输入小于"+min+"的数字.");
-					}
-				}catch(err){
-					console.log("数字输入框的下限值或者输入框的值不是数字.");
-				}
-			}
-			var max = $(this).attr("max");
-			if(max){
-				try{
-					if(parseFloat(max) < parseFloat(value)){
-						$(this).fieldError("不可输入大于"+max+"的数字.");
-					}
-				}catch(err){
-					console.log("数字输入框的上限值或者输入框的值不是数字.");
-				}
-			}
-		}
+		validNu($(this));
 	});
 }
 function validateForm(id){
@@ -226,29 +204,7 @@ function validateForm(id){
 	});
 	//数字最小值和最大值校验
 	$("#"+id).find("input[xtype='int'],input[xtype='float']").each(function(){
-		var value = $(this).val().trim();
-		if(value){
-			var min = $(this).attr("min");
-			if(min){
-				try{
-					if(parseFloat(min) > parseFloat(value)){
-						$(this).fieldError("不可输入小于"+min+"的数字.");
-					}
-				}catch(err){
-					console.log("数字输入框的下限值或者输入框的值不是数字.");
-				}
-			}
-			var max = $(this).attr("max");
-			if(max){
-				try{
-					if(parseFloat(max) < parseFloat(value)){
-						$(this).fieldError("不可输入大于"+max+"的数字.");
-					}
-				}catch(err){
-					console.log("数字输入框的上限值或者输入框的值不是数字.");
-				}
-			}
-		}
+		validNu($(this));
 	});
 }
 function chosen(){
@@ -269,6 +225,44 @@ function getUrlParam(name){
     	return unescape(r[2]); 
     return null;
 }
+function validNu(obj){
+	var min;
+	var max;
+	var value = obj.val().trim();
+	if(value){
+		try{
+			value = parseFloat(value);
+		}catch(err){
+			$(this).fieldError("必须输入数字.");
+		}
+		if(value){
+			try{
+				if(obj.attr("min") && parseFloat(obj.attr("min"))){
+					min = parseFloat($(this).attr("min"));
+				}
+			}catch(err){
+				console.log("数字输入框的上限值或者输入框的值不是数字.");
+			}
+			try{
+				if(obj.attr("max") && parseFloat(obj.attr("max"))){
+					max = parseFloat($(this).attr("max"));
+				}
+			}catch(err){
+				console.log("数字输入框的下限值或者输入框的值不是数字.");
+			}
+			if(min){
+				if(min > parseFloat(obj.val())){
+					$(this).fieldError("不可输入小于"+min+"的数字.");
+				}
+			}
+			if(max){
+				if(max < parseFloat(obj.val())){
+					$(this).fieldError("不可输入大于"+max+"的数字.");
+				}
+			}
+		}
+	}
+}
 var juid = getUrlParam("juid");
 $(function(){
 	chosen();
@@ -287,6 +281,9 @@ $(function(){
 		} else {
 			$.Input.BoundFloat("#" + $(this).attr("id"));
 		}
+	});
+	$(document).delegate('input[xtype="int"],input[xtype="float"]','blur',function(){
+		validNu($(this));
 	});
 	$(document).delegate('.file-upload','click',function() {
 		var obj = $(this).parent().siblings("[xtype='file']");
@@ -400,6 +397,8 @@ $(function(){
 		var fmt = $(this).attr("format");
 		if(fmt && fmt != undefined){
 			$(this).datetimepicker({format: fmt,autoclose: true,todayBtn: true,clearBtn:true,minView:2});
+		} else {
+			$(this).datetimepicker({format: "yyyy-mm-dd",autoclose: true,todayBtn: true,clearBtn:true,minView:2});
 		}
 	});
 	$("label[type='number']").each(function(){

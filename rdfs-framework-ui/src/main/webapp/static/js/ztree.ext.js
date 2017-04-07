@@ -194,6 +194,9 @@ function ztree_modal(type, url, obj, callback){
 		  type: 'POST',
 		  url: url,
 		  success: function(data){
+			  if($("#tree-modal").length!=0){
+				  $("#tree-modal").remove();
+			  }
 			  var html = $('<div class="modal fade" id="tree-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'
 						+'  <div class="modal-dialog" role="document" style="width:360px;">'
 						+'    <div class="modal-content">'
@@ -203,7 +206,7 @@ function ztree_modal(type, url, obj, callback){
 						+'      </div>'
 						+'      <div class="modal-body">'
 						+'			<input type="input" class="form-control" id="modal-tree-search" style="width:90%">'
-						+'			<div class="ztree" id="tree-area"></div>'
+						+'			<div class="ztree" id="tree-area" style="max-height:420px;overflow-y:auto;overflow-x:hidden;"></div>'
 						+'      </div>'
 						+'      <div class="modal-footer">'
 						+'        <button type="button" class="btn btn-primary" id="submit-modal">确定</button>'

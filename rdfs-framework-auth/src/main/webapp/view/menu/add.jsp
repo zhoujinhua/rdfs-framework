@@ -17,7 +17,7 @@ if(menuTitle!=null && !"".equals(menuTitle)){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>催收大平台-权限集管理</title>
+    <title>权限集管理</title>
     <jsp:include page="/view/common/head.jsp"></jsp:include>
 </head>
 <script type="text/javascript">

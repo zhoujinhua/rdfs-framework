@@ -20,7 +20,6 @@ request.setAttribute("basePath", basePath);
 			if($(".error").length!=0){
 				return false;
 			}
-			$("#fn-save-form").attr("action","${path}/permset/save");
 			$("#fn-save-form").submit();
 		});
 	});
@@ -57,7 +56,7 @@ request.setAttribute("basePath", basePath);
 			           </div>
 			       </div>
 		           <div class="box-content">
-		           		<form id="fn-save-form" class="form-horizontal" method="post">
+		           		<form id="fn-save-form" class="form-horizontal" method="post" action="${path}/permset/save">
 		                    <div class="form-group col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">权限集名称<i class="glyphicon glyphicon-star red"></i></label>
 		                        <div class="col-sm-8">

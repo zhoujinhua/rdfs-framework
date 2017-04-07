@@ -44,7 +44,9 @@ public class NumberFieldTag extends TagSupport implements DynamicAttributes{
     public int doStartTag() throws JspException {
 		JspWriter writer = pageContext.getOut();
 		try{
-			StringBuffer sb = new StringBuffer("<input type='number' ");
+			//StringBuffer sb = new StringBuffer("<input type='number' ");
+			StringBuffer sb = new StringBuffer("<input ");
+			Thread.sleep(1);
 			for(Iterator<String> iter = dynamicAttributes.keySet().iterator();iter.hasNext();){
 				String key = iter.next();
 				sb.append(" " + key + "='" + dynamicAttributes.get(key) + "'");
