@@ -222,6 +222,7 @@ public class CrapSession {
 		}
 		@SuppressWarnings("unchecked")
 		T old = (T) this.find(entity.getClass(), pk);
+		this.session.evict(old);
 		if(UpdateMode.EXCLUDE.equals(mode)){
 			for(String name : properties){
 				try {
@@ -230,7 +231,7 @@ public class CrapSession {
 					throw new RuntimeException(e);
 				}
 			}
-			this.session.merge(entity);
+			this.session.update(entity);
 			return entity;
 		}else{
 			for(String name : properties){

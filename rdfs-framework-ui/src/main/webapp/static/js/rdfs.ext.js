@@ -266,6 +266,27 @@ function validNu(obj){
 var juid = getUrlParam("juid");
 $(function(){
 	chosen();
+	//var pop = $('<img src="'+contextPath+'/static/image/loading.gif" style="position: fixed; z-index: 999; padding-left: 48%;"/>');
+	$.ajaxSetup({
+        beforeSend: function (event, jqxhr, settings) {
+        	//pop.modal("show");
+        	var href = jqxhr.url;
+        	if(href && href.indexOf("/")!=-1 && href.indexOf("juid")==-1){
+        		if(href.indexOf("?")!=-1){
+        			href = href+"&juid="+juid;
+        		} else {
+        			href = href+"?juid="+juid;
+        		}
+        	}
+        	jqxhr.url = href;
+        },
+        complete: function (event, jqxhr, settings) {
+        	//pop.modal("hide");
+        },
+        error: function (event, jqxhr, settings) {
+        	//pop.modal("hide");
+        }
+    });
 	$("input[xtype='int']").each(function(){
 		var negative = $(this).attr("negative");
 		if(negative && negative == "true"){
@@ -339,60 +360,6 @@ $(function(){
 			}
 		}
 	});
-	/*$("input[xtype='file']").each(function(){
-		var url = $(this).attr("uploadUrl");
-		var fileType = $(this).attr("fileType");
-		var fileSize = $(this).attr("fileSize");
-		var callback = $(this).attr("callback");
-		var obj = $(this);
-		
-		if(url && url != undefined && fileType && fileType != undefined && fileSize && fileSize != undefined && parseInt(fileSize) &&parseInt(fileSize) != undefined){
-			if(url && url.indexOf("/")!=-1 && url.indexOf("juid")==-1){
-				if(url.indexOf("?")!=-1){
-					url = url+"&juid="+juid;
-				} else {
-					url = href+"?juid="+juid;
-				}
-			}
-			$(this).parent().find(".file-upload").on("click",function(){
-				var html = $('<div class="modal fade" id="file-input-upload-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'
-						+'  <div class="modal-dialog" role="document">'
-						+'    <div class="modal-content">'
-						+'      <div class="modal-header">'
-						+'        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-						+'        <h4 class="modal-title" id="myModalLabel">文件上传</h4>'
-						+'      </div>'
-						+'      <div class="modal-body file-input-body">'
-						+'        	<input id="file-input-area" name="file" class="file-loading" type="file">'
-						+'        	<p class="help-block">支持'+fileType+'格式,大小不超过'+fileSize+'KB.</p>'
-						+'      	<p id="error-msg"></p>'
-						+'      </div>'
-						+'      <div class="modal-footer">'
-						+'        <button type="button" class="btn btn-default" data-dismiss="modal" id="colse-model">关闭</button>'
-						+'      </div>'
-						+'    </div>'
-						+'  </div>'
-						+'</div>');
-				html.modal("show");
-				html.on('shown.bs.modal', function () {
-					  html.find("#file-input-area").fileinput({
-							uploadUrl: url,
-							uploadAsync: true,
-							showPreview: false,
-							allowedFileExtensions: fileType.split(","),
-							maxFileCount: 1,
-							maxFileSize:parseInt(fileSize),
-							elErrorContainer:"#error-msg",
-							language:"zh"
-						}).on("fileuploaded", function(event, data, previewId, index) { //上传后
-							if(callback && callback != undefined ){
-					 			eval(callback+"(data)")
-					 		}
-						});
-				});
-			});
-		}
-	});*/
 	$("input[type='date']").each(function(){
 		var fmt = $(this).attr("format");
 		if(fmt && fmt != undefined){
@@ -445,29 +412,9 @@ $(function(){
 					});
 				}
 			});
+			$("#"+provinceId).change();
 		}
 	});
-	//var pop = $('<img src="'+contextPath+'/static/image/loading.gif" style="position: fixed; z-index: 999; padding-left: 48%;"/>');
-    $.ajaxSetup({
-        beforeSend: function (event, jqxhr, settings) {
-        	//pop.modal("show");
-        	var href = jqxhr.url;
-        	if(href && href.indexOf("/")!=-1 && href.indexOf("juid")==-1){
-        		if(href.indexOf("?")!=-1){
-        			href = href+"&juid="+juid;
-        		} else {
-        			href = href+"?juid="+juid;
-        		}
-        	}
-        	jqxhr.url = href;
-        },
-        complete: function (event, jqxhr, settings) {
-        	//pop.modal("hide");
-        },
-        error: function (event, jqxhr, settings) {
-        	//pop.modal("hide");
-        }
-    });
 	$(".breadcrumb a, table a").each(function(){
     	var href = $(this).attr("href");
     	if(href && href.indexOf("/")!=-1 && href.indexOf("juid")==-1){

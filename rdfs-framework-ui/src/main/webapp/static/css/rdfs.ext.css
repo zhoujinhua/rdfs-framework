@@ -161,3 +161,34 @@ li{
 .file-upload{
 	height:32px;
 }
+
+.span-show {
+    border-radius: 4px;
+    color: #707070;
+    display: inline-block;
+    line-height: 20px;
+    min-height: 20px;
+    padding: 4px 6px;
+    vertical-align: middle;
+}
+
+.info {
+	background: none repeat scroll 0 0 #D9EDF7;
+	border: 1px solid #BCE8F1; 
+	color: #205081;
+	font-weight: bold;
+}
+
+label.form-control{
+	border-radius: 4px;
+    color: #707070;
+    display: inline-block;
+    line-height: 20px;
+    min-height: 20px;
+    padding: 4px 6px;
+    vertical-align: middle;
+	background: none repeat scroll 0 0 #D9EDF7;
+	border: 1px solid #BCE8F1; 
+	color: #205081;
+	font-weight: bold;
+}
