@@ -136,14 +136,14 @@ li{
 .form-group{
 	margin-bottom:5px;
 }
-.ch-container{
+/* .ch-container{
 	background-color:#ecf0f5;	
-}
-.box{
+} */
+/* .box{
 	background:#ffffff none repeat scroll 0 0 !important;
-}
+} */
 .breadcrumb{
-	background-color:#ecf0f5;
+	/* background-color:#ecf0f5; */
 	border-radius:0px;
 }
 .navbar{
@@ -173,7 +173,7 @@ li{
 }
 
 .info {
-	background: none repeat scroll 0 0 #D9EDF7;
+	/* background: none repeat scroll 0 0 #D9EDF7; */
 	border: 1px solid #BCE8F1; 
 	color: #205081;
 	font-weight: bold;

@@ -88,7 +88,7 @@ if(menuTitle!=null && !"".equals(menuTitle)){
                      <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">请求地址</label>
                          <div class="col-sm-8">
-                        	<cs:input class="form-control" maxlength="20" name="itemLocation" value="${resource.itemLocation }"/>
+                        	<cs:input class="form-control" maxlength="200" name="itemLocation" value="${resource.itemLocation }"/>
                         </div>
                     </div>
                      <div class="form-group col-sm-12 col-sm-8">

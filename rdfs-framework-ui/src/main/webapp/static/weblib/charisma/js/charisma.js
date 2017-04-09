@@ -7,7 +7,13 @@ $(document).ready(function () {
     var msie = navigator.userAgent.match(/msie/i);
     $.browser = {};
     $.browser.msie = {};
-    switchTheme(currentTheme);
+    
+    var href = parent.top.$("#bs-css").attr("href");
+	if(href!=null && href!=""){
+		href = href.substring(href.indexOf("/",2),href.length);
+		$(".sub-bs-css").attr("href",contextPath + href);
+	}
+    //switchTheme(obj, currentTheme);
 
     $('.navbar-toggle').click(function (e) {
         e.preventDefault();
@@ -36,20 +42,23 @@ $(document).ready(function () {
         e.preventDefault();
         currentTheme = $(this).attr('data-value');
         $.cookie('currentTheme', currentTheme, {expires: 365});
-        switchTheme(currentTheme);
+        var obj = $("#maskLayer").siblings("#content").find("iframe").contents();
+        switchTheme(obj, currentTheme);
     });
 
 
-    function switchTheme(themeName) {
+    function switchTheme(obj, themeName) {
         if (themeName == 'classic') {
             $('#bs-css').attr('href', contextPath + '/static/weblib/bootstrap/css/bootstrap.min.css');
-            if($("#sub-content").contents().find("#sub-bs-css").length!=0){
-            	$("#sub-content").contents().find("#sub-bs-css").attr('href', contextPath + '/static/weblib/bootstrap/css/bootstrap.min.css');
+            obj.find(".sub-bs-css").attr('href', contextPath + '/static/weblib/bootstrap/css/bootstrap.min.css');
+            if(obj.find("iframe").length!=0){
+            	switchTheme(obj.find("iframe").contents(), themeName);
             }
         } else {
             $('#bs-css').attr('href', contextPath + '/static/weblib/charisma/css/bootstrap-' + themeName + '.min.css');
-            if($("#sub-content").contents().find("#sub-bs-css").length!=0){
-            	$("#sub-content").contents().find("#sub-bs-css").attr('href', contextPath + '/static/weblib/charisma/css/bootstrap-' + themeName + '.min.css');
+            obj.find(".sub-bs-css").attr('href', contextPath + '/static/weblib/charisma/css/bootstrap-' + themeName + '.min.css');
+            if(obj.find("iframe").length!=0){
+            	switchTheme(obj.find("iframe").contents(), themeName);
             }
         }
 
