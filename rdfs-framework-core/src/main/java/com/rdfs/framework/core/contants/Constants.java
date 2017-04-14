@@ -67,22 +67,6 @@ public class Constants {
 	}
 	
 	/**
-	 * 查询标识
-	 */
-	public static final class OPER {
-		public static final String EQ = "eq";
-		public static final String LIKE = "like";
-	}
-	
-	/**
-	 * 排序标识
-	 */
-	public static final class ORDER {
-		public static final String DESC = "desc";
-		public static final String ASC = "asc";
-	}
-	
-	/**
 	 * Redis全局Key前缀
 	 */
 	public static final class KEYS {
@@ -105,12 +89,7 @@ public class Constants {
 
 		public static final String REGION_CITY_KEY = GLOBAL + "region_city_";
 		
-		public static final String DEALER_KEY = GLOBAL + "dealer_";
-		
-		public static final String DEALER_COMPANY_KEY = GLOBAL + "dealer_company_";
-		
 		public static final String USER_KEY = GLOBAL + "user_";
-		//菜单项
 		
 		public static final String APP_SEQ = GLOBAL + "app_seq_";
 		

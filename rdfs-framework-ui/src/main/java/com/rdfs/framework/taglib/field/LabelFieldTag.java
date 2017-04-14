@@ -10,7 +10,6 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import com.rdfs.framework.taglib.bean.Region;
-import com.rdfs.framework.taglib.service.CacheDataService;
 import com.rdfs.framework.taglib.utils.CacheCxtUtil;
 import com.rdfs.framework.taglib.utils.StringUtils;
 
@@ -68,6 +67,7 @@ public class LabelFieldTag extends TagSupport implements DynamicAttributes{
 					}
 				}
 				if(this.getType().equalsIgnoreCase("region") && !StringUtils.isBlank(this.getValue())){
+					System.out.println("label CacheCxtUtil.cacheDataService:"+StringUtils.isBlankObj(CacheCxtUtil.cacheDataService));
 					if(!StringUtils.isBlankObj(CacheCxtUtil.cacheDataService)){
 						Region region = CacheCxtUtil.cacheDataService.getRegion(this.getValue());
 						if(region != null){

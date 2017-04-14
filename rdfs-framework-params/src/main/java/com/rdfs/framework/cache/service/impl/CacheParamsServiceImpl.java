@@ -137,7 +137,9 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 			log.error(RdfsUtils.merge("没有获取到Key为[{0}]的数据字典。", key));
 		}else {
 			for (String dicString : dicList) {
-				dictItems.add((DictItem)JacksonUtil.fromJson(dicString, SyDictItem.class));
+				if(!StringUtils.isBlank(dicString)){
+					dictItems.add((DictItem)JacksonUtil.fromJson(dicString, SyDictItem.class));
+				}
 			}
 		}
 		return dictItems;
@@ -163,7 +165,7 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 		Jedis jedis = JedisUtil.getJedisClient();
 		String dicJson = jedis.hget(Constants.KEYS.DIC_KEY + key, code);
 		JedisUtil.close(jedis);
-		if (RdfsUtils.isNotEmpty(dicJson)) {
+		if (StringUtils.isNotEmpty(dicJson)) {
 			SyDictItem aos_dicPO = (SyDictItem)JacksonUtil.fromJson(dicJson, SyDictItem.class);
 		    desc = aos_dicPO.getDesc();
 		}
@@ -203,7 +205,9 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 			log.error(RdfsUtils.merge("没有获取到省份列表"));
 		}else {
 			for (String province : proList) {
-				regions.add((Region)JacksonUtil.fromJson(province, SyRegion.class));
+				if(!StringUtils.isBlank(province)){
+					regions.add((Region)JacksonUtil.fromJson(province, SyRegion.class));
+				}
 			}
 		}
 		return regions;
@@ -220,7 +224,9 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 		String jsonValue = jedis.hget(Constants.KEYS.REGION_CITY_KEY, regCode);
 		JedisUtil.close(jedis);
 		if(!StringUtils.isBlank(jsonValue)){
-			regions = JacksonUtil.fromJson(jsonValue, new TypeReference<List<Region>>(){});
+			if(!StringUtils.isBlank(jsonValue)){
+				regions = JacksonUtil.fromJson(jsonValue, new TypeReference<List<Region>>(){});
+			}
 		}
 		return regions;
 	}
@@ -234,7 +240,10 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 		Jedis jedis = JedisUtil.getJedisClient();
 		String proString = jedis.hget(Constants.KEYS.REGION_KEY, regCode);
 		JedisUtil.close(jedis);
-		return JacksonUtil.fromJson(proString, SyRegion.class);
+		if(!StringUtils.isBlank(proString)){
+			return JacksonUtil.fromJson(proString, SyRegion.class);
+		}
+		return null;
 	}
 	
 	@Override
@@ -247,7 +256,9 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 			log.error(RdfsUtils.merge("没有获取到区域列表"));
 		}else {
 			for (String province : proList) {
-				regions.add((Region)JacksonUtil.fromJson(province, SyRegion.class));
+				if(!StringUtils.isBlank(province)){
+					regions.add((Region)JacksonUtil.fromJson(province, SyRegion.class));
+				}
 			}
 		}
 		return regions;

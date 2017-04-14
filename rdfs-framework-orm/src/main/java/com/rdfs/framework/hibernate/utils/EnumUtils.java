@@ -1,5 +1,6 @@
 package com.rdfs.framework.hibernate.utils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.slf4j.Logger;
@@ -97,7 +98,6 @@ public final class EnumUtils {
 	 * @param value
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public static <T extends java.lang.Enum<T>> T valueOfIgnoreType(Class <T> enumType,Object value){
 		return valueOf(enumType,value,true);
 	}
@@ -134,5 +134,28 @@ public final class EnumUtils {
 		}
 		
 		return e.name();
+	}
+
+	/**
+	 * 获取值
+	 * @param type
+	 * @param value
+	 * @return
+	 */
+	public static com.rdfs.framework.hibernate.type.Enum valueOf(Class<?> type, String value) {
+		Method method;
+		try {
+			method = type.getMethod("values", new Class[]{});
+			Object[] objs = (Object[]) method.invoke(type, new Object[0]);
+			for(Object obj : objs){
+				if(obj instanceof com.rdfs.framework.hibernate.type.Enum && ((com.rdfs.framework.hibernate.type.Enum)obj).getValue().equals(value)){
+					return (com.rdfs.framework.hibernate.type.Enum) obj;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
 	}
 }

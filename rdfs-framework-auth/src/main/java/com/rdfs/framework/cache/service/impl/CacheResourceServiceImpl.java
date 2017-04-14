@@ -110,7 +110,9 @@ public class CacheResourceServiceImpl extends HibernateServiceSupport implements
 			log.error(RdfsUtils.merge("没有获取到菜单列表"));
 		}else {
 			for (String menu : proList) {
-				menuList.add((SyMenu)JacksonUtil.fromJson(menu, SyMenu.class));
+				if(!StringUtils.isBlank(menu)){
+					menuList.add((SyMenu)JacksonUtil.fromJson(menu, SyMenu.class));
+				}
 			}
 		}
 		return menuList;
@@ -126,7 +128,9 @@ public class CacheResourceServiceImpl extends HibernateServiceSupport implements
 			log.error(RdfsUtils.merge("没有获取到菜单列表"));
 		}else {
 			for (String menu : proList) {
-				resourceList.add((SyResource)JacksonUtil.fromJson(menu, SyResource.class));
+				if(!StringUtils.isBlank(menu)){
+					resourceList.add((SyResource)JacksonUtil.fromJson(menu, SyResource.class));
+				}
 			}
 		}
 		return resourceList;
@@ -142,7 +146,9 @@ public class CacheResourceServiceImpl extends HibernateServiceSupport implements
 			log.error(RdfsUtils.merge("没有获取到菜单列表"));
 		}else {
 			for (String perm : proList) {
-				resourceList.add((SyPermSet)JacksonUtil.fromJson(perm, SyPermSet.class));
+				if(!StringUtils.isBlank(perm)){
+					resourceList.add((SyPermSet)JacksonUtil.fromJson(perm, SyPermSet.class));
+				}
 			}
 		}
 		return resourceList;

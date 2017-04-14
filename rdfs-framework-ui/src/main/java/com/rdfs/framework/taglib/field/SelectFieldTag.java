@@ -126,7 +126,7 @@ public class SelectFieldTag extends TagSupport implements DynamicAttributes{
 					}
 				}
 				//字典
-				System.out.println("当前cacheParamsService的值是：" + StringUtils.isBlankObj(CacheCxtUtil.cacheDataService));
+				System.out.println("select CacheCxtUtil.cacheDataService:"+StringUtils.isBlankObj(CacheCxtUtil.cacheDataService));
 				if(!StringUtils.isBlankObj(CacheCxtUtil.cacheDataService)){
 					List<DictItem> dictItems = CacheCxtUtil.cacheDataService.getDicList(getDicField().toString());
 					if(dictItems!=null && !dictItems.isEmpty()){

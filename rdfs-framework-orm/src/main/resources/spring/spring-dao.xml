@@ -68,6 +68,7 @@
 		</property>
 		<property name="mappingLocations">
             <list>
+            	<value>classpath*:hbm/**/UserTypes.hbm.xml</value>
             	<value>classpath*:hbm/**/*.hbm.xml</value>
            	</list>
         </property>
@@ -85,11 +86,11 @@
 
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
-			<tx:method name="save*" propagation="REQUIRED" />
-			<tx:method name="insert*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="delete*" propagation="REQUIRED" />
-			<tx:method name="submit*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="exception"/>
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="exception"/>
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="exception"/>
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="exception"/>
+			<tx:method name="submit*" propagation="REQUIRED" rollback-for="exception"/>
 			
 			<!--hibernate4必须配置为开启事务 否则 getCurrentSession()获取不到 -->
 			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
