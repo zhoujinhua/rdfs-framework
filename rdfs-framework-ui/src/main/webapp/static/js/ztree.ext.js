@@ -190,6 +190,61 @@ $(document).delegate('.input-tree-search','keyup',function() {
 
 function ztree_modal(type, url, obj, callback){
 	setting_modal.check.chkStyle = type;
+	if(type == "radio"){
+		setting_modal.check.radioType = "all";
+	} else {
+		setting_modal.check.chkboxType = { "Y" : "ps", "N" : "ps" };
+	}
+	$.ajax({
+		  type: 'POST',
+		  url: url,
+		  success: function(data){
+			  if($("#tree-modal").length!=0){
+				  $("#tree-modal").remove();
+			  }
+			  var html = $('<div class="modal fade" id="tree-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">'
+						+'  <div class="modal-dialog" role="document" style="width:360px;">'
+						+'    <div class="modal-content">'
+						+'      <div class="modal-header">'
+						+'        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+						+'        <h4 class="modal-title" id="myModalLabel">树</h4>'
+						+'      </div>'
+						+'      <div class="modal-body">'
+						+'			<input type="input" class="form-control" id="modal-tree-search" style="width:90%">'
+						+'			<div class="ztree" id="tree-area" style="max-height:420px;overflow-y:auto;overflow-x:hidden;"></div>'
+						+'      </div>'
+						+'      <div class="modal-footer">'
+						+'        <button type="button" class="btn btn-primary" id="submit-modal">确定</button>'
+						+'        <button type="button" class="btn btn-default" data-dismiss="modal" id="colse-model">关闭</button>'
+						+'      </div>'
+						+'    </div>'
+						+'  </div>'
+						+'</div>');
+			  html.modal("show");
+			  var zTree ;
+			  html.on('shown.bs.modal', function () {
+				  zTree = $.fn.zTree.init(html.find("#tree-area"), setting_modal, eval(data));
+			  });
+			  html.find("#submit-modal").bind("click",function(){
+				  var nodes = zTree.getCheckedNodes(true);
+				  if(callback && callback!=undefined){
+					  eval(callback+"(zTree, nodes, obj)");
+				  }
+			  });
+		  },
+		  dataType: 'text'
+	});
+}
+
+function ztree_modal_speci(type, crType, url, obj, callback){
+	setting_modal.check.chkStyle = type;
+	if(crType){
+		if(type == "radio"){
+			setting_modal.check.radioType = crType;
+		} else {
+			setting_modal.check.chkboxType = crType;
+		}
+	}
 	$.ajax({
 		  type: 'POST',
 		  url: url,

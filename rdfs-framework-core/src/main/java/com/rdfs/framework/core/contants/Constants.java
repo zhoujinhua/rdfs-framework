@@ -59,14 +59,6 @@ public class Constants {
 	}
 	
 	/**
-	 * 用户标识
-	 */
-	public static final class USER_TYPE {
-		public static final String CS = "01";
-		public static final String SD = "02";
-	}
-	
-	/**
 	 * Redis全局Key前缀
 	 */
 	public static final class KEYS {

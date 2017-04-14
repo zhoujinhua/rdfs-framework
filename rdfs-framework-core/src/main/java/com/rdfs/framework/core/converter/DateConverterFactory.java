@@ -12,8 +12,6 @@ import com.rdfs.framework.core.utils.RdfsUtils;
 
 public final class DateConverterFactory implements
 		ConverterFactory<String, java.util.Date> {
-	private SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-	private SimpleDateFormat SDF=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	public <T extends Date> Converter<String, T> getConverter(
 			Class<T> targetType) {
 		return new StringToDate(targetType);

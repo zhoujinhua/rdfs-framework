@@ -34,7 +34,8 @@ public final class EnumConverterFactory implements
 				T[] enums = (T[]) method.invoke(enumType, new Object[0]);
 				
 				for(T e : enums){
-					Object obj = e.getClass().getMethod("getValue");
+					Object obj = enumType.getMethod("getValue").invoke(e);
+					
 					if(!StringUtils.isEmpty(obj) && String.valueOf(obj).equals(source.trim())){
 						return e;
 					}
