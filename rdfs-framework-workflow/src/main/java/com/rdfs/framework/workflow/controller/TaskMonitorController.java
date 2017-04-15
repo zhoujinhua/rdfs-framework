@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.rdfs.framework.core.utils.ReturnUitl;
+import com.rdfs.framework.hibernate.utils.ReturnUitl;
 import com.rdfs.framework.workflow.entity.CwNodeEvent;
 import com.rdfs.framework.workflow.service.TaskMonitorService;
 import com.rdfs.framework.workflow.service.TaskNodeService;

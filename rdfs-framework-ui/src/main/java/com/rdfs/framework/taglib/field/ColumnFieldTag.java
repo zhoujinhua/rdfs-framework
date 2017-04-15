@@ -2,17 +2,13 @@ package com.rdfs.framework.taglib.field;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import com.rdfs.framework.taglib.bean.DictItem;
-import com.rdfs.framework.taglib.bean.Region;
 import com.rdfs.framework.taglib.utils.CacheCxtUtil;
-import com.rdfs.framework.taglib.utils.JacksonUtil;
 import com.rdfs.framework.taglib.utils.StringUtils;
 
 /**
@@ -92,17 +88,17 @@ public class ColumnFieldTag extends TagSupport implements DynamicAttributes{
 				if(this.getType().equalsIgnoreCase("dict")){
 					if(!StringUtils.isBlank(this.getFormat())){
 						if(!StringUtils.isBlankObj(CacheCxtUtil.cacheDataService)){
-							List<DictItem> dictItems = CacheCxtUtil.cacheDataService.getDicList(this.getFormat());
-							if(dictItems!=null && !dictItems.isEmpty()){
-								sb.append("<input type='hidden' value='"+JacksonUtil.toJson(dictItems)+"' dict-code='"+this.getFormat()+"'>");
+							String dictJson = CacheCxtUtil.cacheDataService.getDictJson(this.getFormat());
+							if(!StringUtils.isBlank(dictJson)){
+								sb.append("<input type='hidden' value='"+dictJson+"' dict-code='"+this.getFormat()+"'>");
 							}
 						}
 					}
 				}
 				if(this.getType().equalsIgnoreCase("region")){
 					if(!StringUtils.isBlankObj(CacheCxtUtil.cacheDataService)){
-						List<Region> regions = CacheCxtUtil.cacheDataService.getRegionList();
-						sb.append("<input type='hidden' value='"+JacksonUtil.toJson(regions)+"' class='region-all'>");
+						String regionJson = CacheCxtUtil.cacheDataService.getRegionJson();
+						sb.append("<input type='hidden' value='"+regionJson+"' class='region-all'>");
 					}
 				}
 			}

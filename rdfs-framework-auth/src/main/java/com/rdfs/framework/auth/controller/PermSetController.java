@@ -21,10 +21,10 @@ import com.rdfs.framework.cache.service.CacheResourceService;
 import com.rdfs.framework.core.bean.TreeDto;
 import com.rdfs.framework.core.bean.UserDto;
 import com.rdfs.framework.core.utils.AuthUtil;
-import com.rdfs.framework.core.utils.JacksonUtil;
 import com.rdfs.framework.core.utils.JsonUtil;
 import com.rdfs.framework.hibernate.bean.Page;
 import com.rdfs.framework.hibernate.enums.OperMode;
+import com.rdfs.framework.hibernate.utils.JacksonUtil;
 import com.rdfs.framework.hibernate.utils.PageUtil;
 
 

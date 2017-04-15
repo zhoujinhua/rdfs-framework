@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.rdfs.framework.auth.entity.SyResource;
 import com.rdfs.framework.auth.service.ResourceService;
 import com.rdfs.framework.cache.service.CacheResourceService;
-import com.rdfs.framework.core.utils.ReturnUitl;
 import com.rdfs.framework.hibernate.bean.Page;
 import com.rdfs.framework.hibernate.utils.PageUtil;
+import com.rdfs.framework.hibernate.utils.ReturnUitl;
 
 @Controller
 @RequestMapping("resource")

@@ -17,5 +17,6 @@ public class JacksonMapper extends ObjectMapper{
 		SimpleModule module = new SimpleModule();
 		module.addSerializer(com.rdfs.framework.hibernate.type.Enum.class, new EnumSerializer());
 		module.addDeserializer(com.rdfs.framework.hibernate.type.Enum.class, new EnumDeserializer());
+		registerModule(module);
 	}
 }

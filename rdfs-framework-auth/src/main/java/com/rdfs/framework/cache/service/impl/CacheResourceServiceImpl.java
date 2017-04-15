@@ -21,11 +21,11 @@ import com.rdfs.framework.cache.service.CacheResourceService;
 import com.rdfs.framework.core.bean.TreeDto;
 import com.rdfs.framework.core.contants.Constants;
 import com.rdfs.framework.core.redis.JedisUtil;
-import com.rdfs.framework.core.utils.JacksonUtil;
 import com.rdfs.framework.core.utils.JsonUtil;
 import com.rdfs.framework.core.utils.RdfsUtils;
 import com.rdfs.framework.core.utils.StringUtils;
 import com.rdfs.framework.hibernate.service.impl.HibernateServiceSupport;
+import com.rdfs.framework.hibernate.utils.JacksonUtil;
 
 import redis.clients.jedis.Jedis;
 

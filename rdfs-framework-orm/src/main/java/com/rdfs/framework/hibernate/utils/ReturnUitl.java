@@ -1,4 +1,4 @@
-package com.rdfs.framework.core.utils;
+package com.rdfs.framework.hibernate.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -1,4 +1,4 @@
-package com.rdfs.framework.core.utils;
+package com.rdfs.framework.hibernate.utils;
 
 import java.text.SimpleDateFormat;
 
@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.rdfs.framework.hibernate.serializer.EnumDeserializer;
+import com.rdfs.framework.hibernate.serializer.EnumSerializer;
 
 public final class JacksonUtil {
 	
@@ -18,7 +20,10 @@ public final class JacksonUtil {
 	static {
 		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-		//objectMapper.registerModule(module);
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(com.rdfs.framework.hibernate.type.Enum.class, new EnumSerializer());
+		module.addDeserializer(com.rdfs.framework.hibernate.type.Enum.class, new EnumDeserializer());
+		objectMapper.registerModule(module);
 	}
 	
 	public static <T> T fromJson(String jsonStr, Class<T> valueType) {

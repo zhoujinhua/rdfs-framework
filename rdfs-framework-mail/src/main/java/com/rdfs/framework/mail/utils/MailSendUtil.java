@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.rdfs.framework.core.contants.Constants;
 import com.rdfs.framework.core.spring.SpringContextBeanFactory;
-import com.rdfs.framework.core.utils.JacksonUtil;
+import com.rdfs.framework.hibernate.utils.JacksonUtil;
 import com.rdfs.framework.mail.config.MailSender;
 import com.rdfs.framework.mail.config.MailSenderConfig;
 import com.rdfs.framework.mail.entity.Attachment;

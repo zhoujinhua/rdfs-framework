@@ -20,12 +20,12 @@ import com.rdfs.framework.core.utils.RdfsUtils;
 import com.rdfs.framework.hibernate.enums.OperMode;
 import com.rdfs.framework.hibernate.enums.OrderMode;
 import com.rdfs.framework.hibernate.service.impl.HibernateServiceSupport;
+import com.rdfs.framework.hibernate.utils.JacksonUtil;
 import com.rdfs.framework.params.entity.SyDictItem;
 import com.rdfs.framework.params.entity.SyParameter;
 import com.rdfs.framework.params.entity.SyRegion;
 import com.rdfs.framework.taglib.bean.DictItem;
 import com.rdfs.framework.taglib.bean.Region;
-import com.rdfs.framework.taglib.utils.JacksonUtil;
 
 import redis.clients.jedis.Jedis;
 
@@ -144,6 +144,19 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 		}
 		return dictItems;
 	}
+	
+	/**
+	 * 获取json字符串
+	 * @param key
+	 * @return
+	 */
+	public String getDictJson(String key){
+		List<DictItem> itemList = getDicList(key);
+		if(itemList!=null && !itemList.isEmpty()){
+			return JacksonUtil.toJson(itemList);
+		}
+		return "";
+	}
 
 	/**
 	 * 从缓存中获取字典对照描述
@@ -246,7 +259,6 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 		return null;
 	}
 	
-	@Override
 	public List<Region> getRegionList(){
 		List<Region> regions = Lists.newArrayList();
 		Jedis jedis = JedisUtil.getJedisClient();
@@ -262,5 +274,13 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 			}
 		}
 		return regions;
+	}
+	
+	public String getRegionJson(){
+		List<Region> regionList = getRegionList();
+		if(regionList!=null && !regionList.isEmpty()){
+			return JacksonUtil.toJson(regionList);
+		}
+		return "";
 	}
 }

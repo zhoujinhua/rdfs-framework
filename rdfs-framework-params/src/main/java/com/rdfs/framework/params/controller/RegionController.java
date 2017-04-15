@@ -13,9 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.rdfs.framework.cache.service.CacheParamsService;
+import com.rdfs.framework.hibernate.utils.JacksonUtil;
 import com.rdfs.framework.params.entity.SyRegion;
 import com.rdfs.framework.taglib.bean.Region;
-import com.rdfs.framework.taglib.utils.JacksonUtil;
 
 @Controller
 @RequestMapping("region")

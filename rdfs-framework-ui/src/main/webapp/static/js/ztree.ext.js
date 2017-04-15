@@ -134,13 +134,13 @@ var hiddenNodes = [];
 var emptyNodes = [];
 function search(treeId, inputId){
 	var treeObj = $.fn.zTree.getZTreeObj(treeId);
+	treeObj.expandAll(false);
 	treeObj.showNodes(hiddenNodes);
 	treeObj.showNodes(emptyNodes);
+	var key = $("#" + inputId).val();
 
 	function filterSearch(node){
-		var key = $("#" + inputId).val();
 		if(!key || key.trim()=="" ||node.isParent || node.name.indexOf(key)!=-1){
-			treeObj.expandNode(node, false, false);
 			return false;
 		}
 		return true;		
@@ -150,31 +150,57 @@ function search(treeId, inputId){
 	treeObj.hideNodes(hiddenNodes);
 	
 	function filterEmptyNode(node){
-		var key = $("#" + inputId).val();
+		var flag = true;
 		if(node.isParent){
 			var children = node.children;
 			if(children){
 				for(var i = 0; i<children.length; i++){
 					if(!children[i].isParent && !children[i].isHidden){
-						if(key && key.trim()!=""){
-							treeObj.expandNode(node, true, false);
-						}
-						return false;
+						flag = false;
+						break;
 					} else {
 						if(children[i].isParent){
-							filterEmptyNode(children[i]);
+							flag = filterEmptyNodeSub(children[i]);
+							if(!flag){
+								break;
+							}
 						}
 					}
 				}
 			}
 		} else {
-			return false;
+			flag = false;
 		}
-		return true;
+		return flag;
+	};
+	function filterEmptyNodeSub(node){
+		var flag = true;
+		if(node.isParent){
+			var children = node.children;
+			if(children){
+				for(var i = 0; i<children.length; i++){
+					if(!children[i].isParent && !children[i].isHidden){
+						flag = false;
+						break;
+					} else {
+						if(children[i].isParent){
+							flag = filterEmptyNodeSub(children[i], key, flag);
+							if(!flag){
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		return flag;
 	};
 	
-	emptyNodes = treeObj.getNodesByFilter(filterEmptyNode);
-	treeObj.hideNodes(emptyNodes);
+	if(key && key.trim()!=""){
+		emptyNodes = treeObj.getNodesByFilter(filterEmptyNode);
+		treeObj.hideNodes(emptyNodes);
+		treeObj.expandAll(true);
+	}
 	
 	$("#" + inputId).focus();
 };

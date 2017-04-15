@@ -8,8 +8,10 @@ import com.rdfs.framework.taglib.bean.Region;
 public interface CacheDataService {
 
 	String getParam(String key);
-
+	
 	List<DictItem> getDicList(String key);
+
+	String getDictJson(String key);
 
 	List<Region> getCityList(String provinceCode);
 
@@ -19,6 +21,6 @@ public interface CacheDataService {
 
 	Region getRegion(String regCode);
 
-	List<Region> getRegionList();
+	String getRegionJson();
 
 }
