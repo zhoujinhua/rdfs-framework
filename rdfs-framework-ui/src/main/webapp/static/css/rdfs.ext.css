@@ -150,7 +150,7 @@ li{
 	margin-bottom:0px !important;
 }
 .breadcrumb{
-	position: fixed;z-index: 999;left: 0;top:0;width: 100%;margin-top:0;
+	position: fixed;z-index: 999;left: 0;top:0;width: 100%;margin-top:0;margin-left:20px;
 }
 .btn-bar{
 	position:fixed;right:20px;z-index:999;
