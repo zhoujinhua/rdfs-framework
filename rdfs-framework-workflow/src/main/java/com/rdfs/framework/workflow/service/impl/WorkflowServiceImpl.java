@@ -67,6 +67,7 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 			CwTaskNode start = taskNodeService.getStartNode(processInfo);
 			nodeEvent = nodeEventService.getNodeEvent(start, action);
 			
+			runTask = new CwRunTask();
 			runTask.setBusinessKey(businessKey);
 			runTask.setProcessInfo(processInfo);
 			runTask.setTaskNode(nodeEvent.getNextNode());
