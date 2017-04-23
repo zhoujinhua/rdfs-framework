@@ -38,7 +38,7 @@ if(name!=null && !"".equals(name)){
 					  if(data.responseCode == 1){
 						  $.alert("保存成功!");
 						  var nodeId = "${event.id}";
-						  var newNode = {id:data.aaData.id,name:data.aaData.name};
+						  var newNode = {id:"event-"+data.aaData.id,name:data.aaData.name};
 						  if(nodeId){
 							  parent.crudNode("edit", newNode);
 						  } else{

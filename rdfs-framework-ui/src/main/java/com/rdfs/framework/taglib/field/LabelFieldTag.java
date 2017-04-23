@@ -67,7 +67,6 @@ public class LabelFieldTag extends TagSupport implements DynamicAttributes{
 					}
 				}
 				if(this.getType().equalsIgnoreCase("region") && !StringUtils.isBlank(this.getValue())){
-					System.out.println("label CacheCxtUtil.cacheDataService:"+StringUtils.isBlankObj(CacheCxtUtil.cacheDataService));
 					if(!StringUtils.isBlankObj(CacheCxtUtil.cacheDataService)){
 						Region region = CacheCxtUtil.cacheDataService.getRegion(this.getValue());
 						if(region != null){

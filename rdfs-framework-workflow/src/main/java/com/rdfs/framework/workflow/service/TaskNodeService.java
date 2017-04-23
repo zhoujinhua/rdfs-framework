@@ -26,8 +26,6 @@ public interface TaskNodeService extends HibernateService {
 	void saveTaskNode(CwTaskNode taskNode);
 
 	void deleteTaskNode(CwTaskNode taskNode);
-
+	
 	List<TreeDto> nodeTree(CwTaskNode taskNode) throws Exception;
-
-	List<CwTaskNode> getTaskNodeList(Integer id);
 }

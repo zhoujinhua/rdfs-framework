@@ -13,17 +13,6 @@ import com.rdfs.framework.workflow.service.RunTaskService;
 public class RunTaskServiceImpl extends HibernateServiceSupport implements RunTaskService {
 
 	@Override
-	public CwRunTask getRunTask(String businessKey, String flowName) {
-		List<CwRunTask> runTasks = getList("from CwRunTask where businessKey = '" + businessKey + "' and processInfo.code = '" + flowName + "'"
-				//+ " and status = '" + Constants.IS.YES + "'"
-		);
-		if(runTasks!=null && !runTasks.isEmpty()){
-			return runTasks.get(0);
-		}
-		return null;
-	}
-
-	@Override
 	public CwRunTask getRunTask(String businessKey, Integer flowId) {
 		List<CwRunTask> runTasks = getList("from CwRunTask where businessKey = '" + businessKey + "' and processInfo.id = '" + flowId + "'"
 				//+ " and status = '" + Constants.IS.YES + "'"

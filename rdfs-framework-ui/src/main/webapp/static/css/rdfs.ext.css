@@ -157,9 +157,16 @@ li{
 }
 .btn-bar .btn{
 	margin-right:5px;
+	margin-top: 1.5px;
+    padding: 3px 9px;
 }
 .file-upload{
 	height:32px;
+}
+
+.form-control{
+	padding:0px 15px;
+	font-size:14px;
 }
 
 .span-show {

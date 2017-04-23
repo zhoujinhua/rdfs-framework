@@ -1,7 +1,5 @@
 package com.rdfs.framework.workflow.service;
 
-import java.util.List;
-
 import com.rdfs.framework.hibernate.service.HibernateService;
 import com.rdfs.framework.workflow.entity.CwNodeEvent;
 import com.rdfs.framework.workflow.entity.CwTaskNode;
@@ -19,7 +17,5 @@ public interface NodeEventService extends HibernateService{
 	void deleteNodeEvent(CwNodeEvent nodeEvent);
 
 	void saveNodeEvent(CwNodeEvent nodeEvent);
-
-	List<CwNodeEvent> getNodeEventList(Integer id);
-
+	
 }

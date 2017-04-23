@@ -376,14 +376,37 @@ $(function(){
 			$(this).text(v);
 		}
 	});
+	$("label[type='int']").each(function(){
+		var value = $(this).text();
+		var format = $(this).attr("format");
+		var v = numeral(value).format(format)
+		if(v && v != undefined){
+			$(this).text(v);
+		}
+	});
+	$("label[type='float']").each(function(){
+		var value = $(this).text();
+		var format = "0.00";
+		var v = numeral(value).format(format)
+		if(v && v != undefined){
+			$(this).text(v);
+		}
+	});
 
 	$("label[type='date']").each(function(){
 		var value = $(this).text();
 		var format = $(this).attr("format");
-		if(value && value != undefined && format && format != undefined){
-			var v = moment(value).format(format)
-			if(v && v != undefined){
-				$(this).text(v);
+		if(value && value != undefined){
+			if(format && format != undefined){
+				var v = moment(value).format(format)
+				if(v && v != undefined){
+					$(this).text(v);
+				}
+			} else {
+				var v = moment(value).format("yyyy-mm-dd")
+				if(v && v != undefined){
+					$(this).text(v);
+				}
 			}
 		}
 	});

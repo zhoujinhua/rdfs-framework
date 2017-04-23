@@ -9,22 +9,25 @@ import com.rdfs.framework.workflow.entity.CwProcessInfo;
 
 public interface ProcessInfoService extends HibernateService{
 
-	CwProcessInfo getLastProcess(String flowName);
-
 	List<CwProcessInfo> getProcessInfos();
 
-	CwProcessInfo saveProcessInfo(CwProcessInfo processInfo);
+	void saveProcessInfo(CwProcessInfo processInfo);
 
-	CwProcessInfo updateProcessVersion(CwProcessInfo processInfo);
+	void updateProcessVersion(CwProcessInfo processInfo);
 
 	List<TreeDto> nodeTree(CwProcessInfo processInfo) throws Exception;
 
-	CwProcessInfo saveCopyProcess(CwProcessInfo processInfo);
+	void saveCopyProcess(CwProcessInfo processInfo);
 
 	CwProcessInfo getEntityById(CwProcessInfo processInfo);
+	/**
+	 * 先取缓存，后取表
+	 * @param id
+	 * @return
+	 */
+	CwProcessInfo getEntityById(Integer id);
 	
-	CwProcessInfo getEntityById(Class<CwProcessInfo> clazz, Integer id, boolean flag);
+	void updateProcessStatus(CwProcessInfo processInfo);
 
-	CwProcessInfo updateProcessStatus(CwProcessInfo processInfo);
 
 }

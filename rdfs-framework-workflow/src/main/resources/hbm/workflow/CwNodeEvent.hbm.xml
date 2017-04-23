@@ -28,10 +28,10 @@
         <property name="remark" type="java.lang.String">
             <column name="remark"></column>
         </property>
-        <many-to-one name="currNode" class="com.rdfs.framework.workflow.entity.CwTaskNode" lazy="false" not-found="ignore">
+        <many-to-one name="currNode" class="com.rdfs.framework.workflow.entity.CwTaskNode" not-found="ignore">
         	<column name="curr_node"></column>
         </many-to-one>
-        <many-to-one name="nextNode" class="com.rdfs.framework.workflow.entity.CwTaskNode" lazy="false" not-found="ignore">
+        <many-to-one name="nextNode" class="com.rdfs.framework.workflow.entity.CwTaskNode" not-found="ignore">
         	<column name="next_node"></column>
         </many-to-one>
         <bag name="taskMonitors" lazy="true" cascade="all-delete-orphan" inverse="true">

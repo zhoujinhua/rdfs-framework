@@ -46,94 +46,6 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 	private TaskNodeService taskNodeService;
 	
 	@Override
-	@Deprecated
-	//@Transactional
-	public void claimTask(String businessKey, String flowName, String userId){
-		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowName);
-		if(!StringUtils.isBlank(userId)){
-			runTask.setAssigenee(userId);
-			runTask.setGroup(null);
-			runTask.setUser(null);
-		} else {
-			throw new RuntimeException("必须指定领单人.");
-		}
-	}
-	
-	@Override
-	@Deprecated
-	//@Transactional
-	public void completeTask(String businessKey, String flowName, String action) {
-		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowName);
-		CwNodeEvent nodeEvent = null; //当前事件
-		if(StringUtils.isBlankObj(runTask)){
-			CwProcessInfo processInfo = processInfoService.getLastProcess(flowName);
-			if(StringUtils.isBlankObj(processInfo)){
-				throw new RuntimeException("流程定义不存在.");
-			}
-			CwTaskNode start = taskNodeService.getStartNode(processInfo);
-			nodeEvent = nodeEventService.getNodeEvent(start, action);
-			
-			runTask = new CwRunTask();
-			runTask.setBusinessKey(businessKey);
-			runTask.setProcessInfo(processInfo);
-			runTask.setTaskNode(nodeEvent.getNextNode());
-			runTask.setCreateTime(new Date());
-		} else {
-			nodeEvent = nodeEventService.getNodeEvent(runTask.getTaskNode(), action);
-			if(StringUtils.isBlankObj(nodeEvent)){
-				throw new RuntimeException("事件定义不存在.");
-			}
-			runTask.setTaskNode(nodeEvent.getNextNode());
-		}
-		if(runTask.getTaskNode().getType().equals("end")){
-			runTask.setStatus(Constants.IS.YES);
-		} else {
-			runTask.setStatus(Constants.IS.NO);
-		}
-		
-		runTask.setUser(nodeEvent.getUser());
-		runTask.setGroup(nodeEvent.getGroup());
-		if(!StringUtils.isBlank(nodeEvent.getUser()) && StringUtils.match("\\$\\{(.*?)}", nodeEvent.getUser())){
-			String code = nodeEvent.getUser().substring(2,nodeEvent.getUser().length()-1);
-			CwRunExecution runExecution = runExecutionService.getRunExecution(businessKey, flowName, code);
-			if(!StringUtils.isBlankObj(runExecution)){
-				runTask.setAssigenee(runExecution.getUserId());
-			}
-		}
-		
-		CwRunExecution runExecution = new CwRunExecution();
-		runExecution.setBusinessKey(businessKey);
-		runExecution.setCreateTime(new Date());
-		runExecution.setNodeEvent(nodeEvent);
-		runExecution.setProcessInfo(runTask.getProcessInfo());
-		runExecution.setUserId(AuthUtil.getCurrentUserDto().getUserId());
-		
-		mergeEntity(runTask);
-		saveEntity(runExecution);
-		try{
-			taskMonitorService.invoke(runTask, nodeEvent, "complete");
-		} catch(Exception e){
-			throw new RuntimeException("唤醒事件监听失败,",e);
-		}
-	}
-	
-	@Override
-	@Deprecated
-	//@Transactional
-	public String getNextRoute(String businessKey, String flowName, String action){
-		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowName);
-		CwNodeEvent nodeEvent = null;
-		if(StringUtils.isBlankObj(runTask)){
-			CwProcessInfo processInfo = processInfoService.getLastProcess(flowName);
-			CwTaskNode start = taskNodeService.getStartNode(processInfo);
-			nodeEvent = nodeEventService.getNodeEvent(start, action);
-		} else {
-			nodeEvent = nodeEventService.getNodeEvent(runTask.getTaskNode(), action);
-		}
-		return nodeEvent.getRoute();
-	}
-	
-	@Override
 	//@Transactional
 	public void claimTask(String businessKey, Integer flowId, String userId){
 		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowId);
@@ -152,7 +64,7 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowId);
 		CwNodeEvent nodeEvent = null; //当前事件
 		if(StringUtils.isBlankObj(runTask)){
-			CwProcessInfo processInfo = processInfoService.getEntityById(CwProcessInfo.class, flowId, false);
+			CwProcessInfo processInfo = processInfoService.getEntityById(flowId);
 			if(StringUtils.isBlankObj(processInfo)){
 				throw new RuntimeException("流程定义不存在.");
 			}
