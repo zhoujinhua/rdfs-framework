@@ -19,6 +19,11 @@ request.setAttribute("basePath", basePath);
 			var html = '';
     		html += ' <a class="link" href= "'+contextPath+'/process/edit?id='+data+'">修改</a>';
     		html += ' <a class="link copy" href= "javascript:;" data-id="'+data+'">复制</a>';
+    		if(full.status == '1'){
+    			html += ' <a class="link stop" href= "javascript:;" data-id="'+data+'">停用</a>';
+    		} else {
+    			html += ' <a class="link start" href= "javascript:;" data-id="'+data+'">启用</a>';
+    		}
     		html += ' <a class="link" href= "'+contextPath+'/process/addVersion?id='+data+'">更新版本</a>';
     		html += ' <a class="link" href= "'+contextPath+'/view/workflow/process/tree/list.jsp?id='+data+'">节点管理</a>';
     		html += ' <a target="_blank" class="link" href= "'+contextPath+'/process/view?id='+data+'">查看流程</a>';
@@ -32,6 +37,22 @@ request.setAttribute("basePath", basePath);
 			$.confirm("复制流程将同步复制流程下的节点和节点关联的事件，确定吗?", function(ok){
 				if(ok){
 					location.href = "${path}/process/copy?id="+id+"&juid="+juid;
+				}
+			});
+	    });
+		$(document).delegate('.stop','click',function() {
+			var id = $(this).attr("data-id");
+			$.confirm("将启用该流程，确定吗?", function(ok){
+				if(ok){
+					location.href = "${path}/process/changeStatus?id="+id+"&juid="+juid;
+				}
+			});
+	    });
+		$(document).delegate('.start','click',function() {
+			var id = $(this).attr("data-id");
+			$.confirm("将停用该流程，确定吗?", function(ok){
+				if(ok){
+					location.href = "${path}/process/changeStatus?id="+id+"&juid="+juid;
 				}
 			});
 	    });
@@ -118,7 +139,7 @@ request.setAttribute("basePath", basePath);
 		           			<cs:column dataField="name" name="流程名称"/>
 		           			<cs:column dataField="code" name="流程代码"/>
 		           			<cs:column dataField="version" name="流程版本"/>
-		           			<cs:column dataField="status" name="流程状态" type="dict" format="_is"/>
+		           			<cs:column dataField="status" name="是否有效" type="dict" format="_is"/>
 		           			<cs:column dataField="createTime" name="创建时间" type="date" format="YYYY-MM-DD"/>
 		           			<cs:column dataField="id" name="操作" renderFn="operator"/>
 		           		</cs:table>

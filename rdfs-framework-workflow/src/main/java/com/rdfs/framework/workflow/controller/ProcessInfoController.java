@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rdfs.framework.cache.service.CacheWorkflowService;
 import com.rdfs.framework.core.bean.TreeDto;
 import com.rdfs.framework.hibernate.bean.Page;
 import com.rdfs.framework.hibernate.enums.OperMode;
@@ -30,6 +31,9 @@ public class ProcessInfoController {
 
 	@Autowired
 	private ProcessInfoService processInfoService;
+	
+	@Autowired
+	private CacheWorkflowService cacheWorkflowService;
 	
 	private Logger logger = LoggerFactory.getLogger(ProcessInfoController.class);
 	
@@ -55,7 +59,8 @@ public class ProcessInfoController {
 	@RequestMapping("save")
 	public String save(HttpServletRequest request, CwProcessInfo processInfo){
 		try{
-			processInfoService.saveProcessInfo(processInfo);
+			processInfo = processInfoService.saveProcessInfo(processInfo);
+			cacheWorkflowService.updateProcessInfo(processInfo);
 			request.setAttribute("msg", "保存流程成功!");
 		}catch(Exception e){
 			logger.error("保存流程失败,", e);
@@ -69,7 +74,8 @@ public class ProcessInfoController {
 	@RequestMapping("addVersion")
 	public String addVersion(HttpServletRequest request, CwProcessInfo processInfo){
 		try{
-			processInfoService.updateProcessVersion(processInfo);
+			processInfo = processInfoService.updateProcessVersion(processInfo);
+			cacheWorkflowService.updateProcessInfo(processInfo);
 			request.setAttribute("msg", "更新流程版本号成功!");
 		}catch(Exception e){
 			logger.error("更新流程版本失败,", e);
@@ -83,10 +89,24 @@ public class ProcessInfoController {
 		try{
 			processInfo = processInfoService.getEntityById(processInfo);
 			processInfoService.saveCopyProcess(processInfo);
+			cacheWorkflowService.updateProcessInfo(processInfo);
 			request.setAttribute("msg", "复制流程成功!");
 		}catch(Exception e){
 			logger.error("复制流程失败,", e);
 			request.setAttribute("msg", "复制流程失败,"+e.getMessage());
+		}
+		return "workflow/process/list";
+	}
+	
+	@RequestMapping("changeStatus")
+	public String changeStatus(HttpServletRequest request, CwProcessInfo processInfo){
+		try{
+			processInfo = processInfoService.updateProcessStatus(processInfo);
+			cacheWorkflowService.updateProcessInfo(processInfo);
+			request.setAttribute("msg", "操作成功!");
+		}catch(Exception e){
+			logger.error("复制流程失败,", e);
+			request.setAttribute("msg", "操作失败,"+e.getMessage());
 		}
 		return "workflow/process/list";
 	}

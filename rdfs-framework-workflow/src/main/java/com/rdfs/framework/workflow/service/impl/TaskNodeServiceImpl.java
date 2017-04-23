@@ -1,11 +1,13 @@
 package com.rdfs.framework.workflow.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rdfs.framework.cache.service.CacheWorkflowService;
 import com.rdfs.framework.core.bean.TreeDto;
 import com.rdfs.framework.core.service.TreeService;
 import com.rdfs.framework.hibernate.service.impl.HibernateServiceSupport;
@@ -21,9 +23,22 @@ public class TaskNodeServiceImpl extends HibernateServiceSupport implements Task
 	@Autowired
 	private TreeService treeService;
 	
+	@Autowired
+	private CacheWorkflowService cacheWorkflowService;
+	
 	@Override
 	public CwTaskNode getStartNode(CwProcessInfo processInfo) {
-		List<CwTaskNode> list = processInfo.getTaskNodes();
+		List<CwTaskNode> list = cacheWorkflowService.getTaskNodeList(processInfo.getId());
+		if(list!=null && !list.isEmpty()){
+			for(CwTaskNode taskNode : list){
+				if(taskNode.getType().equals("start")){
+					return taskNode;
+				}
+			}
+		}
+		
+		list = new ArrayList<>();
+		list = getList("from CwTaskNode where processInfo.id = " + processInfo.getId());
 		if(list!=null && !list.isEmpty()){
 			for(CwTaskNode taskNode : list){
 				if(taskNode.getType().equals("start")){
@@ -36,7 +51,17 @@ public class TaskNodeServiceImpl extends HibernateServiceSupport implements Task
 
 	@Override
 	public CwTaskNode getEndNode(CwProcessInfo processInfo) {
-		List<CwTaskNode> list = processInfo.getTaskNodes();
+		List<CwTaskNode> list = cacheWorkflowService.getTaskNodeList(processInfo.getId());
+		if(list!=null && !list.isEmpty()){
+			for(CwTaskNode taskNode : list){
+				if(taskNode.getType().equals("end")){
+					return taskNode;
+				}
+			}
+		}
+		
+		list = new ArrayList<>();
+		list = getList("from CwTaskNode where processInfo.id = " + processInfo.getId());
 		if(list!=null && !list.isEmpty()){
 			for(CwTaskNode taskNode : list){
 				if(taskNode.getType().equals("end")){
@@ -94,6 +119,15 @@ public class TaskNodeServiceImpl extends HibernateServiceSupport implements Task
 			return treeService.getList(taskNodes, false, "id", "name", null, null);
 		}
 		return null;
+	}
+
+	@Override
+	public List<CwTaskNode> getTaskNodeList(Integer id) {
+		List<CwTaskNode> nodeList = cacheWorkflowService.getTaskNodeList(id);
+		if(nodeList == null || nodeList.isEmpty()){
+			return getList("from CwTaskNode where processInfo.id = " + id);
+		}
+		return nodeList;
 	}
 
 }

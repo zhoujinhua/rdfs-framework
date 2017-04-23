@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.rdfs.framework.core.contants.Constants;
 import com.rdfs.framework.core.utils.AuthUtil;
@@ -30,19 +29,25 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 
 	@Autowired
 	private NodeEventService nodeEventService;
+	
 	@Autowired
 	private ProcessInfoService processInfoService;
+	
 	@Autowired
 	private RunExecutionService runExecutionService;
+	
 	@Autowired
 	private RunTaskService runTaskService;
+	
 	@Autowired
 	private TaskMonitorService taskMonitorService;
+	
 	@Autowired
 	private TaskNodeService taskNodeService;
 	
 	@Override
-	@Transactional
+	@Deprecated
+	//@Transactional
 	public void claimTask(String businessKey, String flowName, String userId){
 		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowName);
 		if(!StringUtils.isBlank(userId)){
@@ -55,7 +60,8 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 	}
 	
 	@Override
-	@Transactional
+	@Deprecated
+	//@Transactional
 	public void completeTask(String businessKey, String flowName, String action) {
 		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowName);
 		CwNodeEvent nodeEvent = null; //当前事件
@@ -112,12 +118,13 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 	}
 	
 	@Override
-	@Transactional
-	public String getNextRoute(String businessKey, Integer flowId, String action){
-		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowId);
+	@Deprecated
+	//@Transactional
+	public String getNextRoute(String businessKey, String flowName, String action){
+		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowName);
 		CwNodeEvent nodeEvent = null;
 		if(StringUtils.isBlankObj(runTask)){
-			CwProcessInfo processInfo = processInfoService.getEntityById(CwProcessInfo.class, flowId, false);
+			CwProcessInfo processInfo = processInfoService.getLastProcess(flowName);
 			CwTaskNode start = taskNodeService.getStartNode(processInfo);
 			nodeEvent = nodeEventService.getNodeEvent(start, action);
 		} else {
@@ -127,7 +134,7 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 	}
 	
 	@Override
-	@Transactional
+	//@Transactional
 	public void claimTask(String businessKey, Integer flowId, String userId){
 		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowId);
 		if(!StringUtils.isBlank(userId)){
@@ -140,7 +147,7 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 	}
 	
 	@Override
-	@Transactional
+	//@Transactional
 	public void completeTask(String businessKey, Integer flowId, String action) {
 		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowId);
 		CwNodeEvent nodeEvent = null; //当前事件
@@ -152,6 +159,7 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 			CwTaskNode start = taskNodeService.getStartNode(processInfo);
 			nodeEvent = nodeEventService.getNodeEvent(start, action);
 			
+			runTask = new CwRunTask();
 			runTask.setBusinessKey(businessKey);
 			runTask.setProcessInfo(processInfo);
 			runTask.setTaskNode(nodeEvent.getNextNode());
@@ -196,12 +204,12 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 	}
 	
 	@Override
-	@Transactional
-	public String getNextRoute(String businessKey, String flowName, String action){
-		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowName);
+	//@Transactional
+	public String getNextRoute(String businessKey, Integer flowId, String action){
+		CwRunTask runTask = runTaskService.getRunTask(businessKey, flowId);
 		CwNodeEvent nodeEvent = null;
 		if(StringUtils.isBlankObj(runTask)){
-			CwProcessInfo processInfo = processInfoService.getLastProcess(flowName);
+			CwProcessInfo processInfo = processInfoService.getEntityById(CwProcessInfo.class, flowId, false);
 			CwTaskNode start = taskNodeService.getStartNode(processInfo);
 			nodeEvent = nodeEventService.getNodeEvent(start, action);
 		} else {

@@ -71,12 +71,12 @@ request.setAttribute("basePath", basePath);
 	                       	 		<input type="text" class="form-control required" name="code" maxlength="30" value="${process.code}">
 		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                    <%--  <div class="form-group col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">是否有效<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
 		                         	<cs:select class="form-control required chosen" dicField="_is" name="status" allowBlank="true" value="${process.status }"/>
 		                        </div>
-		                    </div>
+		                    </div> --%>
 		                     <div class="form-group">
 			                     <div class="col-sm-12">
 				                    <p class="center-block">

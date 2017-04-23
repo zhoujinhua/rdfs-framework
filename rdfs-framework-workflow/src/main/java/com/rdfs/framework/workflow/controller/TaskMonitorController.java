@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.rdfs.framework.cache.service.CacheWorkflowService;
 import com.rdfs.framework.hibernate.utils.ReturnUitl;
 import com.rdfs.framework.workflow.entity.CwNodeEvent;
 import com.rdfs.framework.workflow.service.TaskMonitorService;
@@ -24,6 +25,9 @@ public class TaskMonitorController {
 	private TaskMonitorService taskMonitorService;
 	
 	@Autowired
+	private CacheWorkflowService cacheWorkflowService;
+	
+	@Autowired
 	private TaskNodeService taskNodeService;
 	
 	@RequestMapping("edit")
@@ -37,6 +41,8 @@ public class TaskMonitorController {
 	public void save(HttpServletRequest request, HttpServletResponse response, CwNodeEvent nodeEvent){
 		try{
 			taskMonitorService.saveTaskMonitor(nodeEvent);
+			cacheWorkflowService.deleteEntity(nodeEvent);
+			cacheWorkflowService.cacheTaskMonitor(nodeEvent);
 			ReturnUitl.write(response, 1);
 		}catch(Exception e){
 			logger.error("保存事件监听失败,", e);

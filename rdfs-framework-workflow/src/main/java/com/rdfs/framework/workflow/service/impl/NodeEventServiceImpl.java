@@ -3,8 +3,10 @@ package com.rdfs.framework.workflow.service.impl;
 import java.util.List;
 
 import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rdfs.framework.cache.service.CacheWorkflowService;
 import com.rdfs.framework.core.utils.StringUtils;
 import com.rdfs.framework.hibernate.service.impl.HibernateServiceSupport;
 import com.rdfs.framework.workflow.entity.CwNodeEvent;
@@ -15,8 +17,20 @@ import com.rdfs.framework.workflow.service.NodeEventService;
 @Service
 public class NodeEventServiceImpl extends HibernateServiceSupport implements NodeEventService {
 
+	@Autowired
+	private CacheWorkflowService cacheWorkflowService;
+	
 	@Override
 	public CwNodeEvent getNodeEvent(CwTaskNode taskNode, String action){
+		List<CwNodeEvent> list = cacheWorkflowService.getNodeEventList(taskNode.getId());
+		if(list!=null && !list.isEmpty()){
+			for(CwNodeEvent nodeEvent : list){
+				if(nodeEvent.getAction().equals(action)){
+					return nodeEvent;
+				}
+			}
+		}
+		
 		String hql = "from CwNodeEvent where currNode.id = " + taskNode.getId();
 		if(!StringUtils.isBlank(action)){
 			hql += " and action = '" + action + "'";
@@ -46,5 +60,14 @@ public class NodeEventServiceImpl extends HibernateServiceSupport implements Nod
 		}else {
 			saveEntity(nodeEvent);
 		}
+	}
+
+	@Override
+	public List<CwNodeEvent> getNodeEventList(Integer id) {
+		List<CwNodeEvent> eventList = cacheWorkflowService.getNodeEventList(id);
+		if(eventList == null || eventList.isEmpty()){
+			return getList("from CwNodeEvent where currNode.id = " + id);
+		}
+		return null;
 	}
 }

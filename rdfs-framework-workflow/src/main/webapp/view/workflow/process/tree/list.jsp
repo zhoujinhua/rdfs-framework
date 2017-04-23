@@ -135,12 +135,11 @@ request.setAttribute("juid", juid);
 				if(nodeId.indexOf("node")!=-1){
 					nodeId = nodeId.substring(5, nodeId.length);
 					var parId = treeNode.getParentNode().id;
-					parId = parId.substring(5, parId.length);
 					$.confirm("删除节点将同步删除节点下事件，确定吗?", function(ok){
 						if(ok){
 							$.ajax({
 								  type: 'POST',
-								  url: '${pageContext.request.contextPath}/node/delete?id='+nodeId,
+								  url: '${pageContext.request.contextPath}/node/delete?id='+nodeId+"&processInfo.id="+parId,
 								  success: function(data){
 									  if(data.responseCode == 1){
 										  $.alert("删除节点成功!");
@@ -163,7 +162,7 @@ request.setAttribute("juid", juid);
 						if(ok){
 							$.ajax({
 								  type: 'POST',
-								  url: '${pageContext.request.contextPath}/event/delete?id='+nodeId,
+								  url: '${pageContext.request.contextPath}/event/delete?id='+nodeId+"&currNode.id="+parId,
 								  success: function(data){
 									  if(data.responseCode == 1){
 										  $.alert("删除节点事件成功!");

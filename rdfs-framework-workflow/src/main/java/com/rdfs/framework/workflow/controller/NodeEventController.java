@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rdfs.framework.cache.service.CacheWorkflowService;
 import com.rdfs.framework.hibernate.bean.Page;
 import com.rdfs.framework.hibernate.enums.OperMode;
 import com.rdfs.framework.hibernate.utils.PageUtil;
@@ -26,6 +27,9 @@ public class NodeEventController {
 
 	@Autowired
 	private NodeEventService nodeEventService;
+	
+	@Autowired
+	private CacheWorkflowService cacheWorkflowService;
 	
 	private Logger logger = LoggerFactory.getLogger(NodeEventController.class);
 	
@@ -62,6 +66,7 @@ public class NodeEventController {
 	public void save(HttpServletRequest request, HttpServletResponse response, CwNodeEvent nodeEvent){
 		try{
 			nodeEventService.saveNodeEvent(nodeEvent);
+			cacheWorkflowService.cacheNodeEvent(nodeEvent);
 			ReturnUitl.write(response, 1, nodeEvent);
 		}catch(Exception e){
 			logger.error("保存节点事件失败,", e);
@@ -72,7 +77,12 @@ public class NodeEventController {
 	@RequestMapping("delete")
 	public void delete(HttpServletRequest request, HttpServletResponse response, CwNodeEvent nodeEvent){
 		try{
+			CwNodeEvent cwNodeEvent = new CwNodeEvent();
+			cwNodeEvent.setId(nodeEvent.getId());
+			
+			
 			nodeEventService.deleteNodeEvent(nodeEvent);
+			cacheWorkflowService.delNodeEvent(cwNodeEvent);
 			ReturnUitl.write(response, 1);
 		}catch(Exception e){
 			logger.error("删除节点事件失败,", e);

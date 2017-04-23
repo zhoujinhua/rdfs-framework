@@ -13,14 +13,18 @@ public interface ProcessInfoService extends HibernateService{
 
 	List<CwProcessInfo> getProcessInfos();
 
-	void saveProcessInfo(CwProcessInfo processInfo);
+	CwProcessInfo saveProcessInfo(CwProcessInfo processInfo);
 
-	void updateProcessVersion(CwProcessInfo processInfo);
+	CwProcessInfo updateProcessVersion(CwProcessInfo processInfo);
 
 	List<TreeDto> nodeTree(CwProcessInfo processInfo) throws Exception;
 
-	void saveCopyProcess(CwProcessInfo processInfo);
+	CwProcessInfo saveCopyProcess(CwProcessInfo processInfo);
 
 	CwProcessInfo getEntityById(CwProcessInfo processInfo);
+	
+	CwProcessInfo getEntityById(Class<CwProcessInfo> clazz, Integer id, boolean flag);
+
+	CwProcessInfo updateProcessStatus(CwProcessInfo processInfo);
 
 }

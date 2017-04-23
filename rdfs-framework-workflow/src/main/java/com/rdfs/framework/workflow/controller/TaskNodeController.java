@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.rdfs.framework.cache.service.CacheWorkflowService;
 import com.rdfs.framework.core.bean.TreeDto;
 import com.rdfs.framework.hibernate.bean.Page;
 import com.rdfs.framework.hibernate.enums.OperMode;
@@ -30,6 +31,9 @@ public class TaskNodeController {
 
 	@Autowired
 	private TaskNodeService taskNodeService;
+	
+	@Autowired
+	private CacheWorkflowService cacheWorkflowService;
 	
 	private Logger logger = LoggerFactory.getLogger(TaskNodeController.class);
 	
@@ -58,6 +62,7 @@ public class TaskNodeController {
 	public void save(HttpServletRequest request, HttpServletResponse response, CwTaskNode taskNode){
 		try{
 			taskNodeService.saveTaskNode(taskNode);
+			cacheWorkflowService.cacheTaskNode(taskNode);
 			ReturnUitl.write(response, 1, taskNode);
 		}catch(Exception e){
 			logger.error("保存节点信息失败,", e);
@@ -68,7 +73,12 @@ public class TaskNodeController {
 	@RequestMapping("delete")
 	public void delete(HttpServletRequest request, HttpServletResponse response, CwTaskNode taskNode){
 		try{
+			CwTaskNode node = new CwTaskNode();
+			node.setId(taskNode.getId());
+			node.setProcessInfo(taskNode.getProcessInfo());
+			
 			taskNodeService.deleteTaskNode(taskNode);
+			cacheWorkflowService.delTaskNode(node);
 			ReturnUitl.write(response, 1);
 		}catch(Exception e){
 			logger.error("删除节点失败,", e);
