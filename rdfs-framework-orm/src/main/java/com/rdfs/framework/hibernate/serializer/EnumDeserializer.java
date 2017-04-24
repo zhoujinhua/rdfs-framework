@@ -29,7 +29,7 @@ public class EnumDeserializer extends JsonDeserializer<Enum>{
         	Object obj = jp.getCurrentValue();
         	try {
 				Field field = obj.getClass().getDeclaredField(fieldName);
-				return EnumUtils.valueOf(field.getType(), value);
+				return EnumUtils.valueOfNT(field.getType(), value);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -1,6 +1,5 @@
 package com.rdfs.framework.hibernate.utils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.slf4j.Logger;
@@ -142,7 +141,7 @@ public final class EnumUtils {
 	 * @param value
 	 * @return
 	 */
-	public static com.rdfs.framework.hibernate.type.Enum valueOf(Class<?> type, String value) {
+	public static com.rdfs.framework.hibernate.type.Enum valueOfNT(Class<?> type, String value) {
 		Method method;
 		try {
 			method = type.getMethod("values", new Class[]{});
