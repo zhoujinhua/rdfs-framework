@@ -38,7 +38,7 @@ import com.rdfs.framework.core.bean.HashDto;
 import com.rdfs.framework.core.contants.Constants;
 import com.rdfs.framework.core.converter.BeanUtilsDateConverter;
 import com.rdfs.framework.core.converter.TypeConvertFactory;
-import com.rdfs.framework.core.exeption.RdfsException;
+import com.rdfs.framework.core.exeption.CustomerException;
 import com.rdfs.framework.core.service.Dto;
 import com.rdfs.framework.core.velocity.VelocityHelper;
 
@@ -129,7 +129,7 @@ public class RdfsUtils {
 				ConvertUtils.register(converter, java.sql.Date.class);
 				BeanUtils.copyProperties(pToObj, pFromObj);
 			} catch (Exception e) {
-				throw new RdfsException("JavaBean之间的属性值拷贝发生错误", e);
+				throw new CustomerException("JavaBean之间的属性值拷贝发生错误", e);
 			}
 		}
 	}
@@ -148,7 +148,7 @@ public class RdfsUtils {
 				pToDto.putAll(BeanUtils.describe(pFromObj));
 				pToDto.remove("class");
 			} catch (Exception e) {
-				throw new RdfsException("将JavaBean属性值拷贝到Dto对象发生错误", e);
+				throw new CustomerException("将JavaBean属性值拷贝到Dto对象发生错误", e);
 			}
 		}
 	}
@@ -163,17 +163,17 @@ public class RdfsUtils {
 	 */
 	public static String getFixedPersonIDCode(String personIDCode) {
 		if (personIDCode == null)
-			throw new RdfsException("输入的身份证号无效，请检查");
+			throw new CustomerException("输入的身份证号无效，请检查");
 
 		if (personIDCode.length() == 18) {
 			if (isIdentity(personIDCode))
 				return personIDCode;
 			else
-				throw new RdfsException("输入的身份证号无效，请检查");
+				throw new CustomerException("输入的身份证号无效，请检查");
 		} else if (personIDCode.length() == 15)
 			return fixPersonIDCodeWithCheck(personIDCode);
 		else
-			throw new RdfsException("输入的身份证号无效，请检查");
+			throw new CustomerException("输入的身份证号无效，请检查");
 	}
 
 	/**
@@ -186,10 +186,10 @@ public class RdfsUtils {
 	 */
 	public static String fixPersonIDCodeWithCheck(String personIDCode) {
 		if (personIDCode == null || personIDCode.trim().length() != 15)
-			throw new RdfsException("输入的身份证号不足15位，请检查");
+			throw new CustomerException("输入的身份证号不足15位，请检查");
 
 		if (!isIdentity(personIDCode))
-			throw new RdfsException("输入的身份证号无效，请检查");
+			throw new CustomerException("输入的身份证号无效，请检查");
 
 		return fixPersonIDCodeWithoutCheck(personIDCode);
 	}
@@ -209,7 +209,7 @@ public class RdfsUtils {
 		else if (personIDCode != null || personIDCode.trim().length() == 15)
 			id17 = personIDCode.substring(0, 6) + "19" + personIDCode.substring(6, 15); // 15位身份证补'19'
 		else
-			throw new RdfsException("输入的身份证号不足15位，请检查");
+			throw new CustomerException("输入的身份证号不足15位，请检查");
 
 		char[] code = { '1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2' }; // 11个校验码字符
 		int[] factor = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 }; // 18个加权因子
@@ -278,7 +278,7 @@ public class RdfsUtils {
 			Timestamp birthday = new Timestamp(sdf.parse(id.substring(6, 14)).getTime());
 			return birthday;
 		} catch (ParseException e) {
-			throw new RdfsException("不是有效的身份证号，请检查", e);
+			throw new CustomerException("不是有效的身份证号，请检查", e);
 		}
 	}
 
@@ -602,7 +602,7 @@ public class RdfsUtils {
 		try {
 			date = sdfInput.parse(strdate);
 		} catch (ParseException e) {
-			throw new RdfsException("日期类型转换出错", e);
+			throw new CustomerException("日期类型转换出错", e);
 		}
 		calendar.setTime(date);
 		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
@@ -684,7 +684,7 @@ public class RdfsUtils {
 			try {
 				path = file.getCanonicalPath();
 			} catch (IOException e) {
-				throw new RdfsException("获取class文件所在绝对路径出错", e);
+				throw new CustomerException("获取class文件所在绝对路径出错", e);
 			}
 		}
 		return path;
@@ -717,7 +717,7 @@ public class RdfsUtils {
 		try {
 			path = file.getCanonicalPath();
 		} catch (IOException e) {
-			throw new RdfsException("获取class文件所在绝对路径出错", e);
+			throw new CustomerException("获取class文件所在绝对路径出错", e);
 		}
 		return path;
 	}
@@ -826,13 +826,13 @@ public class RdfsUtils {
 				writer.write(buffer, 0, n);
 			}
 		} catch (Exception e) {
-			throw new RdfsException("从文件读取字符串失败", e);
+			throw new CustomerException("从文件读取字符串失败", e);
 		} finally {
 			if (reader != null)
 				try {
 					reader.close();
 				} catch (IOException e) {
-					throw new RdfsException("从文件读取字符串失败", e);
+					throw new CustomerException("从文件读取字符串失败", e);
 				}
 		}
 		if (writer != null)
@@ -854,7 +854,7 @@ public class RdfsUtils {
 		try {
 			pString = new String(pString.getBytes("ISO-8859-1"), "GBK");
 		} catch (UnsupportedEncodingException e) {
-			throw new RdfsException("不支持的字符集编码", e);
+			throw new CustomerException("不支持的字符集编码", e);
 		}
 		return pString;
 	}

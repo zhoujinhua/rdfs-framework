@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.rdfs.framework.core.bean.HashDto;
-import com.rdfs.framework.core.exeption.RdfsException;
+import com.rdfs.framework.core.exeption.CustomerException;
 import com.rdfs.framework.core.service.Dto;
 
 
@@ -38,13 +38,13 @@ public class PropertyUtil {
 			}
 			parametersDto = new HashDto();
 			//application.properties
-			InputStream is = classLoader.getResourceAsStream("rdfs.properties");
+			InputStream is = classLoader.getResourceAsStream("application.properties");
 			defaultProperties = new Properties();
 			defaultProperties.load(is);
 			parametersDto.put(DEFAULT, defaultProperties);
 			//to add other properties
 		} catch (Exception e) {
-			throw new RdfsException("装载属性资源参数文件出错.", e);
+			throw new CustomerException("装载属性资源参数文件出错.", e);
 		}
 	}
 	

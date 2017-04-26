@@ -128,7 +128,7 @@
 	  					<exclude>spring/spring-dispather.xml</exclude>
 	  					<exclude>jdbc/**</exclude>
 	  					<exclude>logback.xml</exclude>
-	  					<exclude>rdfs.properties</exclude>
+	  					<exclude>application.properties</exclude>
 	  					<exclude>META-INF/resources/view/common/**</exclude>
                     </excludes>
                 </configuration>

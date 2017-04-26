@@ -3,7 +3,7 @@ package com.rdfs.framework.core.utils;
 import java.util.UUID;
 
 import com.rdfs.framework.core.contants.Constants;
-import com.rdfs.framework.core.exeption.RdfsException;
+import com.rdfs.framework.core.exeption.CustomerException;
 import com.rdfs.framework.core.redis.JedisUtil;
 
 import redis.clients.jedis.Jedis;
@@ -42,7 +42,7 @@ public class UUIDUtil {
 	 */
 	public static String appId(String idType, String timeFormat, String maxIncr){
 		if (RdfsUtils.isEmpty(idType)) {
-			throw new RdfsException("idType不能为空，请分配ID类型标识。");
+			throw new CustomerException("idType不能为空，请分配ID类型标识。");
 		}
 		Jedis jedis = JedisUtil.getJedisClient();
 		String id = null;

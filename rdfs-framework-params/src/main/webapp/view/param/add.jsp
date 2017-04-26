@@ -61,13 +61,13 @@ request.setAttribute("basePath", basePath);
 		                        <label class="control-label col-sm-4">参数名称<i class="glyphicon glyphicon-star red"></i></label>
 		                        <div class="col-sm-8">
 		                        	<input type="hidden" name="id" value="${parameter.id }">
-	                       	 		<input type="text" class="form-control required" name="name" maxlength="10" value="${parameter.name}">
+	                       	 		<input type="text" class="form-control required" name="name" maxlength="30" value="${parameter.name}">
 		                        </div>
 		                     </div>
 		                     <div class="form-group col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">参数KEY<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
-		                        	<input type="text" class="form-control required" name="key" maxlength="25" value="${parameter.key}">
+		                        	<input type="text" class="form-control required" name="key" maxlength="30" value="${parameter.key}">
 		                        </div>
 		                    </div>
 		                    <div class="form-group col-sm-12 col-sm-8">

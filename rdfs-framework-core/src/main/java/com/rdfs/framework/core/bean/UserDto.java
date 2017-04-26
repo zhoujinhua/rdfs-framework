@@ -19,8 +19,6 @@ public class UserDto implements Serializable{
 	 */
 	private String juid;
 	
-	private String password;
-	
 	/**
 	 * 登录名
 	 */
@@ -45,11 +43,6 @@ public class UserDto implements Serializable{
 	 * 用户状态
 	 */
 	private String status;
-	
-	/**
-	 * 用户类别
-	 */
-	private String type;
 	
 	/**
 	 * 客户端IP
@@ -114,14 +107,6 @@ public class UserDto implements Serializable{
 		this.status = status;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public String getClientIp() {
 		return clientIp;
 	}
@@ -146,14 +131,6 @@ public class UserDto implements Serializable{
 		this.loginTime = loginTime;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getUserType() {
 		return userType;
 	}
@@ -161,4 +138,13 @@ public class UserDto implements Serializable{
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
+
+	@Override
+	public String toString() {
+		return "当前用户 [用户ID=" + userId + ", 用户token=" + juid + ", 登录名=" + userName + ", 真实姓名=" + trueName
+				+ ", 用户类型=" + userType + ", 用户性别=" + sex + ", 用户状态=" + status + ", 用户IP地址="
+				+ clientIp + ", 用户客户端指纹=" + clientKey + ", 用户登录时间=" + loginTime + "]";
+	}
+	
+	
 }

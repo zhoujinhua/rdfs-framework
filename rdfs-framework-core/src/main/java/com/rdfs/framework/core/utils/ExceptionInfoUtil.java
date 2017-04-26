@@ -12,8 +12,8 @@ import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.rdfs.framework.core.exeption.ExceptionVO;
-import com.rdfs.framework.core.exeption.RdfsException;
+import com.rdfs.framework.core.bean.ExceptionDto;
+import com.rdfs.framework.core.exeption.CustomerException;
 
 
 
@@ -46,14 +46,14 @@ public class ExceptionInfoUtil {
 				String info = attrInfo.getText();
 				Attribute attrSuggest = el.attribute("suggest");
 				String suggest = attrSuggest.getText();
-				ExceptionVO exceptionVO = new ExceptionVO();
+				ExceptionDto exceptionVO = new ExceptionDto();
 				exceptionVO.setId(id);
 				exceptionVO.setInfo(info);
 				exceptionVO.setSuggest(suggest);
 				parameterCacheDto.put(id, exceptionVO);
 			}
 		} catch (Exception e) {
-			throw new RdfsException("解析XML异常参数配置文件出错.", e);
+			throw new CustomerException("解析XML异常参数配置文件出错.", e);
 		}
 	}
 
@@ -63,8 +63,8 @@ public class ExceptionInfoUtil {
 	 * @param pKey
 	 * @return
 	 */
-	public static ExceptionVO getExceptionInfo(String errID) {
-		ExceptionVO vo = (ExceptionVO) parameterCacheDto.get(errID);
+	public static ExceptionDto getExceptionInfo(String errID) {
+		ExceptionDto vo = (ExceptionDto) parameterCacheDto.get(errID);
 		return vo;
 	}
 

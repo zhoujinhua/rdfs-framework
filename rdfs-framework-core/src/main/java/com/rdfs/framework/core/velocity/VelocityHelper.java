@@ -9,7 +9,7 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import com.rdfs.framework.core.exeption.RdfsException;
+import com.rdfs.framework.core.exeption.CustomerException;
 import com.rdfs.framework.core.service.Dto;
 import com.rdfs.framework.core.utils.RdfsUtils;
 
@@ -34,7 +34,7 @@ public class VelocityHelper {
 		try {
 			ve.init(getDefaultProperties());
 		} catch (Exception e) {
-			throw new RdfsException("初始化Velocity模板引擎实例失败", e);
+			throw new CustomerException("初始化Velocity模板引擎实例失败", e);
 		}
 	}
 
@@ -50,7 +50,7 @@ public class VelocityHelper {
 			props.load(is);
 			is.close();
 		} catch (Exception e) {
-			throw new RdfsException("读取Velocity模板引擎属性配置文件出错[velocity.aos.properties]", e);
+			throw new CustomerException("读取Velocity模板引擎属性配置文件出错[velocity.aos.properties]", e);
 		}
 		return props;
 	}
@@ -74,7 +74,7 @@ public class VelocityHelper {
 		try {
 			ve.evaluate(context, writer, "", pTemplateString);
 		} catch (Exception e) {
-			throw new RdfsException("字符串模板合并失败", e);
+			throw new CustomerException("字符串模板合并失败", e);
 		}
 		return writer;
 	}
@@ -99,13 +99,13 @@ public class VelocityHelper {
 		try {
 			template = ve.getTemplate(pTemplatePath);
 		} catch (Exception e) {
-			throw new RdfsException("解析文件模板失败", e);
+			throw new CustomerException("解析文件模板失败", e);
 		}
 		VelocityContext context = VelocityHelper.convertDto2VelocityContext(pDto);
 		try {
 			template.merge(context, writer);
 		} catch (Exception e) {
-			throw new RdfsException("文件模板合并失败", e);
+			throw new CustomerException("文件模板合并失败", e);
 		}
 		return writer;
 	}

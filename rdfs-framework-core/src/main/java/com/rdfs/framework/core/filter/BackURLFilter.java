@@ -36,13 +36,19 @@ public class BackURLFilter implements Filter{
         UserDto userDto = AuthUtil.getUserDto(juid);
         
         boolean flag = AuthUtil.compareUserDto(request);
-        if(!flag && uri.indexOf("index.jsp")==-1){
-        	response.sendError(405);
-			return;
+        if(!flag){
+        	//ajax请求
+        	if (request.getHeader("x-requested-with") != null&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
+        		response.setStatus(911);
+        	} else if(uri.indexOf("index.jsp")==-1){
+        		response.sendError(405);
+        		return;
+        	}
         } else {
         	AuthUtil.heartbeat(juid);
         	AuthUtil.setCurrentUserDto(userDto);
         }
+        System.out.println("请求状态："+response.getStatus());
 		filterChain.doFilter(servletRequest, servletResponse);
     }
     

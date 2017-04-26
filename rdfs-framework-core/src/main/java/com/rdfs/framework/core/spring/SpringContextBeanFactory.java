@@ -7,7 +7,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-import com.rdfs.framework.core.exeption.RdfsException;
+import com.rdfs.framework.core.exeption.CustomerException;
 
 public class SpringContextBeanFactory {
 
@@ -23,7 +23,7 @@ public class SpringContextBeanFactory {
 				.getBean(name);
 			} catch(Exception ex){
 				String msg = "Spring容器中没有找到ID名称为:[" + name + "]的SpringBean组件,请检查!";
-				throw new RdfsException(msg, ex);
+				throw new CustomerException(msg, ex);
 			}
 		}
 		return springBean;
@@ -41,7 +41,7 @@ public class SpringContextBeanFactory {
 						.getBean(clazz);
 			} catch(Exception ex){
 				String msg = "Spring容器中没有找到Class名称为:[" + clazz.getSimpleName() + "]的SpringBean组件,请检查!";
-				throw new RdfsException(msg, ex);
+				throw new CustomerException(msg, ex);
 			}
 		}
 		return springBean;
