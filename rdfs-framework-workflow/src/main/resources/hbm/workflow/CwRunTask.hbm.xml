@@ -19,6 +19,9 @@
         <property name="assigenee" type="java.lang.String">
             <column name="assignee"></column>
         </property>
+        <property name="assigeneeName" type="java.lang.String">
+            <column name="assigenee_name"></column>
+        </property>
         <property name="group" type="java.lang.String">
             <column name="group_no"></column>
         </property>

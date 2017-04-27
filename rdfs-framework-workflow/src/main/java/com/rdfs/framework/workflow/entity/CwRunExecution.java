@@ -14,6 +14,7 @@ public class CwRunExecution implements Serializable{
 	private String businessKey;
 	private CwNodeEvent nodeEvent;
 	private String userId;  //操作人
+	private String userName;
 	private Date createTime;
 	
 	public Integer getId() {
@@ -45,6 +46,12 @@ public class CwRunExecution implements Serializable{
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public Date getCreateTime() {
 		return createTime;

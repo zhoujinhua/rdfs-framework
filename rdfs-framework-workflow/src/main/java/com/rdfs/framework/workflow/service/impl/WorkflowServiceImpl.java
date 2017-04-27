@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rdfs.framework.core.bean.UserDto;
 import com.rdfs.framework.core.contants.Constants;
 import com.rdfs.framework.core.utils.AuthUtil;
 import com.rdfs.framework.core.utils.StringUtils;
@@ -96,7 +97,14 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 			CwRunExecution runExecution = runExecutionService.getRunExecution(businessKey, flowId, code);
 			if(!StringUtils.isBlankObj(runExecution)){
 				runTask.setAssigenee(runExecution.getUserId());
+				runTask.setAssigeneeName(runExecution.getUserName());
+			} else {
+				runTask.setAssigenee(null);
+				runTask.setAssigeneeName(null);
 			}
+		} else {
+			runTask.setAssigenee(null);
+			runTask.setAssigeneeName(null);
 		}
 		
 		CwRunExecution runExecution = new CwRunExecution();
@@ -104,7 +112,9 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 		runExecution.setCreateTime(new Date());
 		runExecution.setNodeEvent(nodeEvent);
 		runExecution.setProcessInfo(runTask.getProcessInfo());
-		runExecution.setUserId(AuthUtil.getCurrentUserDto().getUserId());
+		UserDto userDto = AuthUtil.getCurrentUserDto();
+		runExecution.setUserId(userDto.getUserId());
+		runExecution.setUserName(userDto.getUserName());
 		
 		mergeEntity(runTask);
 		saveEntity(runExecution);

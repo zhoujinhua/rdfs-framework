@@ -17,6 +17,7 @@ public class CwRunTask implements Serializable{
 	private String group; //待分配组
 	private String user; //待分配用户
 	private String assigenee; //分配人
+	private String assigeneeName; //分配人姓名
 	private Date createTime;
 	
 	public Integer getId() {
@@ -66,6 +67,12 @@ public class CwRunTask implements Serializable{
 	}
 	public void setAssigenee(String assigenee) {
 		this.assigenee = assigenee;
+	}
+	public String getAssigeneeName() {
+		return assigeneeName;
+	}
+	public void setAssigeneeName(String assigeneeName) {
+		this.assigeneeName = assigeneeName;
 	}
 	public Date getCreateTime() {
 		return createTime;
