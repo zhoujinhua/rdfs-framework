@@ -90,23 +90,17 @@ request.setAttribute("basePath", basePath);
 		           <div class="box-content">
 		           		<form id="fn-search-form" class="form-horizontal" method="post">
 		                    <div class="form-group">
-		                    	<div class="col-sm-6 col-sm-12">
-			                        <label class="control-label col-sm-4">流程名称</label>
-			                        <div class="col-sm-7">
+		                    	<div class="col-sm-12">
+			                        <label class="control-label col-sm-1">流程名称</label>
+			                        <div class="col-sm-3">
 		                       	 		<cs:input type="text" class="form-control" name="name" maxlength="20" renderId="data-table"/>
 			                        </div>
-		                        </div>
-		                        <div class="col-sm-6 col-sm-12">
-			                        <label class="control-label col-sm-4">流程代码</label>
-			                         <div class="col-sm-7">
+			                        <label class="control-label col-sm-1">流程代码</label>
+			                         <div class="col-sm-3">
 			                        	<cs:input type="text" class="form-control" name="code" maxlength="20" renderId="data-table"/>
 			                        </div>
-		                        </div>
-		                    </div>
-		                     <div class="form-group">
-		                     	 <div class="col-sm-6 col-sm-12">
-			                        <label class="control-label col-sm-4">是否有效</label>
-			                         <div class="col-sm-7">
+			                        <label class="control-label col-sm-1">是否有效</label>
+			                         <div class="col-sm-3">
 			                         	<cs:select class="form-control chosen" dicField="_is" name="status" allowBlank="true" renderId="data-table"/>
 			                        </div>
 		                        </div>

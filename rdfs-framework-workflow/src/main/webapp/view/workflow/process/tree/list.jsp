@@ -94,14 +94,15 @@ request.setAttribute("juid", juid);
 				var nodeName = treeNode.name;
 				if(nodeId.indexOf("node")!=-1){
 					nodeId = nodeId.substring(5, nodeId.length);
-					$("#process-frame").attr("src", "${path}/view/workflow/event/add.jsp?id="+nodeId+"&name="+nodeName+"&juid="+juid);
+					$("#process-frame").attr("src", "${path}/view/workflow/event/add.jsp?nodeId="+nodeId+"&name="+nodeName+"&juid="+juid);
 				}
 				if(nodeId.indexOf("event")!=-1){
 					var parentNode = treeNode.getParentNode();
 					nodeId = parentNode.id;
 					if(nodeId.indexOf("node")!=-1){
 						nodeId = nodeId.substring(5, nodeId.length);
-						$("#process-frame").attr("src", "${path}/view/workflow/event/add.jsp?id="+nodeId+"&name="+nodeName+"&juid="+juid);
+						name = parentNode.name;
+						$("#process-frame").attr("src", "${path}/view/workflow/event/add.jsp?nodeId="+nodeId+"&name="+name+"&juid="+juid);
 					}
 				}
 			}

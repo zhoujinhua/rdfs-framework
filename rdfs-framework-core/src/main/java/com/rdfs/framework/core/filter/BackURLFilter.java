@@ -2,6 +2,7 @@ package com.rdfs.framework.core.filter;
 
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -31,7 +32,6 @@ public class BackURLFilter implements Filter{
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        String uri = request.getServletPath()+ (request.getPathInfo() == null ? "" : request.getPathInfo());
         String juid = AuthUtil.getJuid(request);
         UserDto userDto = AuthUtil.getUserDto(juid);
         
@@ -40,7 +40,7 @@ public class BackURLFilter implements Filter{
         	//ajax请求
         	if (request.getHeader("x-requested-with") != null&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
         		response.setStatus(911);
-        	} else if(uri.indexOf("index.jsp")==-1){
+        	} else if(request.getRequestURI().indexOf("index.jsp")==-1){
         		response.sendError(405);
         		return;
         	}
@@ -48,7 +48,7 @@ public class BackURLFilter implements Filter{
         	AuthUtil.heartbeat(juid);
         	AuthUtil.setCurrentUserDto(userDto);
         }
-        System.out.println("请求状态："+response.getStatus());
+        System.out.println(new Date().toString() + "," + userDto.toString() + ",请求地址：" + request.getRequestURI() + ",请求状态："+response.getStatus());
 		filterChain.doFilter(servletRequest, servletResponse);
     }
     

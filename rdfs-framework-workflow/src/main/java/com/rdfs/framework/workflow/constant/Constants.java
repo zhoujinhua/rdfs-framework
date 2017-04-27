@@ -13,4 +13,14 @@ public class Constants {
 		public static final String NODE_EVENT_KEY = com.rdfs.framework.core.contants.Constants.KEYS.GLOBAL + "node_event_";
 		public static final String EVENT_MONITOR_KEY = com.rdfs.framework.core.contants.Constants.KEYS.GLOBAL + "event_monitor_";
 	}
+	
+	/**
+	 * 节点类型
+	 *
+	 */
+	public static final class NODE_TYPE {
+
+		public static final String START = "01";
+		public static final String END = "09";
+	}
 }

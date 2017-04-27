@@ -6,9 +6,9 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 request.setAttribute("path", path);
 request.setAttribute("basePath", basePath);
-String id = request.getParameter("id");
-if(id!=null && !"".equals(id)){
-	request.setAttribute("id", id);
+String nodeId = request.getParameter("nodeId");
+if(nodeId!=null && !"".equals(nodeId)){
+	request.setAttribute("nodeId", nodeId);
 }
 String name = request.getParameter("name"); 
 if(name!=null && !"".equals(name)){
@@ -24,7 +24,6 @@ if(name!=null && !"".equals(name)){
 </head>
 <script type="text/javascript">
 	$(function(){
-		var id = "${process.id}";
 	  	$("#fn-btn-save").click(function() {
 	  		validate();
 	  		if($(".error").length!=0){
@@ -44,7 +43,7 @@ if(name!=null && !"".equals(name)){
 						  } else{
 							  parent.crudNode("add", newNode);
 						  }
-						  location.href="${path }/view/workflow/event/list.jsp?id=${id}&juid="+juid;
+						  location.href="${path }/view/workflow/event/list.jsp?id=${nodeId==null?event.id:nodeId}&juid="+juid;
 					  } else {
 						  $.alert(data.responseMsg);
 					  }
@@ -52,7 +51,7 @@ if(name!=null && !"".equals(name)){
 				  dataType: 'json'
 			});
          });
-	  	ztree_input("radio", contextPath + '/node/nodeTree?id=${id}', $("#_next_node_name"));
+	  	ztree_input("radio", contextPath + '/node/nodeTree?id=${nodeId == null?id:nodeId }', $("#_next_node_name"));
 	});
 </script>
 <body>
@@ -86,7 +85,7 @@ if(name!=null && !"".equals(name)){
                         <label class="control-label col-sm-4">当前节点<i class="glyphicon glyphicon-star red"></i></label>
                         <div class="col-sm-8">
                       	 		<input class="form-control required" readonly name="currNode.name" value="${name }" id="_curr_node_name">
-                      	 		<input type="hidden" name="currNode.id" value="${event.currNode.id == null?id : event.currNode.id }" id="_curr_node_id">
+                      	 		<input type="hidden" name="currNode.id" value="${event.currNode.id == null?nodeId : event.currNode.id }" id="_curr_node_id">
                         </div>
                      </div>
                      <div class="form-group col-sm-12 col-sm-8">

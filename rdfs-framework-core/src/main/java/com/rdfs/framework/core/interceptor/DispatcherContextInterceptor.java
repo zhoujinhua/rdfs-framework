@@ -1,6 +1,7 @@
 package com.rdfs.framework.core.interceptor;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,10 +36,12 @@ public class DispatcherContextInterceptor implements HandlerInterceptor {
 			boolean flag = AuthUtil.compareUserDto(request);
 	        if(!flag){
 	        	response.sendError(405);
+	        	System.out.println(new Date().toString() + "," + userDto.toString() + ",请求地址：" + request.getRequestURI() + ",请求状态："+response.getStatus());
 				response.sendRedirect(request.getContextPath() + redirectURL);
 	        } else {
 	        	AuthUtil.heartbeat(juid); //维持心跳
 	        	AuthUtil.setCurrentUserDto(userDto);
+	        	System.out.println(new Date().toString() + "," + userDto.toString() + ",请求地址：" + request.getRequestURI() + ",请求状态："+response.getStatus());
 	        }
 			SpringDispatcherContextHolder.initDispatcherContext(response);
 		} catch (IOException e) {
@@ -60,6 +63,10 @@ public class DispatcherContextInterceptor implements HandlerInterceptor {
         //if(consumeTime > 500) {
         	System.out.println(String.format("%s consume %d millis", request.getRequestURI(), consumeTime));
         //}
+        	
+        	if(ex!=null){
+        		ex.printStackTrace();
+        	}
 	}
 
 	@Override

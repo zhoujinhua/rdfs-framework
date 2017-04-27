@@ -83,7 +83,7 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 			}
 			runTask.setTaskNode(nodeEvent.getNextNode());
 		}
-		if(runTask.getTaskNode().getType().equals("end")){
+		if(runTask.getTaskNode().getType().equals(com.rdfs.framework.workflow.constant.Constants.NODE_TYPE.END)){
 			runTask.setStatus(Constants.IS.YES);
 		} else {
 			runTask.setStatus(Constants.IS.NO);

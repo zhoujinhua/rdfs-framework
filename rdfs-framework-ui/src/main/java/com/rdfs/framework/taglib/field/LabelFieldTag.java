@@ -55,28 +55,40 @@ public class LabelFieldTag extends TagSupport implements DynamicAttributes{
 			if(!StringUtils.isBlank(this.getTooltip())){
 				sb.append(" tooltip='" + this.getTooltip() + "'");
 			}
-			String v = this.getValue();
+			String v = " ";
+			boolean flag = true;
 			if(!StringUtils.isBlank(this.getType())){
 				sb.append(" type='" +this.getType()+ "'");
 				if(this.getType().equalsIgnoreCase("dict")&& !StringUtils.isBlank(this.getFormat()) && !StringUtils.isBlank(this.getValue())){
 					if(!StringUtils.isBlankObj(CacheCxtUtil.cacheDataService)){
-						String desc = CacheCxtUtil.cacheDataService.getDicDesc(this.getFormat(), this.getValue());
-						if(!StringUtils.isBlank(desc)){
-							v = desc ;
+						for(String part : this.getValue().split(",")){
+							String desc = CacheCxtUtil.cacheDataService.getDicDesc(this.getFormat(), part);
+							if(!StringUtils.isBlank(desc)){
+								flag = false;
+								v += desc +"," ;
+							}
 						}
 					}
 				}
 				if(this.getType().equalsIgnoreCase("region") && !StringUtils.isBlank(this.getValue())){
 					if(!StringUtils.isBlankObj(CacheCxtUtil.cacheDataService)){
-						Region region = CacheCxtUtil.cacheDataService.getRegion(this.getValue());
-						if(region != null){
-							v = region.getRegName();
+						for(String part : this.getValue().split(",")){
+							Region region = CacheCxtUtil.cacheDataService.getRegion(part);
+							if(region != null){
+								flag = false;
+								v += region.getRegName() +",";
+							}
 						}
 					}
 				}
 			}
 			if(!StringUtils.isBlank(this.getFormat())){
 				sb.append(" format='"+this.getFormat()+"'");
+			}
+			
+			v = v.substring(0, v.length()-1 );
+			if(flag){
+				v = this.getValue()	;
 			}
 			sb.append(">").append(v).append("</label>");
 			writer.print(sb.toString());

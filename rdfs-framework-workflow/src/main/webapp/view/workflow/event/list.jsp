@@ -83,21 +83,17 @@ if(id!=null && !"".equals(id)){
 		           <div class="box-content">
 		           		<form id="fn-search-form" class="form-horizontal" method="post">
 		                    <div class="form-group">
-		                    	<div class="col-sm-6 col-sm-12">
-			                        <label class="control-label col-sm-4">起始节点</label>
-			                        <div class="col-sm-7">
+		                    	<div class="col-sm-12">
+			                        <label class="control-label col-sm-1">起始节点</label>
+			                        <div class="col-sm-3">
 		                       	 		<cs:input type="text" class="form-control" name="name" maxlength="20" renderId="data-table"/>
 			                        </div>
-		                        </div>
-		                        <div class="col-sm-6 col-sm-12">
-			                        <label class="control-label col-sm-4">到达节点</label>
-			                         <div class="col-sm-7">
+			                        <label class="control-label col-sm-1">到达节点</label>
+			                         <div class="col-sm-3">
 			                        	<cs:input type="text" class="form-control" name="code" maxlength="20" renderId="data-table"/>
 			                        </div>
-		                        </div>
-		                        <div class="col-sm-6 col-sm-12">
-			                        <label class="control-label col-sm-4">执行动作</label>
-			                         <div class="col-sm-7">
+			                        <label class="control-label col-sm-1">执行动作</label>
+			                         <div class="col-sm-3">
 			                        	<cs:select class="form-control chosen" name="action" dicField="_node_action" allowBlank="true" renderId="data-table"/>
 			                        </div>
 		                        </div>

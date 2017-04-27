@@ -10,6 +10,7 @@ import com.rdfs.framework.cache.service.CacheWorkflowService;
 import com.rdfs.framework.core.bean.TreeDto;
 import com.rdfs.framework.core.service.TreeService;
 import com.rdfs.framework.hibernate.service.impl.HibernateServiceSupport;
+import com.rdfs.framework.workflow.constant.Constants;
 import com.rdfs.framework.workflow.entity.CwNodeEvent;
 import com.rdfs.framework.workflow.entity.CwProcessInfo;
 import com.rdfs.framework.workflow.entity.CwTaskNode;
@@ -34,7 +35,7 @@ public class TaskNodeServiceImpl extends HibernateServiceSupport implements Task
 		
 		if(list!=null && !list.isEmpty()){
 			for(CwTaskNode taskNode : list){
-				if(taskNode.getType().equals("start")){
+				if(taskNode.getType().equals(Constants.NODE_TYPE.START)){
 					return taskNode;
 				}
 			}
@@ -51,7 +52,7 @@ public class TaskNodeServiceImpl extends HibernateServiceSupport implements Task
 		
 		if(list!=null && !list.isEmpty()){
 			for(CwTaskNode taskNode : list){
-				if(taskNode.getType().equals("end")){
+				if(taskNode.getType().equals(Constants.NODE_TYPE.END)){
 					return taskNode;
 				}
 			}
@@ -62,7 +63,7 @@ public class TaskNodeServiceImpl extends HibernateServiceSupport implements Task
 	@Override
 	public void saveTaskNode(CwTaskNode taskNode) {
 		String hql = "from CwTaskNode where processInfo.id = "+taskNode.getProcessInfo().getId()+" and code = '" + taskNode.getCode() + "'";
-		if(taskNode.getType().equals("01") || taskNode.getType().equals("03")){
+		if(taskNode.getType().equals(Constants.NODE_TYPE.START) || taskNode.getType().equals(Constants.NODE_TYPE.END)){
 			hql += " or type = '" + taskNode.getType() + "'";
 		}
 		List<CwTaskNode> nodeList = getList(hql);
@@ -102,6 +103,7 @@ public class TaskNodeServiceImpl extends HibernateServiceSupport implements Task
 	@Override
 	public List<TreeDto> nodeTree(CwTaskNode taskNode) throws Exception {
 		taskNode = getEntityById(CwTaskNode.class, taskNode.getId(), true);
+		
 		CwProcessInfo processInfo = taskNode.getProcessInfo();
 		Hibernate.initialize(processInfo.getTaskNodes());
 		
