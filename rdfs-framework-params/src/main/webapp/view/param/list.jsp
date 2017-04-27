@@ -57,15 +57,13 @@ request.setAttribute("basePath", basePath);
 		           <div class="box-content">
 		           		<form id="fn-search-form" class="form-horizontal" method="post">
 		                    <div class="form-group">
-		                    	<div class="col-sm-6 col-sm-12">
-			                        <label class="control-label col-sm-4">参数KEY</label>
-			                        <div class="col-sm-7">
+		                    	<div class="col-sm-12">
+			                        <label class="control-label col-sm-1">参数KEY</label>
+			                        <div class="col-sm-3">
 		                       	 		<cs:input type="text" class="form-control" name="key" maxlength="20" renderId="data-table"/>
 			                        </div>
-		                        </div>
-		                        <div class="col-sm-6 col-sm-12">
-			                        <label class="control-label col-sm-4">参数名称</label>
-			                         <div class="col-sm-7">
+			                        <label class="control-label col-sm-1">参数名称</label>
+			                         <div class="col-sm-3">
 			                        	<cs:input type="text" class="form-control" name="name" maxlength="20" renderId="data-table"/>
 			                        </div>
 		                        </div>
