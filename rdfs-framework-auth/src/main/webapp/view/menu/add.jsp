@@ -86,13 +86,13 @@ if(menuTitle!=null && !"".equals(menuTitle)){
                      <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">排序号</label>
                          <div class="col-sm-8">
-                        	<cs:input type="int" class="form-control" maxlength="2" name="sortNo"/>
+                        	<cs:input type="int" class="form-control" maxlength="2" name="sortNo" value="${menu.sortNo }"/>
                         </div>
                     </div>
                      <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">图标</label>
                          <div class="col-sm-8">
-                        	<cs:input class="form-control" maxlength="30" name="menuIcon"/>
+                        	<cs:input class="form-control" maxlength="30" name="menuIcon" value="${menu.menuIcon }"/>
                         </div>
                     </div>
                      <div class="form-group">

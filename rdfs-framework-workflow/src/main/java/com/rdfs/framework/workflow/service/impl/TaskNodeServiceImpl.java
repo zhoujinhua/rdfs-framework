@@ -62,9 +62,11 @@ public class TaskNodeServiceImpl extends HibernateServiceSupport implements Task
 
 	@Override
 	public void saveTaskNode(CwTaskNode taskNode) {
-		String hql = "from CwTaskNode where processInfo.id = "+taskNode.getProcessInfo().getId()+" and code = '" + taskNode.getCode() + "'";
+		String hql = "from CwTaskNode where processInfo.id = "+taskNode.getProcessInfo().getId();
 		if(taskNode.getType().equals(Constants.NODE_TYPE.START) || taskNode.getType().equals(Constants.NODE_TYPE.END)){
-			hql += " or type = '" + taskNode.getType() + "'";
+			hql += " and (code = '" + taskNode.getCode() +"' or type = '" + taskNode.getType() + "')";
+		} else {
+			hql += " and code = '" + taskNode.getCode() + "'";
 		}
 		List<CwTaskNode> nodeList = getList(hql);
 		if(taskNode.getId()!=null){
