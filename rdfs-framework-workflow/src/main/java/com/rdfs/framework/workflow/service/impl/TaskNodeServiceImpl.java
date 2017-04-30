@@ -97,7 +97,11 @@ public class TaskNodeServiceImpl extends HibernateServiceSupport implements Task
 			taskNode.getNodeEvents().clear();
 		}
 		CwTaskNode cwTaskNode = new CwTaskNode();
+		CwProcessInfo processInfo = new CwProcessInfo();
+		processInfo.setId(taskNode.getProcessInfo().getId());
+		cwTaskNode.setProcessInfo(processInfo);
 		cwTaskNode.setId(taskNode.getId());
+		
 		deleteEntity(taskNode);
 		cacheWorkflowService.delTaskNode(cwTaskNode);
 	}
