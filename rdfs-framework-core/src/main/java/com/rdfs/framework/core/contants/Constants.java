@@ -91,9 +91,9 @@ public class Constants {
 	}
 	
 	public static final class REDIS_TYPE{
-		public static final String STRING = "resource_";
-		public static final String LIST = "resource_";
-		public static final String MAP = "resource_";
-		public static final String SET = "resource_";
+		public static final String STRING = "resource_string";
+		public static final String LIST = "resource_list";
+		public static final String MAP = "resource_map";
+		public static final String SET = "resource_set";
 	}
 }
