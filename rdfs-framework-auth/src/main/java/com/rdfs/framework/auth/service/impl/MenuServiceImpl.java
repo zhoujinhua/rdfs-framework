@@ -48,6 +48,9 @@ public class MenuServiceImpl extends HibernateServiceSupport implements MenuServ
 		if(menu.getMenuId()!=null){
 			updateEntity(menu, "menuTitle","menuIcon","status","sortNo");
 		} else {
+			if(menu.getParMenu()!=null && menu.getParMenu().getMenuId() == 0){
+				menu.setParMenu(null);
+			}
 			menu.setCreateTime(new Date());
 			saveEntity(menu);
 		}

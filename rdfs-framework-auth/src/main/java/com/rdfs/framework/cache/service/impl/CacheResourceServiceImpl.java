@@ -162,38 +162,40 @@ public class CacheResourceServiceImpl extends HibernateServiceSupport implements
 				List<SyResource> list = permSet.getItems();
 				if(list!= null && !list.isEmpty()){
 					for(SyResource resource : list){
-						SyMenu menu = resource.getMenu();
-						String pId = "0";
-						if(menu!=null){
-							pId = menu.getMenuId() + "";
-						}
-						TreeDto treeDto = new TreeDto(resource.getItemId()+"", pId,
-								resource.getItemTitle(), resource.getItemLocation(), resource.getItemIcon(), false);
-						if(sortMap.get(pId) == null){
-							sortMap.put(pId, new TreeMap<>(new Comparator<Integer>() {
-								@Override
-								public int compare(Integer o1, Integer o2) {
-									if (o1 != null && o2 != null) {
-										return o1 - o2;
+						if(resource.getStatus().equals(Constants.IS.YES)){
+							SyMenu menu = resource.getMenu();
+							String pId = "0";
+							if(menu!=null){
+								pId = menu.getMenuId() + "";
+							}
+							TreeDto treeDto = new TreeDto(resource.getItemId()+"", pId,
+									resource.getItemTitle(), resource.getItemLocation(), resource.getItemIcon(), false);
+							if(sortMap.get(pId) == null){
+								sortMap.put(pId, new TreeMap<>(new Comparator<Integer>() {
+									@Override
+									public int compare(Integer o1, Integer o2) {
+										if (o1 != null && o2 != null) {
+											return o1 - o2;
+										}
+										if (o1 == null && o2 != null) {
+											return -1;
+										}
+										if (o1 != null && o2 == null) {
+											return 1;
+										}
+										return 0;
 									}
-									if (o1 == null && o2 != null) {
-										return -1;
-									}
-									if (o1 != null && o2 == null) {
-										return 1;
-									}
-									return 0;
-								}
-							}));
-						}
-						if(sortMap.get(pId).get(resource.getSortNo()) == null){
-							sortMap.get(pId).put(resource.getSortNo(), new ArrayList<>());
-						}
-						if(!sortMap.get(pId).get(resource.getSortNo()).contains(treeDto)){
-							sortMap.get(pId).get(resource.getSortNo()).add(treeDto);
-						}
-						if(!"0".equals(pId)){
-							cascade(sortMap, pId);
+								}));
+							}
+							if(sortMap.get(pId).get(resource.getSortNo()) == null){
+								sortMap.get(pId).put(resource.getSortNo(), new ArrayList<>());
+							}
+							if(!sortMap.get(pId).get(resource.getSortNo()).contains(treeDto)){
+								sortMap.get(pId).get(resource.getSortNo()).add(treeDto);
+							}
+							if(!"0".equals(pId)){
+								cascade(sortMap, pId);
+							}
 						}
 					}
 				}
