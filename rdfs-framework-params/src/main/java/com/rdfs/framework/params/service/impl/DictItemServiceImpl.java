@@ -11,7 +11,7 @@ public class DictItemServiceImpl extends HibernateServiceSupport implements Dict
 
 	@Override
 	public SyDictItem saveDictItem(SyDictItem dict) {
-		if(dict.getId()!=null){
+		if(dict.getId()==null){
 			saveEntity(dict);
 		} else {
 			getSession().update(dict);

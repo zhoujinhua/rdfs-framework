@@ -32,7 +32,7 @@ request.setAttribute("basePath", basePath);
 	    	var id = $(this).attr("data-id");
 	    	$.confirm("跑一次?",function(ok){
 	    		if(ok){
-	    			location.href = contextPath + '/job/run?id='+id;
+	    			location.href = contextPath + '/job/run?id='+id+"&juid="+juid;
 	    		}
 	    	});
 	    });

@@ -9,10 +9,10 @@ $(document).ready(function () {
     $.browser.msie = {};
     
     var href = parent.top.$("#bs-css").attr("href");
-	if(href!=null && href!=""){
-		href = href.substring(href.indexOf("/",2),href.length);
-		$(".sub-bs-css").attr("href",contextPath + href);
-	}
+	// if(href!=null && href!=""){
+	// 	href = href.substring(href.indexOf("/",2),href.length);
+	// 	$(".sub-bs-css").attr("href",contextPath + href);
+	// }
     //switchTheme(obj, currentTheme);
 
     $('.navbar-toggle').click(function (e) {

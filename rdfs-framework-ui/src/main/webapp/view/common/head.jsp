@@ -40,8 +40,8 @@
 <script type="text/javascript">
 	var contextPath = "${pageContext.request.contextPath}";
 	var href = parent.top.$("#bs-css").attr("href");
-	if(href!=null && href!=""){
-		href = href.substring(href.indexOf("/",2),href.length);
-		$("#sub-bs-css").attr("href","${path}"+href);
-	}
+	<%--if(href!=null && href!=""){--%>
+		<%--href = href.substring(href.indexOf("/",2),href.length);--%>
+		<%--$("#sub-bs-css").attr("href","${path}"+href);--%>
+	<%--}--%>
 </script>
