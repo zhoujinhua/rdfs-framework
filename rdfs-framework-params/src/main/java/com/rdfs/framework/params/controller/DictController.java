@@ -36,7 +36,7 @@ public class DictController {
 	@ResponseBody
 	public Map<String,Object> list(HttpServletRequest request, SyDictItem arg){
 		Map<String, Object> map = new HashMap<String,Object>();
-		Page page = dictItemService.pageList(arg, PageUtil.getPage(request), OperMode.LIKE, "name","code","status","key");
+		Page page = dictItemService.pageList(arg, PageUtil.getPage(request), OperMode.LIKE, "name", "code", "status", "key", "desc", "group");
 		
 		map.put("aaData", page.getItems());
 		map.put("recordsTotal", page.getCount());
