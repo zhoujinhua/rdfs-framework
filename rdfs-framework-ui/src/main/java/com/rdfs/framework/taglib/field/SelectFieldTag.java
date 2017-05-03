@@ -131,7 +131,7 @@ public class SelectFieldTag extends TagSupport implements DynamicAttributes{
 					if(dictItems!=null && !dictItems.isEmpty()){
 						for(DictItem dictItem : dictItems){
 							if(!StringUtils.isBlank(this.getDicFilter()) ){
-								if(dictCodes.contains(dictItem.getCode()) && flag){
+								if((dictCodes.contains(dictItem.getCode()) && flag) || (!dictCodes.contains(dictItem.getCode()) && !flag)){
 									if(values.contains(dictItem.getCode())){
 										sb.append("<option value='"+dictItem.getCode()+"' selected='selected'>"+dictItem.getDesc()+"</option>");
 									} else {

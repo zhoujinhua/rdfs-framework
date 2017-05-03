@@ -2,7 +2,6 @@ package com.rdfs.framework.core.filter;
 
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -10,6 +9,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,6 +21,7 @@ import com.rdfs.framework.core.utils.AuthUtil;
  *拦截没有登陆情况下方view文件夹下的JSP页面
  * Version: 1.0
  */
+@WebFilter(filterName="/urlFilter",urlPatterns="/view/*",initParams={@WebInitParam(name ="EXCLUDED_PAGES" , value = "index.jsp")}) 
 public class BackURLFilter implements Filter{
 	
 	protected FilterConfig filterConfig = null;
@@ -40,7 +42,7 @@ public class BackURLFilter implements Filter{
         	//ajax请求
         	if (request.getHeader("x-requested-with") != null&& request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
         		response.setStatus(911);
-        	} else if(request.getRequestURI().indexOf("index.jsp")==-1){
+        	} else/* if(request.getRequestURI().indexOf("index.jsp")==-1)*/{
         		response.sendError(405);
         		return;
         	}
@@ -48,7 +50,7 @@ public class BackURLFilter implements Filter{
         	AuthUtil.heartbeat(juid);
         	AuthUtil.setCurrentUserDto(userDto);
         }
-        System.out.println(new Date().toString() + "," + userDto.toString() + ",请求地址：" + request.getRequestURI() + ",请求状态："+response.getStatus());
+        //System.out.println(new Date().toString() + "," + userDto.toString() + ",请求地址：" + request.getRequestURI() + ",请求状态："+response.getStatus());
 		filterChain.doFilter(servletRequest, servletResponse);
     }
     

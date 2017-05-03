@@ -96,7 +96,7 @@ public class RadioFieldTag extends TagSupport implements DynamicAttributes{
 					if(dictItems!=null && !dictItems.isEmpty()){
 						for(DictItem dictItem : dictItems){
 							if(!StringUtils.isBlank(this.getDicFilter()) ){
-								if(dictCodes.contains(dictItem.getCode()) && flag){
+								if((dictCodes.contains(dictItem.getCode()) && flag) || (!dictCodes.contains(dictItem.getCode()) && !flag)){
 									if(!StringUtils.isBlank(this.getValue())&&this.getValue().equals(dictItem.getCode())){
 										sb.append("<label class='radio-inline'>").append(builder).append(" checked value='" + dictItem.getCode() + "'></input>").append(dictItem.getDesc()).append("</label>");
 									} else {

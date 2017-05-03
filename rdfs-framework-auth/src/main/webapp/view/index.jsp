@@ -14,7 +14,7 @@ if(juid!=null && !"".equals(juid)){
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>美利车金融-渠道管理系统</title>
+    <title>收单审批系统</title>
     <jsp:include page="common/head.jsp"></jsp:include>
     <link href="${path }/static/weblib/charisma/css/bootstrap-cerulean.min.css" rel="stylesheet" type="text/css" id="bs-css">
 </head>
@@ -58,7 +58,7 @@ if(juid!=null && !"".equals(juid)){
     <div class="navbar navbar-default" role="navigation">
         <div class="navbar-inner">
             <a class="navbar-brand" href="#"> <!-- <img alt="Charisma Logo" src="charisma/img/logo20.png" class="hidden-xs"/> -->
-                <span>美利车金融</span>
+                <span>收单审批系统</span>
             </a>
  
             <div class="btn-group pull-right">

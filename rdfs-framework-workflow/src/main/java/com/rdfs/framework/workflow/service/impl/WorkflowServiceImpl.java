@@ -71,6 +71,9 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 			}
 			CwTaskNode start = taskNodeService.getStartNode(processInfo);
 			nodeEvent = nodeEventService.getNodeEvent(start, action);
+			if(StringUtils.isBlankObj(nodeEvent)){
+				throw new RuntimeException("事件定义不存在.");
+			}
 			
 			runTask = new CwRunTask();
 			runTask.setBusinessKey(businessKey);

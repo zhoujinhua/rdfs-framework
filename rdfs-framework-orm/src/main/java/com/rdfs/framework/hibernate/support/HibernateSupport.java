@@ -3,6 +3,7 @@ package com.rdfs.framework.hibernate.support;
 import org.hibernate.SessionFactory;
 import org.hibernate.metadata.ClassMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.rdfs.framework.hibernate.hibernate.CrapSession;
@@ -12,10 +13,11 @@ import com.rdfs.framework.hibernate.hibernate.CrapSession;
  * hibernate 持久化支持
  * 获取自定义session，service层直接调用
  */
-@Component
+//@Component
 public abstract class HibernateSupport {
 	
 	@Autowired
+	@Qualifier("sessionFactory")
 	private SessionFactory sessionFactory;
 	
 	/**

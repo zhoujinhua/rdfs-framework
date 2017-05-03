@@ -100,7 +100,7 @@ if(menuTitle!=null && !"".equals(menuTitle)){
                      <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">图标</label>
                          <div class="col-sm-8">
-                        	<cs:input class="form-control" maxlength="30" name="itemIcon" value="${resource.itemIcon }"/>
+                        	<cs:input class="form-control" maxlength="50" name="itemIcon" value="${resource.itemIcon }"/>
                         </div>
                     </div>
                      <div class="form-group">

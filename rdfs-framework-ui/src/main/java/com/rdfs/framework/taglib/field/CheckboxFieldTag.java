@@ -104,13 +104,13 @@ public class CheckboxFieldTag extends TagSupport implements DynamicAttributes{
 					if(dictItems!=null && !dictItems.isEmpty()){
 						for(DictItem dictItem : dictItems){
 							if(!StringUtils.isBlank(this.getDicFilter()) ){
-								if(dictCodes.contains(dictItem.getCode()) && flag){
+								if((dictCodes.contains(dictItem.getCode()) && flag) || (!dictCodes.contains(dictItem.getCode()) && !flag)){
 									if(values.contains(dictItem.getCode())){
 										sb.append("<label class='checkbox-inline'>").append(builder).append(" checked value='" + dictItem.getCode() + "'></input>").append(dictItem.getDesc()).append("</label>");
 									} else {
 										sb.append("<label class='checkbox-inline'>").append(builder).append(" value='" + dictItem.getCode() + "'></input>").append(dictItem.getDesc()).append("</label>");
 									}
-								}
+								} 
 							} else {
 								if(values.contains(dictItem.getCode())){
 									sb.append("<label class='checkbox-inline'>").append(builder).append(" checked value='" + dictItem.getCode() + "'></input>").append(dictItem.getDesc()).append("</label>");

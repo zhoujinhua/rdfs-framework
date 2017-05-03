@@ -64,9 +64,9 @@ public class DispatcherContextInterceptor implements HandlerInterceptor {
         	System.out.println(String.format("%s consume %d millis", request.getRequestURI(), consumeTime));
         //}
         	
-        	if(ex!=null){
-        		ex.printStackTrace();
-        	}
+    	if(ex!=null){
+    		ex.printStackTrace();
+    	}
 	}
 
 	@Override

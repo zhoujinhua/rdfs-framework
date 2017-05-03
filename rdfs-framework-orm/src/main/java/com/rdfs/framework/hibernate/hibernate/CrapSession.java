@@ -252,7 +252,7 @@ public class CrapSession {
 	 * @return
 	 */
 	public <T extends Serializable> T persist(T entity) {
-		this.session.save("Computer",entity);
+		this.session.persist(entity);
 		return entity;
 	}
 	
