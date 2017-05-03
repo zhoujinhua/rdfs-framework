@@ -233,31 +233,31 @@ function validNu(obj){
 		try{
 			value = parseFloat(value);
 		}catch(err){
-			$(this).fieldError("必须输入数字.");
+			obj.fieldError("必须输入数字.");
 		}
 		if(value){
 			try{
 				if(obj.attr("min") && parseFloat(obj.attr("min"))){
-					min = parseFloat($(this).attr("min"));
+					min = parseFloat(obj.attr("min"));
 				}
 			}catch(err){
 				console.log("数字输入框的上限值或者输入框的值不是数字.");
 			}
 			try{
 				if(obj.attr("max") && parseFloat(obj.attr("max"))){
-					max = parseFloat($(this).attr("max"));
+					max = parseFloat(obj.attr("max"));
 				}
 			}catch(err){
 				console.log("数字输入框的下限值或者输入框的值不是数字.");
 			}
 			if(min){
 				if(min > parseFloat(obj.val())){
-					$(this).fieldError("不可输入小于"+min+"的数字.");
+					obj.fieldError("不可输入小于"+min+"的数字.");
 				}
 			}
 			if(max){
 				if(max < parseFloat(obj.val())){
-					$(this).fieldError("不可输入大于"+max+"的数字.");
+					obj.fieldError("不可输入大于"+max+"的数字.");
 				}
 			}
 		}
