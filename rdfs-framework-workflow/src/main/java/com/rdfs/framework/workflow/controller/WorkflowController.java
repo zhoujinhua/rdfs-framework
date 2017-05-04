@@ -25,9 +25,9 @@ public class WorkflowController {
 	
 	@RequestMapping("listFlow")
 	@ResponseBody
-	public Map<String, Object> listFlow(HttpServletRequest request, HttpServletResponse response){
+	public Map<String, Object> listFlow(HttpServletRequest request, HttpServletResponse response, CwProcessInfo processInfo){
 		Map<String,Object> map = new HashMap<>();
-		List<CwProcessInfo> list = processInfoService.getProcessInfos();
+		List<CwProcessInfo> list = processInfoService.getProcessInfos(processInfo);
 		map.put("aaData", list);
 		return map;
 	}

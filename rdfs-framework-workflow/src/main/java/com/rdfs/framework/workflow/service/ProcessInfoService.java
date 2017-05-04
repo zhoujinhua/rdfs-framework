@@ -9,7 +9,7 @@ import com.rdfs.framework.workflow.entity.CwProcessInfo;
 
 public interface ProcessInfoService extends HibernateService{
 
-	List<CwProcessInfo> getProcessInfos();
+	List<CwProcessInfo> getProcessInfos(CwProcessInfo processInfo);
 
 	void saveProcessInfo(CwProcessInfo processInfo);
 

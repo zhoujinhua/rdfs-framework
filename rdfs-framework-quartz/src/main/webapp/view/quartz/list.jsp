@@ -46,6 +46,10 @@ request.setAttribute("basePath", basePath);
 	            <a href="#">定时任务管理</a>
 	        </li>
 	    </ul>
+	    <div class="btn-bar">
+	    	<a href="#" class="btn btn-primary btn-mini" id="fn-btn-search"><i class="glyphicon glyphicon-search"></i> 查询</a>
+            <a href="#" class="btn btn-default btn-mini" id="fn-btn-add"><i class="glyphicon glyphicon-plus"></i> 新增</a>
+	    </div>
 		<div class="row">
 			<c:if test="${msg!=null && msg!=''}">
 				<div class="col-md-12">
@@ -82,14 +86,6 @@ request.setAttribute("basePath", basePath);
 			                        </div>
 		                        </div>
 		                     </div>
-		                     <div class="form-group">
-			                     <div class="col-sm-12">
-				                    <p class="center-block">
-				                        <a href="#" class="btn btn-primary btn-mini" id="fn-btn-search"><i class="glyphicon glyphicon-search"></i> 查询</a>
-				                        <a href="#" class="btn btn-default btn-mini" id="fn-btn-add"><i class="glyphicon glyphicon-plus"></i> 新增</a>
-				                    </p>
-				                </div>
-			                </div>
 		                </form>
 	               	</div>
 		      	</div>

@@ -143,8 +143,8 @@ public class WorkflowServiceImpl extends HibernateServiceSupport implements Work
 		return nodeEvent.getRoute();
 	}
 	
-	public List<CwProcessInfo> getCwProcessInfos(){
-		return processInfoService.getProcessInfos();
+	public List<CwProcessInfo> getCwProcessInfos(CwProcessInfo processInfo){
+		return processInfoService.getProcessInfos(processInfo);
 	}
 	
 	@Override

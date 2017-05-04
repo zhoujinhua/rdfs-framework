@@ -20,6 +20,7 @@ public class CwProcessInfo implements Serializable, Cloneable{
 	private Integer id;
 	private String name;
 	private String code;
+	private String type;
 	private Long version;
 	private String status; 
 	private Date createTime;
@@ -44,6 +45,12 @@ public class CwProcessInfo implements Serializable, Cloneable{
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	public Long getVersion() {
 		return version;

@@ -69,6 +69,10 @@ request.setAttribute("basePath", basePath);
 	            <a href="#">工作流管理</a>
 	        </li>
 	    </ul>
+	    <div class="btn-bar">
+	    	<a href="#" class="btn btn-primary btn-mini" id="fn-btn-search"><i class="glyphicon glyphicon-search"></i> 查询</a>
+            <a href="#" class="btn btn-default btn-mini" id="fn-btn-add"><i class="glyphicon glyphicon-plus"></i> 新增</a>
+	    </div>
 		<div class="row">
 			<c:if test="${msg!=null && msg!=''}">
 				<div class="col-md-12">
@@ -105,14 +109,6 @@ request.setAttribute("basePath", basePath);
 			                        </div>
 		                        </div>
 		                     </div>
-		                     <div class="form-group">
-			                     <div class="col-sm-12">
-				                    <p class="center-block">
-				                        <a href="#" class="btn btn-primary btn-mini" id="fn-btn-search"><i class="glyphicon glyphicon-search"></i> 查询</a>
-				                        <a href="#" class="btn btn-default btn-mini" id="fn-btn-add"><i class="glyphicon glyphicon-plus"></i> 新增</a>
-				                    </p>
-				                </div>
-			                </div>
 		                </form>
 	               	</div>
 		      	</div>
@@ -132,6 +128,7 @@ request.setAttribute("basePath", basePath);
 		           		<cs:table id="data-table" class="table table-striped table-bordered responsive" onrender="${path }/process/list">
 		           			<cs:column dataField="name" name="流程名称"/>
 		           			<cs:column dataField="code" name="流程代码"/>
+		           			<cs:column dataField="type" name="流程类型" type="dict" format="_app_type"/>
 		           			<cs:column dataField="version" name="流程版本"/>
 		           			<cs:column dataField="status" name="是否有效" type="dict" format="_is"/>
 		           			<cs:column dataField="createTime" name="创建时间" type="date" format="YYYY-MM-DD"/>

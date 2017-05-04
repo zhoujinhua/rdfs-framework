@@ -16,6 +16,9 @@
         <property name="code" type="java.lang.String">
             <column name="code"></column>
         </property>
+        <property name="type" type="java.lang.String">
+            <column name="type"></column>
+        </property>
         <property name="version" type="java.lang.Long">
             <column name="version"></column>
         </property>

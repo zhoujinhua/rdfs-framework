@@ -17,7 +17,9 @@ request.setAttribute("basePath", basePath);
 	<script type="text/javascript">
 		function operator(data, type, full, meta){
 			var html = '';
-    		html += ' <a class="link" href= "'+contextPath+'/dict/edit?id='+data+'">修改</a>';
+			if(full.group == '2'){
+	    		html += ' <a class="link" href= "'+contextPath+'/dict/edit?id='+data+'">修改</a>';
+			}
 	    	return	data=html;
 		}
 		$(document).delegate('#fn-btn-search','click',function() {
@@ -36,6 +38,10 @@ request.setAttribute("basePath", basePath);
 	            <a href="#">数据字典管理</a>
 	        </li>
 	    </ul>
+	    <div class="btn-bar">
+	    	<a href="#" class="btn btn-primary btn-mini" id="fn-btn-search"><i class="glyphicon glyphicon-search"></i> 查询</a>
+            <a href="#" class="btn btn-default btn-mini" id="fn-btn-add"><i class="glyphicon glyphicon-plus"></i> 新增</a>
+	    </div>
 		<div class="row">
 			<c:if test="${msg!=null && msg!=''}">
 				<div class="col-md-12">
@@ -71,7 +77,7 @@ request.setAttribute("basePath", basePath);
 			                        	<cs:input type="text" class="form-control" name="code" maxlength="20" renderId="data-table"/>
 			                        </div>
 			                    </div>
-			                <div>
+			                </div>
 			                <div class="form-group">
 		                    	<div class="col-sm-12">
 			                        <label class="control-label col-sm-1">对照值</label>
@@ -88,14 +94,6 @@ request.setAttribute("basePath", basePath);
 			                        </div>
 		                        </div>
 		                     </div>
-		                     <div class="form-group">
-			                     <div class="col-sm-12">
-				                    <p class="center-block">
-				                        <a href="#" class="btn btn-primary btn-mini" id="fn-btn-search"><i class="glyphicon glyphicon-search"></i> 查询</a>
-				                        <a href="#" class="btn btn-default btn-mini" id="fn-btn-add"><i class="glyphicon glyphicon-plus"></i> 新增</a>
-				                    </p>
-				                </div>
-			                </div>
 		                </form>
 	               	</div>
 		      	</div>

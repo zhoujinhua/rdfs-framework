@@ -38,6 +38,9 @@ request.setAttribute("basePath", basePath);
 	            <a href="#">流程维护</a>
 	        </li>
 	    </ul>
+	    <div class="btn-bar">
+	    	<a href="#" class="btn btn-primary btn-mini" id="fn-btn-save"><i class="glyphicon glyphicon-ok"></i> 保存</a>
+	    </div>
 		<div class="row">
 			<c:if test="${msg!=null && msg!=''}">
 				<div class="col-md-12">
@@ -71,19 +74,18 @@ request.setAttribute("basePath", basePath);
 	                       	 		<input type="text" class="form-control required" name="code" maxlength="30" value="${process.code}">
 		                        </div>
 		                    </div>
+		                    <div class="form-group col-sm-12 col-sm-8">
+		                        <label class="control-label col-sm-4">流程类型<i class="glyphicon glyphicon-star red"></i></label>
+		                         <div class="col-sm-8">
+	                       	 		<cs:select class="form-control required chosen" dicField="_app_type" name="type" allowBlank="true" value="${process.type }"/>
+		                        </div>
+		                    </div>
 		                    <%--  <div class="form-group col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">是否有效<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
 		                         	<cs:select class="form-control required chosen" dicField="_is" name="status" allowBlank="true" value="${process.status }"/>
 		                        </div>
 		                    </div> --%>
-		                     <div class="form-group">
-			                     <div class="col-sm-12">
-				                    <p class="center-block">
-				                        <a href="#" class="btn btn-primary btn-mini" id="fn-btn-save"><i class="glyphicon glyphicon-ok"></i> 保存</a>
-				                    </p>
-				                </div>
-			                </div>
 		                </form>
 	               	</div>
 		      	</div>

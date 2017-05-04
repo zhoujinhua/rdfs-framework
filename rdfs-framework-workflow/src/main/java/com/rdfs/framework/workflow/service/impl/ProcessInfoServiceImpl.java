@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,10 +28,14 @@ public class ProcessInfoServiceImpl extends HibernateServiceSupport implements P
 	private CacheWorkflowService cacheWorkflowService;
 	
 	@Override
-	public List<CwProcessInfo> getProcessInfos() {
+	public List<CwProcessInfo> getProcessInfos(CwProcessInfo processInfo) {
 		List<CwProcessInfo> list = cacheWorkflowService.getProcessInfos();
 		if(list == null || list.isEmpty()){
-			String hql = "from CwProcessInfo a where a.status = '" + Constants.IS.YES + "' and exists (select 1 from CwProcessInfo b where a.code = b.code group by b.code having max(b.version) = a.version)";
+			String hql = "from CwProcessInfo a where a.status = '" + Constants.IS.YES + "' ";
+			if(!StringUtils.isBlank(processInfo.getType())){
+				hql += " and a.type = '" + processInfo.getType() + "'";
+			}
+			hql += " and exists (select 1 from CwProcessInfo b where a.code = b.code group by b.code having max(b.version) = a.version)";
 			return getList(hql);
 		}
 		return list;
