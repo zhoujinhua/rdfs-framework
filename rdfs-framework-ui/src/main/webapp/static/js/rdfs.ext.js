@@ -363,7 +363,9 @@ $(function(){
 	$("input[type='date']").each(function(){
 		var fmt = $(this).attr("format");
 		var value = $(this).attr("value");
-		$(this).attr("value", moment(value).format(fmt.toUpperCase()));
+		if(value){
+			$(this).attr("value", moment(value).format(fmt.toUpperCase()));
+		}
 		if(fmt && fmt != undefined){
 			$(this).datetimepicker({format: fmt,autoclose: true,todayBtn: true,clearBtn:true,minView:2});
 		} else {

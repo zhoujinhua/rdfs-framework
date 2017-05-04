@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +26,8 @@ public class DispatcherContextInterceptor implements HandlerInterceptor {
 	
 	//出错返回页面
 	private static final String redirectURL = "/error.jsp";
+	
+	private Logger logger = LoggerFactory.getLogger(DispatcherContextInterceptor.class);
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -60,11 +64,12 @@ public class DispatcherContextInterceptor implements HandlerInterceptor {
         long consumeTime = endTime - beginTime;
         
         //处理时间超过500毫秒的请求为慢请求  
-        //if(consumeTime > 500) {
-        	System.out.println(String.format("%s consume %d millis", request.getRequestURI(), consumeTime));
-        //}
+        if(consumeTime > 500) {
+        	logger.info(String.format("%s consume %d millis", request.getRequestURI(), consumeTime));
+        }
         	
     	if(ex!=null){
+    		logger.error("拦截到控制层报错，请求为："+String.format("%s consume %d millis", request.getRequestURI(), consumeTime), ex);
     		ex.printStackTrace();
     	}
 	}
