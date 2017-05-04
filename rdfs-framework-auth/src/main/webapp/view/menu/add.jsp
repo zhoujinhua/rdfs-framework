@@ -6,12 +6,12 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 request.setAttribute("path", path);
 request.setAttribute("basePath", basePath);
-String menuId = request.getParameter("menuId");
-request.setAttribute("menuId", menuId);
 String menuTitle = request.getParameter("menuTitle"); 
 if(menuTitle!=null && !"".equals(menuTitle)){
 	menuTitle = new String(menuTitle.getBytes("ISO8859_1"));
 	request.setAttribute("menuTitle", menuTitle);
+	String menuId = request.getParameter("menuId");
+	request.setAttribute("menuId", menuId);
 }
 %>
 <!DOCTYPE html>
@@ -79,8 +79,8 @@ if(menuTitle!=null && !"".equals(menuTitle)){
                      <div class="form-group col-sm-12 col-sm-8">
                         <label class="control-label col-sm-4">上级菜单</label>
                          <div class="col-sm-8">
-                        	<input class="form-control" name="parMenu.menuTitle" value="${menuTitle != null ? menuTitle : menu.menuTitle }" readonly>
-                        	<input type="hidden" name="parMenu.menuId" value="${menuId != null ? menuId : menu.menuId }">
+                        	<input class="form-control" name="parMenu.menuTitle" value="${menuTitle != null ? menuTitle : menu.parMenu.menuTitle }" readonly>
+                        	<input type="hidden" name="parMenu.menuId" value="${menuId != null ? menuId : menu.parMenu.menuId }">
                         </div>
                     </div>
                      <div class="form-group col-sm-12 col-sm-8">

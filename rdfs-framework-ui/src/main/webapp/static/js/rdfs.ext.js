@@ -362,6 +362,8 @@ $(function(){
 	});
 	$("input[type='date']").each(function(){
 		var fmt = $(this).attr("format");
+		var value = $(this).attr("value");
+		$(this).attr("value", moment(value).format(fmt.toUpperCase()));
 		if(fmt && fmt != undefined){
 			$(this).datetimepicker({format: fmt,autoclose: true,todayBtn: true,clearBtn:true,minView:2});
 		} else {
@@ -395,7 +397,7 @@ $(function(){
 
 	$("label[type='date']").each(function(){
 		var value = $(this).text();
-		var format = $(this).attr("format");
+		var format = $(this).attr("format").toUpperCase();
 		if(value && value != undefined){
 			if(format && format != undefined){
 				var v = moment(value).format(format)
@@ -403,7 +405,7 @@ $(function(){
 					$(this).text(v);
 				}
 			} else {
-				var v = moment(value).format("yyyy-mm-dd")
+				var v = moment(value).format("YYYY-MM-DD")
 				if(v && v != undefined){
 					$(this).text(v);
 				}
