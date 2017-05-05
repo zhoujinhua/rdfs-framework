@@ -226,6 +226,9 @@ function getUrlParam(name){
     return null;
 }
 function validNu(obj){
+	if(obj.hasClass("error")){
+		obj.fieldErrorClear();
+	}
 	var min;
 	var max;
 	var value = obj.val().trim();
