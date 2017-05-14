@@ -2,6 +2,8 @@ package com.rdfs.framework.core.interceptor;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +28,9 @@ public class DispatcherContextInterceptor implements HandlerInterceptor {
 	
 	//出错返回页面
 	private static final String redirectURL = "/error.jsp";
+	
+	 //线程安全的token储存map,禁止相同用户提交相同的请款请求
+	private static Map<String, Map<String, Long>> tokenMap = new ConcurrentHashMap<>();
 	
 	private Logger logger = LoggerFactory.getLogger(DispatcherContextInterceptor.class);
 	
@@ -65,11 +70,11 @@ public class DispatcherContextInterceptor implements HandlerInterceptor {
         
         //处理时间超过500毫秒的请求为慢请求  
         if(consumeTime > 500) {
-        	logger.info(String.format("%s consume %d millis", request.getRequestURI(), consumeTime));
+        	logger.info("拦截到Controller控制层慢请求，请求为："+String.format("%s consume %d millis", request.getRequestURI(), consumeTime));
         }
         	
     	if(ex!=null){
-    		logger.error("拦截到控制层报错，请求为："+String.format("%s consume %d millis", request.getRequestURI(), consumeTime), ex);
+    		logger.error("拦截到Controller控制层报错，请求为："+String.format("%s consume %d millis", request.getRequestURI(), consumeTime), ex);
     		ex.printStackTrace();
     	}
 	}

@@ -60,53 +60,69 @@ request.setAttribute("basePath", basePath);
 			       </div>
 		           <div class="box-content">
 		           		<form id="fn-save-form" class="form-horizontal" method="post" action="${path }/dict/save">
-		                    <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">字典名称<i class="glyphicon glyphicon-star red"></i></label>
-		                        <div class="col-sm-8">
-		                        	<input type="hidden" name="id" value="${dict.id }">
-	                       	 		<input type="text" class="form-control required" name="name" maxlength="10" value="${dict.name}" data-placement="top" title="不可为空." id="dict-code">
+		                    <div class="form-group">
+		                    	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">字典名称<i class="glyphicon glyphicon-star red"></i></label>
+			                        <div class="col-sm-8">
+			                        	<input type="hidden" name="id" value="${dict.id }">
+		                       	 		<input type="text" class="form-control required" name="name" maxlength="10" value="${dict.name}" data-placement="top" title="不可为空." id="dict-code">
+			                        </div>
 		                        </div>
 		                     </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">字典KEY<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                        	<input type="text" class="form-control required" name="key" maxlength="25" value="${dict.key}" data-placement="top" title="不可为空.">
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">字典KEY<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                        	<input type="text" class="form-control required" name="key" maxlength="25" value="${dict.key}" data-placement="top" title="不可为空.">
+			                        </div>
 		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">对照码<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                        	<input type="text" class="form-control required" name="code" maxlength="50" value="${dict.code}" data-placement="top" title="不可为空.">
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">对照码<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                        	<input type="text" class="form-control required" name="code" maxlength="50" value="${dict.code}" data-placement="top" title="不可为空.">
+			                        </div>
 		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">对照值<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                         	<input type="text" class="form-control required" name="desc" maxlength="50" value="${dict.desc}" data-placement="top" title="不可为空.">
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">对照值<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                         	<input type="text" class="form-control required" name="desc" maxlength="50" value="${dict.desc}" data-placement="top" title="不可为空.">
+			                        </div>
 		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">是否有效<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                         	<cs:select class="form-control required chosen" dicField="_is" name="status" allowBlank="true" value="${dict.status }"/>
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">是否有效<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                         	<cs:select class="form-control required chosen" dicField="_is" name="status" allowBlank="true" value="${dict.status }"/>
+			                        </div>
 		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">所属分组<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                         	<cs:select class="form-control required chosen" dicField="_param_group" name="group" allowBlank="true" value="${dict.group }"/>
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">所属分组<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                         	<cs:select class="form-control required chosen" dicField="_param_group" name="group" allowBlank="true" value="${dict.group }"/>
+			                        </div>
 		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">排序号<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                         	<cs:input class="form-control required" style="int" name="sortNo" maxlength="2" value="${dict.sortNo }"></cs:input>
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">排序号<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                         	<cs:input class="form-control required" style="int" name="sortNo" maxlength="2" value="${dict.sortNo }"></cs:input>
+			                        </div>
 		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">备注</label>
-		                         <div class="col-sm-8">
-		                         	<textarea rows="" cols="" class="form-control autogrow" name="remark">${dict.remark }</textarea>
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">备注</label>
+			                         <div class="col-sm-8">
+			                         	<textarea rows="" cols="" class="form-control autogrow" name="remark">${dict.remark }</textarea>
+			                        </div>
 		                        </div>
 		                    </div>
 		                </form>

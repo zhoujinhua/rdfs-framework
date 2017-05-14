@@ -60,23 +60,29 @@ request.setAttribute("basePath", basePath);
 			       </div>
 		           <div class="box-content">
 		           		<form id="fn-save-form" class="form-horizontal" method="post" action="${path}/permset/save">
-		                    <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">权限集名称<i class="glyphicon glyphicon-star red"></i></label>
-		                        <div class="col-sm-8">
-		                        	<input type="hidden" name="id" value="${permSet.id }"	>
-	                       	 		<input type="text" class="form-control required" name="permName" maxlength="20" value="${permSet.permName }" data-placement="top" title="不可为空.">
+		                    <div class="form-group">
+		                    	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">权限集名称<i class="glyphicon glyphicon-star red"></i></label>
+			                        <div class="col-sm-8">
+			                        	<input type="hidden" name="id" value="${permSet.id }"	>
+		                       	 		<input type="text" class="form-control required" name="permName" maxlength="20" value="${permSet.permName }" data-placement="top" title="不可为空.">
+			                        </div>
 		                        </div>
 		                     </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">是否启用<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                         	<cs:select class="form-control required chosen" dicField="_is" name="permStatus" allowBlank="true" value="${permSet.permStatus }"/>
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">是否启用<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                         	<cs:select class="form-control required chosen" dicField="_is" name="permStatus" allowBlank="true" value="${permSet.permStatus }"/>
+			                        </div>
 		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">权限集描述</label>
-		                         <div class="col-sm-8">
-		                        	<textarea rows="3" name="permDesc" class="form-control autogrow" maxlength="200">${permSet.permDesc }</textarea>
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">权限集描述</label>
+			                         <div class="col-sm-8">
+			                        	<textarea rows="3" name="permDesc" class="form-control autogrow" maxlength="200">${permSet.permDesc }</textarea>
+			                        </div>
 		                        </div>
 		                    </div>
 		                </form>

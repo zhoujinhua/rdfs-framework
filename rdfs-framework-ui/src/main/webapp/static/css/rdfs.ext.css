@@ -200,3 +200,6 @@ label.form-control{
 	font-weight: bold;
 	height:auto;
 }
+.input-group-btn > .btn{
+	padding: 5px 12px;
+}

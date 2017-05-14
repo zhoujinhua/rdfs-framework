@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://javass.cn/common/" prefix="cs"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -55,9 +56,9 @@ request.setAttribute("basePath", basePath);
 		                     </div>
 		                     <div class="form-group">
 		                     	<div class=" col-sm-12 col-sm-8">
-			                        <label class="control-label col-sm-4">权限集状态</label>
+			                        <label class="control-label col-sm-4">是否有效</label>
 			                         <div class="col-sm-8">
-			                         	<span class="info text-show form-control">${permSet.permStatus.name }</span>
+			                         	<cs:label class="form-control" value="${permSet.permStatus }" type="dict" format="_is"/>
 			                        </div>
 		                        </div>
 		                    </div>

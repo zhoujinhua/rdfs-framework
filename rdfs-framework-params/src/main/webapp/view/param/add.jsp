@@ -60,35 +60,45 @@ request.setAttribute("basePath", basePath);
 			       </div>
 		           <div class="box-content">
 		           		<form id="fn-save-form" class="form-horizontal" method="post" action="${path }/param/save">
-		                    <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">参数名称<i class="glyphicon glyphicon-star red"></i></label>
-		                        <div class="col-sm-8">
-		                        	<input type="hidden" name="id" value="${parameter.id }">
-	                       	 		<input type="text" class="form-control required" name="name" maxlength="30" value="${parameter.name}">
+		                    <div class="form-group">
+		                    	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">参数名称<i class="glyphicon glyphicon-star red"></i></label>
+			                        <div class="col-sm-8">
+			                        	<input type="hidden" name="id" value="${parameter.id }">
+		                       	 		<input type="text" class="form-control required" name="name" maxlength="30" value="${parameter.name}">
+			                        </div>
 		                        </div>
 		                     </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">参数KEY<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                        	<input type="text" class="form-control required" name="key" maxlength="30" value="${parameter.key}">
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">参数KEY<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                        	<input type="text" class="form-control required" name="key" maxlength="30" value="${parameter.key}">
+			                        </div>
 		                        </div>
 		                    </div>
-		                    <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">参数值<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                         	<input type="text" class="form-control required" name="value" maxlength="50" value="${parameter.value}">
+		                    <div class="form-group">
+		                    	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">参数值<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                         	<input type="text" class="form-control required" name="value" maxlength="50" value="${parameter.value}">
+			                        </div>
 		                        </div>
 		                    </div>
-		                    <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">所属分组<i class="glyphicon glyphicon-star red"></i></label>
-		                         <div class="col-sm-8">
-		                         	<cs:select class="form-control required chosen" dicField="_param_group" name="group" allowBlank="true" value="${parameter.group }"/>
+		                    <div class="form-group">
+		                    	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">所属分组<i class="glyphicon glyphicon-star red"></i></label>
+			                         <div class="col-sm-8">
+			                         	<cs:select class="form-control required chosen" dicField="_param_group" name="group" allowBlank="true" value="${parameter.group }"/>
+			                        </div>
 		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
-		                        <label class="control-label col-sm-4">备注</label>
-		                         <div class="col-sm-8">
-		                         	<textarea rows="" cols="" class="form-control autogrow" name="remark">${parameter.remark }</textarea>
+		                     <div class="form-group">
+		                     	<div class=" col-sm-12 col-sm-8">
+			                        <label class="control-label col-sm-4">备注</label>
+			                         <div class="col-sm-8">
+			                         	<textarea rows="" cols="" class="form-control autogrow" name="remark">${parameter.remark }</textarea>
+			                        </div>
 		                        </div>
 		                    </div>
 		                </form>

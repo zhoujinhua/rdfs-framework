@@ -206,38 +206,40 @@ public class CacheResourceServiceImpl extends HibernateServiceSupport implements
 	
 	public void cascade(Map<String, SortedMap<Integer, List<TreeDto>>> sortMap, String id){
 		SyMenu menu = getMenu(id);
-		String pId = "0";
-		if(menu.getParMenu()!=null && menu.getParMenu().getMenuId()!=null){
-			pId = menu.getParMenu().getMenuId() + "";
-		}
-		TreeDto treeDto = new TreeDto(menu.getMenuId()+"", pId,
-				menu.getMenuTitle(), "", menu.getMenuIcon(), true);
-		if(sortMap.get(pId) == null){
-			sortMap.put(pId, new TreeMap<>(new Comparator<Integer>() {
-				@Override
-				public int compare(Integer o1, Integer o2) {
-					if (o1 != null && o2 != null) {
-						return o1 - o2;
+		if(menu!=null){
+			String pId = "0";
+			if(menu.getParMenu()!=null && menu.getParMenu().getMenuId()!=null){
+				pId = menu.getParMenu().getMenuId() + "";
+			}
+			TreeDto treeDto = new TreeDto(menu.getMenuId()+"", pId,
+					menu.getMenuTitle(), "", menu.getMenuIcon(), true);
+			if(sortMap.get(pId) == null){
+				sortMap.put(pId, new TreeMap<>(new Comparator<Integer>() {
+					@Override
+					public int compare(Integer o1, Integer o2) {
+						if (o1 != null && o2 != null) {
+							return o1 - o2;
+						}
+						if (o1 == null && o2 != null) {
+							return -1;
+						}
+						if (o1 != null && o2 == null) {
+							return 1;
+						}
+						return 0;
 					}
-					if (o1 == null && o2 != null) {
-						return -1;
-					}
-					if (o1 != null && o2 == null) {
-						return 1;
-					}
-					return 0;
-				}
-			}));
-		}
-		if(sortMap.get(pId).get(menu.getSortNo()) == null){
-			sortMap.get(pId).put(menu.getSortNo(), new ArrayList<>());
-		}
-		if(!sortMap.get(pId).get(menu.getSortNo()).contains(treeDto)){
-			sortMap.get(pId).get(menu.getSortNo()).add(treeDto);
-		}
-
-		if(!"0".equals(pId)){
-			cascade(sortMap, pId);
+				}));
+			}
+			if(sortMap.get(pId).get(menu.getSortNo()) == null){
+				sortMap.get(pId).put(menu.getSortNo(), new ArrayList<>());
+			}
+			if(!sortMap.get(pId).get(menu.getSortNo()).contains(treeDto)){
+				sortMap.get(pId).get(menu.getSortNo()).add(treeDto);
+			}
+			
+			if(!"0".equals(pId)){
+				cascade(sortMap, pId);
+			}
 		}
 	}
 

@@ -138,62 +138,71 @@ request.setAttribute("basePath", basePath);
 			       </div>
 		           <div class="box-content">
 		           		<form id="fn-save-form" class="form-horizontal" method="post" action="${path }/job/save">
-		                    <div class="form-group col-sm-12 col-sm-8">
+		                    <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">任务名称<i class="glyphicon glyphicon-star red"></i></label>
 		                        <div class="col-sm-8">
 		                        	<input type="hidden" name="id" value="${info.id }">
 	                       	 		<input type="text" class="form-control required" name="name" maxlength="30" value="${info.name}">
 		                        </div>
+		                        </div>
 		                     </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">任务分组<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
 	                       	 		<input type="text" class="form-control required" readonly name="group" maxlength="10" value="默认分组">
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">执行计划</label>
 		                         <div class="col-sm-8">
 	                       	 		<input type="text" class="form-control" name="cron" maxlength="100" value="${info.cron }">
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">任务类型<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
 		                         	<cs:select class="form-control required chosen" id="_quartz_type" dicField="_quartz_type" name="type" allowBlank="true" value="${info.type }"/>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">是否有效<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
 		                         	<cs:select class="form-control required chosen" dicField="_is" name="status" allowBlank="true" value="${info.status }"/>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">是否允许并发<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
 		                         	<cs:select class="form-control required chosen" dicField="_is" name="batch" allowBlank="true" value="${info.batch }"/>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">执行调度主机名称</label>
 		                         <div class="col-sm-8">
 		                         	<cs:input class="form-control" name="ip" maxlength="30" value="${info.ip }"></cs:input>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">邮件我<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
 		                         	<cs:select class="form-control required chosen" dicField="_quartz_mail" name="" allowBlank="true" value="${info.sendMail }" id="send_mail"/>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8 hide">
+		                     <div class="form-group hide"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">邮件地址<i class="glyphicon glyphicon-star red"></i></label>
 		                         <div class="col-sm-8">
 		                         	<textarea rows="" cols="" class="form-control required autogrow" maxlength="1000" name="email" id="email" style="min-height:57px;" placeholder="多个邮件地址使用英文分号;分割">${info.email }</textarea>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">继续执行</label>
 		                         <div class="col-sm-8">
 		                         	<div class="input-group">
@@ -203,56 +212,65 @@ request.setAttribute("basePath", basePath);
 		                         		</a>
 		                         	</div>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8 hide">
+		                     <div class="form-group hide"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">本地任务类</label>
 		                         <div class="col-sm-8">
 		                         	<cs:input class="form-control native" name="className" maxlength="100" value="${info.className }"></cs:input>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8 hide">
+		                     <div class="form-group hide"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">HttpUrl</label>
 		                         <div class="col-sm-8">
 		                         	<cs:input class="form-control http" name="httpUrl" maxlength="100" value="${info.httpUrl }"/>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8 hide">
+		                     <div class="form-group hide"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">远端SSH主机地址</label>
 		                         <div class="col-sm-8">
 		                         	<cs:input class="form-control ssh" name="host" maxlength="30" value="${info.host }"/>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8 hide">
+		                     <div class="form-group hide"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">远端SSH主机用户名</label>
 		                         <div class="col-sm-8">
 		                         	<cs:input class="form-control ssh" name="userName" maxlength="30" value="${info.userName }"/>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8 hide">
+		                     <div class="form-group hide"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">远端SSH主机密码</label>
 		                         <div class="col-sm-8">
 		                         	<cs:input class="form-control ssh" type="password" name="password" maxlength="30" value="${info.password }"/>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8 hide">
+		                     <div class="form-group hide"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">远端SSH主机端口</label>
 		                         <div class="col-sm-8">
 		                         	<cs:input class="form-control ssh" type="int" maxlength="5" name="port" value="${info.port }"/>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8 hide">
+		                     <div class="form-group hide"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">远端SSH命令</label>
 		                         <div class="col-sm-8">
 		                         	<textarea rows="" cols="" class="form-control autogrow ssh" maxlength="1000" name="cmd" placeholder="命令之间以;分隔">${info.cmd }</textarea>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4">任务备注</label>
 		                         <div class="col-sm-8">
 		                         	<textarea rows="" cols="" class="form-control autogrow" maxlength="1000" name="remark">${info.remark }</textarea>
 		                        </div>
+		                        </div>
 		                    </div>
-		                     <div class="form-group col-sm-12 col-sm-8">
+		                     <div class="form-group"><div class="col-sm-12 col-sm-8">
 		                        <label class="control-label col-sm-4"></label>
 		                         <div class="col-sm-8">
 		                         	<table class="table table-striped table-bordered responsive no-footer hide" id="qz_table">
@@ -277,6 +295,7 @@ request.setAttribute("basePath", basePath);
 		                         			</c:forEach>
 		                         		</tbody>
 	                         		</table>
+		                        </div>
 		                        </div>
 		                    </div>
 		                </form>
