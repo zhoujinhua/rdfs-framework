@@ -133,6 +133,9 @@ function validate(){
 			}
 		}
 	});
+	if($(".error").length!=0){
+		return false;
+	}
 	//数字最大值和最小值校验
 	$("input[xtype='int'],input[xtype='float']").each(function(){
 		validNu($(this));
@@ -202,6 +205,9 @@ function validateForm(id){
 			}
 		}
 	});
+	if($("#"+id).find(".error").length!=0){
+		return false;
+	}
 	//数字最小值和最大值校验
 	$("#"+id).find("input[xtype='int'],input[xtype='float']").each(function(){
 		validNu($(this));
