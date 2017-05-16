@@ -90,7 +90,7 @@ private static Logger log = LoggerFactory.getLogger(CacheParamsServiceImpl.class
 	public void cacheDictData() {
 		SyDictItem item = new SyDictItem();
 		item.setStatus(Constants.IS.YES);
-		List<SyDictItem> dictItems = getList(item, OrderMode.DESC, "sortNo", OperMode.EQ, "isEnable");
+		List<SyDictItem> dictItems = getList(item, OrderMode.DESC, "sortNo", OperMode.EQ, "status");
 		Jedis jedis = JedisUtil.getJedisClient();
 		// 将字典对照项目载入缓存
 		for (SyDictItem dictItem : dictItems) {
